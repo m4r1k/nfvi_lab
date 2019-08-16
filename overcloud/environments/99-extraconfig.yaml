@@ -99,7 +99,7 @@ parameter_defaults:
     # Ensure Overlay VXLAN has 1500 Byte
     neutron::plugins::ml2::path_mtu: 1550
 
-  ComputeDualOvsDpdkSriovExtraConfig:
+  ComputeDualOvsDpdkExtraConfig:
     # Reserved HugePagaes consumed by OVS-DPDK
     nova::compute::reserved_huge_pages:
       - node:0,size:1GB,count:4
