@@ -1,0 +1,185 @@
+resource_registry:
+  # NIC Configuration files for all the roles
+  OS::TripleO::Controller::Net::SoftwareConfig:             ../nic-configs/controller.yaml
+  OS::TripleO::ComputeOvsDpdk::Net::SoftwareConfig:         ../nic-configs/compute.yaml
+  OS::TripleO::ComputeDualOvsDpdk::Net::SoftwareConfig:     ../nic-configs/compute.yaml
+  OS::TripleO::ComputeSriov::Net::SoftwareConfig:           ../nic-configs/compute.yaml
+  OS::TripleO::ComputeDualSriov::Net::SoftwareConfig:       ../nic-configs/compute.yaml
+  OS::TripleO::ComputeOvsDpdkSriov::Net::SoftwareConfig:    ../nic-configs/compute.yaml
+
+  # IP Port for Controller
+  OS::TripleO::Controller::Ports::ExternalPort:             /usr/share/openstack-tripleo-heat-templates/network/ports/external_from_pool.yaml
+  OS::TripleO::Controller::Ports::InternalApiPort:          /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
+  OS::TripleO::Controller::Ports::StoragePort:              /usr/share/openstack-tripleo-heat-templates/network/ports/storage_from_pool.yaml
+  OS::TripleO::Controller::Ports::StorageMgmtPort:          /usr/share/openstack-tripleo-heat-templates/network/ports/storage_mgmt_from_pool.yaml
+  OS::TripleO::Controller::Ports::TenantPort:               /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
+  OS::TripleO::Controller::Ports::ManagementPort:           /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+
+  # IP Port for Compute OVS-DPDK
+  OS::TripleO::ComputeOvsDpdk::Ports::ExternalPort:         /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeOvsDpdk::Ports::InternalApiPort:      /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
+  OS::TripleO::ComputeOvsDpdk::Ports::StoragePort:          /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeOvsDpdk::Ports::StorageMgmtPort:      /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeOvsDpdk::Ports::TenantPort:           /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
+  OS::TripleO::ComputeOvsDpdk::Ports::ManagementPort:       /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+
+  # IP Port for Compute Dual OVS-DPDK
+  OS::TripleO::ComputeDualOvsDpdk::Ports::ExternalPort:     /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeDualOvsDpdk::Ports::InternalApiPort:  /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
+  OS::TripleO::ComputeDualOvsDpdk::Ports::StoragePort:      /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeDualOvsDpdk::Ports::StorageMgmtPort:  /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeDualOvsDpdk::Ports::TenantPort:       /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
+
+  # IP Port for Compute SRIOV
+  OS::TripleO::ComputeSriov::Ports::ExternalPort:           /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeSriov::Ports::InternalApiPort:        /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
+  OS::TripleO::ComputeSriov::Ports::StoragePort:            /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeSriov::Ports::StorageMgmtPort:        /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeSriov::Ports::TenantPort:             /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
+  OS::TripleO::ComputeSriov::Ports::ManagementPort:         /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+
+  # IP Port for Compute SRIOV
+  OS::TripleO::ComputeDualSriov::Ports::ExternalPort:       /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeDualSriov::Ports::InternalApiPort:    /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
+  OS::TripleO::ComputeDualSriov::Ports::StoragePort:        /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeDualSriov::Ports::StorageMgmtPort:    /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeDualSriov::Ports::TenantPort:         /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
+
+  # IP Port for Compute OVS-DPDK and SRIOV
+  OS::TripleO::ComputeOvsDpdkSriov::Ports::ExternalPort:    /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeOvsDpdkSriov::Ports::InternalApiPort: /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
+  OS::TripleO::ComputeOvsDpdkSriov::Ports::StoragePort:     /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeOvsDpdkSriov::Ports::StorageMgmtPort: /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeOvsDpdkSriov::Ports::TenantPort:      /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
+
+  # VIP ports
+  OS::TripleO::Network::Ports::InternalApiVipPort:          /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api.yaml
+  OS::TripleO::Network::Ports::StorageVipPort:              /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::Network::Ports::StorageMgmtVipPort:          /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::Network::Ports::ExternalVipPort:             /usr/share/openstack-tripleo-heat-templates/network/ports/external.yaml
+  OS::TripleO::Network::Ports::RedisVipPort:                /usr/share/openstack-tripleo-heat-templates/network/ports/vip.yaml
+
+
+parameter_defaults:
+  # This sets 'external_network_bridge' in l3_agent.ini to an empty string
+  # so that external networks act like provider bridge networks (they
+  # will plug into br-int instead of br-ex)
+  NeutronExternalNetworkBridge: "''"
+
+  # Internal API used for private OpenStack Traffic
+  InternalApiNetCidr: 10.0.11.0/27
+  InternalApiAllocationPools: [{'start': '10.0.11.10', 'end': '10.0.11.30'}]
+  InternalApiNetworkVlanID: 110
+
+  # Tenant Network Traffic - will be used for VXLAN over VLAN
+  TenantNetCidr: 10.0.12.0/27
+  TenantAllocationPools: [{'start': '10.0.12.10', 'end': '10.0.12.30'}]
+  TenantNetworkVlanID: 120
+
+  # Public Storage Access - e.g. Nova/Glance <--> Ceph
+  StorageNetCidr: 10.0.13.0/27
+  StorageAllocationPools: [{'start': '10.0.13.10', 'end': '10.0.13.30'}]
+  StorageNetworkVlanID: 130
+
+  # Private Storage Access - i.e. Ceph background cluster/replication
+  StorageMgmtNetCidr: 10.0.14.0/24
+  StorageMgmtAllocationPools: [{'start': '10.0.14.10', 'end': '10.0.14.30'}]
+  StorageMgmtNetworkVlanID: 140
+
+  # External Networking Access - Public API Access
+  ExternalNetCidr: 192.168.178.0/24
+  ExternalAllocationPools: [{'start': '192.168.178.15', 'end': '192.168.178.18'}]
+  ExternalNetworkVlanID: 178
+  # Set to the router gateway on the external network
+  ExternalInterfaceDefaultRoute: 192.168.178.1
+
+  # Add in configuration for the Control Plane
+  ControlPlaneSubnetCidr: "24"
+  ControlPlaneDefaultRoute: 10.0.10.10
+  EC2MetadataIp: 10.0.10.10
+
+  # DNS Server
+  DnsServers: ['1.1.1.1']
+
+  # NTP Server
+  NtpServer:  ['72.87.88.202']
+
+  # Bonding options for OVS (only active/backup works in a virtual environment)
+  BondInterfaceOvsOptions: 'bond_mode=balance-slb'
+
+  # Bonding options for Linux (only active/backup works in a virtual environment)
+  BondInterfaceLinuxOptions: 'mode=balance-xor xmit_hash_policy=layer3+4 miimon=100'
+
+  # To refresh the overcloud nodes network configuration at every Overcloud Update
+  NetworkDeploymentActions: ['CREATE','UPDATE']
+
+  # VIP addresses
+  PublicVirtualFixedIPs:      [{'ip_address':'192.168.178.15'}]
+  RedisVirtualFixedIPs:       [{'ip_address':'10.0.11.14'}]
+  InternalApiVirtualFixedIPs: [{'ip_address':'10.0.11.15'}]
+  StorageVirtualFixedIPs:     [{'ip_address':'10.40.2.5'}]
+  StorageMgmtVirtualFixedIPs: [{'ip_address':'10.40.3.5'}]
+  ControlFixedIPs:            [{'ip_address':'10.0.10.15'}]
+
+  # Static IP Address for Controller
+  ControllerIPs:
+    ctlplane:
+    - 10.0.10.16
+    - 10.0.10.17
+    - 10.0.10.18
+    external:
+    - 192.168.178.16
+    - 192.168.178.17
+    - 192.168.178.18
+    internal_api:
+    - 10.0.11.16
+    - 10.0.11.17
+    - 10.0.11.18
+    tenant:
+    - 10.0.12.16
+    - 10.0.12.17
+    - 10.0.12.18
+    storage:
+    - 10.0.13.16
+    - 10.0.13.17
+    - 10.0.13.18
+    storage_mgmt:
+    - 10.0.14.16
+    - 10.0.14.17
+    - 10.0.14.18
+  # Static IP Address for Compute OVS-DPDK
+  ComputeOvsDpdkIPs:
+    ctlplane:
+    - 10.0.10.19
+    internal_api:
+    - 10.0.11.19
+    tenant:
+    - 10.0.12.19
+  # Static IP Address for Compute Dual OVS-DPDK
+  ComputeDualOvsDpdkIPs:
+    ctlplane:
+    - 10.0.10.20
+    internal_api:
+    - 10.0.11.20
+    tenant:
+    - 10.0.12.20
+  # Static IP Address for Compute SR-IOV
+  ComputeSriovIPs:
+    ctlplane:
+    - 10.0.10.21
+    internal_api:
+    - 10.0.11.21
+  # Static IP Address for Compute Dual SR-IOV
+  ComputeDualSriovIPs:
+    ctlplane:
+    - 10.0.10.22
+    internal_api:
+    - 10.0.11.22
+  # Static IP Address for Compute OVS-DPDK and SR-IOV
+  ComputeOvsDpdkSriovIPs:
+    ctlplane:
+    - 10.0.10.23
+    internal_api:
+    - 10.0.11.23
+    tenant:
+    - 10.0.12.23

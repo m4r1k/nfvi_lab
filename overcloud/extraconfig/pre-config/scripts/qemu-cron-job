@@ -1,0 +1,19 @@
+#!/bin/bash
+
+cat <<EOF >/etc/cron.d/qemu-emulation-threads-re-pinning
+MAILTO=""
+*/1 * * * * root /usr/sbin/qemu-emulation-threads-re-pinning
+EOF
+
+cat <<EOF >/usr/sbin/qemu-emulation-threads-re-pinning
+#!/bin/bash
+
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin
+
+virsh list 2>/dev/null | awk '/running/ {print \$2}' | xargs -n1 virsh emulatorpin --cpulist \$(find /proc/sys/kernel/sched_domain/ -name "domain[0-9]" | grep -o -E "cpu[0-9]{1,4}" | sed -e "s/cpu//g" | sort -n | uniq | head -c -1 | tr '\n' ',') --live --domain 2>/dev/null
+
+EOF
+
+chmod 0744 /usr/sbin/qemu-emulation-threads-re-pinning
+
+exit 0

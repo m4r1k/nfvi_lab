@@ -1,0 +1,187 @@
+resource_registry:
+  # FirstBoot Script for initial configuration (i.e. Disk Wipe, Root Password, SSH Root Access)
+  OS::TripleO::NodeUserData:                     ../firstboot/first-boot.yaml
+
+  # Controller Role Post-Configuration hook for the Heat cache
+  OS::TripleO::Tasks::ControllerPostConfig: ../extraconfig/post-config/controller.yaml
+
+parameter_defaults:
+  ControllerExtraConfig:
+    # Increase HAProxy timeout to 10m for server and client, this is for VMs with very large image
+    tripleo::haproxy::haproxy_default_timeout: [ 'http-request 40s',  'queue 4m',  'connect 40s', 'client 4m', 'server 4m', 'check 40s' ]
+
+    # Increase HAProxy total maximum connections
+    tripleo::haproxy::haproxy_global_maxconn: 5120001
+
+    # Set each HAProxy backend to a lower value in order to queue requests
+    tripleo::haproxy::haproxy_default_maxconn: 20480
+
+    # Keystone token expiration set at 4 hours
+    keystone::token_expiration: 14440
+
+    # Heat re-auth model using trust tokens
+    # https://github.com/openstack/heat/blob/stable/queens/doc/source/admin/auth-model.rst#authorization-model-configuration
+    heat::engine::reauthentication_auth_method: trusts
+
+    # The size in bytes of the buffer pool, the memory area where InnoDB caches table and index data.
+    # Tuned at 10GB in order to store in-memory the entire DB dataset
+    tripleo::profile::base::database::mysql::innodb_buffer_pool_size: '10G'
+
+    # Defines the method used to flush data to InnoDB data files and log files, which can affect I/O throughput.
+    # Tuned at O_DIRECT to help avoid double buffering between the InnoDB buffer pool and the operating system file system cache.
+    tripleo::profile::base::database::mysql::innodb_flush_method: 'O_DIRECT'
+
+    keystone::config::keystone_config:
+        # memcached everywhere
+        catalog/caching:
+            value: true
+        # memcached everywhere
+        domain_config/caching:
+            value: true
+        # memcached everywhere
+        federation/caching:
+            value: true
+        # memcached everywhere
+        revoke/caching:
+            value: true
+        # memcached everywhere
+        role/caching:
+            value: true
+        # memcached everywhere
+        token/cache_on_issue:
+            value: true
+        # memcached everywhere
+        identity/caching:
+            value: true
+        # memcached everywhere
+        identity/cache_time:
+            value: '600'
+        # Keystone Password driver
+        # https://access.redhat.com/solutions/3452481
+        identity/password_hash_algorithm:
+            value: pbkdf2_sha512
+
+    heat::config::heat_config:
+        # Heat Max stacks per tenant
+        DEFAULT/max_stacks_per_tenant:
+            value: '2000'
+
+    # Memcached everywhere (to enable Heat caching)
+    # https://review.opendev.org/#/c/636746/
+    # Following config not working so replaced by a post-deployment
+    Controller_classes:
+    - '::heat::cache'
+
+    # Array of Physical network and custom MTU size
+    # Ensure MTU is 1500 Bytes for external floating IP network
+    # Datacentre and Niantic_pool both at 9000Byte
+    neutron::plugins::ml2::physical_network_mtus: ['external:1500','datacentre:9000','niantic_pool:9000']
+
+    # Ensure Overlay VXLAN has 1500 Byte
+    neutron::plugins::ml2::path_mtu: 1550
+
+  # Required config in order to have a custom Ceilometer polling
+  ManagePolling: true
+
+  # Required config in order to have a custom Ceilometer pipeline
+  ManagePipeline: true
+
+  ComputeOvsDpdkSriovExtraConfig:
+    nova::compute::reserved_huge_pages:
+      - node:0,size:1GB,count:4
+      - node:1,size:1GB,count:4
+
+    # Array of Physical network and custom MTU size
+    # Datacentre and Niantic_pool both at 9000Byte
+    neutron::plugins::ml2::physical_network_mtus: ['datacentre:9000','niantic_pool:9000']
+
+    # Ensure Overlay VXLAN has 1500 Byte
+    neutron::plugins::ml2::path_mtu: 1550
+
+  # Maximum resources allowed per top-level stack.
+  HeatMaxResourcesPerStack: -1
+
+  ExtraConfig:
+    # Ceilometer custom Polling frequency
+    ceilometer::agent::polling::polling_interval: 60
+
+    ceilometer::agent::polling::polling_meters:
+      - cpu
+      - memory.usage
+      - network.outgoing.packets.drop
+      - network.incoming.packets.drop
+      - network.outgoing.packets.rate
+      - network.incoming.packets.rate
+      - disk.read.requests.rate
+      - disk.write.requests.rate
+      - disk.read.bytes.rate
+      - disk.write.bytes.rate
+
+    # Memcached everywhere
+    # https://review.openstack.org/#/c/634505/
+    aodh::keystone::authtoken::memcached_servers: 'overcloud-controller-0.internalapi:11211,overcloud-controller-1.internalapi:11211,overcloud-controller-2.internalapi:11211'
+    aodh::keystone::authtoken::memcache_pool_conn_get_timeout: 1
+    aodh::keystone::authtoken::memcache_pool_dead_retry: 600
+    aodh::keystone::authtoken::memcache_pool_socket_timeout: 1
+    aodh::keystone::authtoken::memcache_pool_unused_timeout: 10
+    cinder::keystone::authtoken::memcached_servers: 'overcloud-controller-0.internalapi:11211,overcloud-controller-1.internalapi:11211,overcloud-controller-2.internalapi:11211'
+    cinder::keystone::authtoken::memcache_pool_conn_get_timeout: 1
+    cinder::keystone::authtoken::memcache_pool_dead_retry: 600
+    cinder::keystone::authtoken::memcache_pool_socket_timeout: 1
+    cinder::keystone::authtoken::memcache_pool_unused_timeout: 10
+    glance::api::authtoken::memcached_servers: 'overcloud-controller-0.internalapi:11211,overcloud-controller-1.internalapi:11211,overcloud-controller-2.internalapi:11211'
+    glance::api::authtoken::memcache_pool_conn_get_timeout: 1
+    glance::api::authtoken::memcache_pool_dead_retry: 600
+    glance::api::authtoken::memcache_pool_socket_timeout: 1
+    glance::api::authtoken::memcache_pool_unused_timeout: 10
+    heat::keystone::authtoken::memcached_servers: 'overcloud-controller-0.internalapi:11211,overcloud-controller-1.internalapi:11211,overcloud-controller-2.internalapi:11211'
+    heat::keystone::authtoken::memcache_pool_conn_get_timeout: 1
+    heat::keystone::authtoken::memcache_pool_dead_retry: 600
+    heat::keystone::authtoken::memcache_pool_socket_timeout: 1
+    heat::keystone::authtoken::memcache_pool_unused_timeout: 10
+    heat::cache::enabled: true
+    heat::cache::backend: 'oslo_cache.memcache_pool'
+    heat::cache::memcache_servers: 'overcloud-controller-0.internalapi:11211,overcloud-controller-1.internalapi:11211,overcloud-controller-2.internalapi:11211'
+    heat::cache::memcache_dead_retry: 600
+    heat::cache::memcache_socket_timeout: 1
+    heat::cache::memcache_pool_unused_timeout: 10
+    heat::cache::memcache_pool_connection_get_timeout: 1
+    keystone::cache_memcache_servers: 'overcloud-controller-0.internalapi:11211,overcloud-controller-1.internalapi:11211,overcloud-controller-2.internalapi:11211'
+    keystone::memcache_dead_retry: 600
+    keystone::memcache_socket_timeout: 1
+    keystone::memcache_pool_unused_timeout: 10
+    keystone::memcache_pool_connection_get_timeout: 1
+    keystone::cache_enabled: true
+    keystone::cache_backend: 'oslo_cache.memcache_pool'
+    neutron::keystone::authtoken::memcached_servers: 'overcloud-controller-0.internalapi:11211,overcloud-controller-1.internalapi:11211,overcloud-controller-2.internalapi:11211'
+    neutron::keystone::authtoken::memcache_pool_conn_get_timeout: 1
+    neutron::keystone::authtoken::memcache_pool_dead_retry: 600
+    neutron::keystone::authtoken::memcache_pool_socket_timeout: 1
+    neutron::keystone::authtoken::memcache_pool_unused_timeout: 10
+    panko::keystone::authtoken::memcached_servers: 'overcloud-controller-0.internalapi:11211,overcloud-controller-1.internalapi:11211,overcloud-controller-2.internalapi:11211'
+    panko::keystone::authtoken::memcache_pool_conn_get_timeout: 1
+    panko::keystone::authtoken::memcache_pool_dead_retry: 600
+    panko::keystone::authtoken::memcache_pool_socket_timeout: 1
+    panko::keystone::authtoken::memcache_pool_unused_timeout: 10
+    nova::keystone::authtoken::memcached_servers: 'overcloud-controller-0.internalapi:11211,overcloud-controller-1.internalapi:11211,overcloud-controller-2.internalapi:11211'
+    nova::keystone::authtoken::memcache_pool_conn_get_timeout: 1
+    nova::keystone::authtoken::memcache_pool_dead_retry: 600
+    nova::keystone::authtoken::memcache_pool_socket_timeout: 1
+    nova::keystone::authtoken::memcache_pool_unused_timeout: 10
+    nova::metadata::novajoin::authtoken::memcached_servers: 'overcloud-controller-0.internalapi:11211,overcloud-controller-1.internalapi:11211,overcloud-controller-2.internalapi:11211'
+    nova::metadata::novajoin::authtoken::memcache_pool_conn_get_timeout: 1
+    nova::metadata::novajoin::authtoken::memcache_pool_dead_retry: 600
+    nova::metadata::novajoin::authtoken::memcache_pool_socket_timeout: 1
+    nova::metadata::novajoin::authtoken::memcache_pool_unused_timeout: 10
+    nova::cache::enabled: true
+    nova::cache::backend: 'oslo_cache.memcache_pool'
+    nova::cache::memcache_servers: 'overcloud-controller-0.internalapi:11211,overcloud-controller-1.internalapi:11211,overcloud-controller-2.internalapi:11211'
+    nova::cache::memcache_dead_retry: 600
+    nova::cache::memcache_socket_timeout: 1
+    nova::cache::memcache_pool_unused_timeout: 10
+    nova::cache::memcache_pool_connection_get_timeout: 1
+    gnocchi::keystone::authtoken::memcached_servers: 'overcloud-controller-0.internalapi:11211,overcloud-controller-1.internalapi:11211,overcloud-controller-2.internalapi:11211'
+    gnocchi::keystone::authtoken::memcache_pool_conn_get_timeout: 1
+    gnocchi::keystone::authtoken::memcache_pool_dead_retry: 600
+    gnocchi::keystone::authtoken::memcache_pool_socket_timeout: 1
+    gnocchi::keystone::authtoken::memcache_pool_unused_timeout: 10

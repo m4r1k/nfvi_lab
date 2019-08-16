@@ -1,0 +1,31 @@
+parameter_defaults:
+  EnableFencing: true
+  FencingConfig:
+    devices:
+    # controller-node-0
+    - agent: fence_ipmilan
+      host_mac: 52:54:00:05:30:a0
+      params:
+        login: root
+        passwd: calvin
+        ipaddr: 192.168.178.28
+        ipport: 623
+        lanplus: 1
+    # controller-node-1
+    - agent: fence_ipmilan
+      host_mac: 52:54:00:80:cc:28
+      params:
+        login: root
+        passwd: calvin
+        ipaddr: 192.168.178.29
+        ipport: 623
+        lanplus: 1
+    # controller-node-2
+    - agent: fence_ipmilan
+      host_mac: 52:54:00:18:79:7c
+      params:
+        login: root
+        passwd: calvin
+        ipaddr: 192.168.178.30
+        ipport: 623
+        lanplus: 1

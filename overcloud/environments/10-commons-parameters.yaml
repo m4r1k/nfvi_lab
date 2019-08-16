@@ -1,0 +1,9 @@
+parameter_defaults:
+  # TimeZone for the environment
+  TimeZone: "UTC"
+
+  # Public API Domain Name 
+  CloudName: osp.local
+
+  # Node Root Password (through CloudInit)
+  NodeRootPassword: 'temproot'

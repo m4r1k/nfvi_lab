@@ -1,0 +1,93 @@
+resource_registry:
+  OS::TripleO::Services::ComputeNeutronOvsDpdk: /usr/share/openstack-tripleo-heat-templates/docker/services/neutron-ovs-dpdk-agent.yaml
+  OS::TripleO::Services::NeutronSriovAgent:      /usr/share/openstack-tripleo-heat-templates/docker/services/neutron-sriov-agent.yaml
+  OS::TripleO::Services::NeutronSriovHostConfig: /usr/share/openstack-tripleo-heat-templates/puppet/services/neutron-sriov-host-config.yaml
+
+
+parameter_defaults:
+  ComputeOvsDpdkSriovParameters:
+    # GRUB Kernel CLI
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=110 iommu=pt intel_iommu=on isolcpus=1-17,19-35,37-53,55-71 module_blacklist=ixgbevf,i40evf"
+
+    # Tuned profile
+    TunedProfileName: "cpu-partitioning"
+
+    # Isolated pCPU from Kernel, NMI, IRQ, and userland
+    IsolCpusList: "1-17,19-35,37-53,55-71"
+
+    # Nova pCPU to be used by the vCPU
+    NovaVcpuPinSet: ['2-17,20-35,38-53,56-71']
+
+    # OVS-DPDK Memory size for NUMA node
+    OvsDpdkSocketMemory: "4096,4096"
+
+    # OVS-DPDK DPC config (DPC1 here)
+    OvsDpdkMemoryChannels: "4"
+
+    # OVS housekeeper cores
+    OvsDpdkCoreList: "0,18,36,54"
+
+    # OVS-DPDK PMD Threads pCPU
+    OvsPmdCoreList: "1,19,37,55"
+
+    # Default OVS-DPDK Driver for the PHY device
+    OvsDpdkDriverType: "vfio-pci"
+
+    # VHU Socket Group
+    VhostuserSocketGroup: "hugetlbfs"
+
+    # CPU Share for the QEMU Emulator Threads 
+    NovaComputeCpuSharedSet: "0,18,36,54"
+
+    # NUMA-aware vSwitch for the bridge mapping
+    NeutronPhysnetNUMANodesMapping: {'datacentre': [0, 1]}
+
+    # NUMA-aware vSwitch for the VXLAN overlay
+    NeutronTunnelNUMANodes: 0,1
+
+    # Reserved mamory for the hypervisor
+    NovaReservedHostMemory: 16384
+
+    # SRIOV-specific
+    # Neutron Physical mapping between a custom name and physical devices 
+    NeutronPhysicalDevMappings: "niantic_pool:ens785f0,niantic_pool:ens785f1,niantic_pool:ens786f0,niantic_pool:ens786f1,niantic_pool:ens817f0,niantic_pool:ens817f1,niantic_pool:ens818f0,niantic_pool:ens818f1"
+
+    # Number of VFs that needs to be configured for a physical interface
+    NeutronSriovNumVFs:
+      - ens785f0:8
+      - ens785f1:8
+      - ens786f0:8
+      - ens786f1:8
+      - ens817f0:8
+      - ens817f1:8
+      - ens818f0:8
+      - ens818f1:8
+
+    # Mapping of SR-IOV PF interface to neutron physical_network.
+    # In case of Vxlan/GRE physical_network should be null.
+    # In case of flat/vlan the physical_network should as configured in neutron.
+    NovaPCIPassthrough:
+      - devname: "ens785f0"
+        trusted: "true"
+        physical_network: "niantic_pool"
+      - devname: "ens785f1"
+        trusted: "true"
+        physical_network: "niantic_pool"
+      - devname: "ens786f0"
+        trusted: "true"
+        physical_network: "niantic_pool"
+      - devname: "ens786f1"
+        trusted: "true"
+        physical_network: "niantic_pool"
+      - devname: "ens817f0"
+        trusted: "true"
+        physical_network: "niantic_pool"
+      - devname: "ens817f1"
+        trusted: "true"
+        physical_network: "niantic_pool"
+      - devname: "ens818f0"
+        trusted: "true"
+        physical_network: "niantic_pool"
+      - devname: "ens818f1"
+        trusted: "true"
+        physical_network: "niantic_pool"

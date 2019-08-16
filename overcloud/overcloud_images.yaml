@@ -1,0 +1,80 @@
+# Generated with the following on 2019-08-16T17:11:18.638302
+#
+#   openstack overcloud container image prepare --namespace=registry.access.redhat.com/rhosp13 --push-destination=10.0.10.10:8787 --prefix=openstack- --tag-from-label {version}-{release} --output-env-file=../overcloud/overcloud_images.yaml --output-images-file /home/stack/local_registry_images.yaml -r ../overcloud/roles-data.yaml -e /usr/share/openstack-tripleo-heat-templates/environments/sshd-banner.yaml -e /usr/share/openstack-tripleo-heat-templates/environments/network-isolation.yaml -e /usr/share/openstack-tripleo-heat-templates/environments/host-config-and-reboot.yaml -e ../overcloud/environments/10-commons-parameters.yaml -e ../overcloud/environments/20-network-environment.yaml -e ../overcloud/environments/40-fencing.yaml -e ../overcloud/environments/50-keystone-admin-endpoint.yaml -e ../overcloud/environments/60-openstack-neutron-custom-configs.yaml -e ../overcloud/environments/65-openstack-nova-custom-configs.yaml -e ../overcloud/environments/70-ovs-dpdk-sriov.yaml -e ../overcloud/environments/99-extraconfig.yaml -e ../overcloud/environments/99-server-blacklist.yaml
+#
+
+parameter_defaults:
+  DockerAodhApiImage: 10.0.10.10:8787/rhosp13/openstack-aodh-api:13.0-83
+  DockerAodhConfigImage: 10.0.10.10:8787/rhosp13/openstack-aodh-api:13.0-83
+  DockerAodhEvaluatorImage: 10.0.10.10:8787/rhosp13/openstack-aodh-evaluator:13.0-83
+  DockerAodhListenerImage: 10.0.10.10:8787/rhosp13/openstack-aodh-listener:13.0-82
+  DockerAodhNotifierImage: 10.0.10.10:8787/rhosp13/openstack-aodh-notifier:13.0-83
+  DockerCeilometerCentralImage: 10.0.10.10:8787/rhosp13/openstack-ceilometer-central:13.0-80
+  DockerCeilometerComputeImage: 10.0.10.10:8787/rhosp13/openstack-ceilometer-compute:13.0-82
+  DockerCeilometerConfigImage: 10.0.10.10:8787/rhosp13/openstack-ceilometer-central:13.0-80
+  DockerCeilometerNotificationImage: 10.0.10.10:8787/rhosp13/openstack-ceilometer-notification:13.0-82
+  DockerCinderApiImage: 10.0.10.10:8787/rhosp13/openstack-cinder-api:13.0-87
+  DockerCinderConfigImage: 10.0.10.10:8787/rhosp13/openstack-cinder-api:13.0-87
+  DockerCinderSchedulerImage: 10.0.10.10:8787/rhosp13/openstack-cinder-scheduler:13.0-88
+  DockerCinderVolumeImage: 10.0.10.10:8787/rhosp13/openstack-cinder-volume:13.0-86
+  DockerClustercheckConfigImage: 10.0.10.10:8787/rhosp13/openstack-mariadb:13.0-85
+  DockerClustercheckImage: 10.0.10.10:8787/rhosp13/openstack-mariadb:13.0-85
+  DockerCrondConfigImage: 10.0.10.10:8787/rhosp13/openstack-cron:13.0-90
+  DockerCrondImage: 10.0.10.10:8787/rhosp13/openstack-cron:13.0-90
+  DockerGlanceApiConfigImage: 10.0.10.10:8787/rhosp13/openstack-glance-api:13.0-85
+  DockerGlanceApiImage: 10.0.10.10:8787/rhosp13/openstack-glance-api:13.0-85
+  DockerGnocchiApiImage: 10.0.10.10:8787/rhosp13/openstack-gnocchi-api:13.0-83
+  DockerGnocchiConfigImage: 10.0.10.10:8787/rhosp13/openstack-gnocchi-api:13.0-83
+  DockerGnocchiMetricdImage: 10.0.10.10:8787/rhosp13/openstack-gnocchi-metricd:13.0-84
+  DockerGnocchiStatsdImage: 10.0.10.10:8787/rhosp13/openstack-gnocchi-statsd:13.0-83
+  DockerHAProxyConfigImage: 10.0.10.10:8787/rhosp13/openstack-haproxy:13.0-87
+  DockerHAProxyImage: 10.0.10.10:8787/rhosp13/openstack-haproxy:13.0-87
+  DockerHeatApiCfnConfigImage: 10.0.10.10:8787/rhosp13/openstack-heat-api-cfn:13.0-81
+  DockerHeatApiCfnImage: 10.0.10.10:8787/rhosp13/openstack-heat-api-cfn:13.0-81
+  DockerHeatApiConfigImage: 10.0.10.10:8787/rhosp13/openstack-heat-api:13.0-82
+  DockerHeatApiImage: 10.0.10.10:8787/rhosp13/openstack-heat-api:13.0-82
+  DockerHeatConfigImage: 10.0.10.10:8787/rhosp13/openstack-heat-api:13.0-82
+  DockerHeatEngineImage: 10.0.10.10:8787/rhosp13/openstack-heat-engine:13.0-80
+  DockerHorizonConfigImage: 10.0.10.10:8787/rhosp13/openstack-horizon:13.0-84
+  DockerHorizonImage: 10.0.10.10:8787/rhosp13/openstack-horizon:13.0-84
+  DockerInsecureRegistryAddress:
+  - 10.0.10.10:8787
+  DockerIscsidConfigImage: 10.0.10.10:8787/rhosp13/openstack-iscsid:13.0-82
+  DockerIscsidImage: 10.0.10.10:8787/rhosp13/openstack-iscsid:13.0-82
+  DockerKeystoneConfigImage: 10.0.10.10:8787/rhosp13/openstack-keystone:13.0-81
+  DockerKeystoneImage: 10.0.10.10:8787/rhosp13/openstack-keystone:13.0-81
+  DockerMemcachedConfigImage: 10.0.10.10:8787/rhosp13/openstack-memcached:13.0-84
+  DockerMemcachedImage: 10.0.10.10:8787/rhosp13/openstack-memcached:13.0-84
+  DockerMysqlClientConfigImage: 10.0.10.10:8787/rhosp13/openstack-mariadb:13.0-85
+  DockerMysqlConfigImage: 10.0.10.10:8787/rhosp13/openstack-mariadb:13.0-85
+  DockerMysqlImage: 10.0.10.10:8787/rhosp13/openstack-mariadb:13.0-85
+  DockerNeutronApiImage: 10.0.10.10:8787/rhosp13/openstack-neutron-server:13.0-91
+  DockerNeutronConfigImage: 10.0.10.10:8787/rhosp13/openstack-neutron-server:13.0-91
+  DockerNeutronDHCPImage: 10.0.10.10:8787/rhosp13/openstack-neutron-dhcp-agent:13.0-91
+  DockerNeutronL3AgentImage: 10.0.10.10:8787/rhosp13/openstack-neutron-l3-agent:13.0-90
+  DockerNeutronMetadataImage: 10.0.10.10:8787/rhosp13/openstack-neutron-metadata-agent:13.0-92
+  DockerNeutronSriovImage: 10.0.10.10:8787/rhosp13/openstack-neutron-sriov-agent:13.0-89
+  DockerNovaApiImage: 10.0.10.10:8787/rhosp13/openstack-nova-api:13.0-90
+  DockerNovaComputeImage: 10.0.10.10:8787/rhosp13/openstack-nova-compute:13.0-98
+  DockerNovaConductorImage: 10.0.10.10:8787/rhosp13/openstack-nova-conductor:13.0-88
+  DockerNovaConfigImage: 10.0.10.10:8787/rhosp13/openstack-nova-api:13.0-90
+  DockerNovaConsoleauthImage: 10.0.10.10:8787/rhosp13/openstack-nova-consoleauth:13.0-88
+  DockerNovaLibvirtConfigImage: 10.0.10.10:8787/rhosp13/openstack-nova-compute:13.0-98
+  DockerNovaLibvirtImage: 10.0.10.10:8787/rhosp13/openstack-nova-libvirt:13.0-101
+  DockerNovaMetadataImage: 10.0.10.10:8787/rhosp13/openstack-nova-api:13.0-90
+  DockerNovaPlacementConfigImage: 10.0.10.10:8787/rhosp13/openstack-nova-placement-api:13.0-89
+  DockerNovaPlacementImage: 10.0.10.10:8787/rhosp13/openstack-nova-placement-api:13.0-89
+  DockerNovaSchedulerImage: 10.0.10.10:8787/rhosp13/openstack-nova-scheduler:13.0-90
+  DockerNovaVncProxyImage: 10.0.10.10:8787/rhosp13/openstack-nova-novncproxy:13.0-91
+  DockerOpenvswitchImage: 10.0.10.10:8787/rhosp13/openstack-neutron-openvswitch-agent:13.0-90
+  DockerPankoApiImage: 10.0.10.10:8787/rhosp13/openstack-panko-api:13.0-83
+  DockerPankoConfigImage: 10.0.10.10:8787/rhosp13/openstack-panko-api:13.0-83
+  DockerRabbitmqConfigImage: 10.0.10.10:8787/rhosp13/openstack-rabbitmq:13.0-86
+  DockerRabbitmqImage: 10.0.10.10:8787/rhosp13/openstack-rabbitmq:13.0-86
+  DockerRedisConfigImage: 10.0.10.10:8787/rhosp13/openstack-redis:13.0-87
+  DockerRedisImage: 10.0.10.10:8787/rhosp13/openstack-redis:13.0-87
+  DockerSwiftAccountImage: 10.0.10.10:8787/rhosp13/openstack-swift-account:13.0-81
+  DockerSwiftConfigImage: 10.0.10.10:8787/rhosp13/openstack-swift-proxy-server:13.0-83
+  DockerSwiftContainerImage: 10.0.10.10:8787/rhosp13/openstack-swift-container:13.0-84
+  DockerSwiftObjectImage: 10.0.10.10:8787/rhosp13/openstack-swift-object:13.0-81
+  DockerSwiftProxyImage: 10.0.10.10:8787/rhosp13/openstack-swift-proxy-server:13.0-83

@@ -1,0 +1,54 @@
+parameter_defaults:
+  # Metadata through Neutron DHCP
+  NeutronEnableIsolatedMetadata: true
+  NeutronEnableForceMetadata: true
+
+  # Neutron allowed Network types
+  NeutronNetworkType: 'vxlan,vlan,flat'
+  NeutronTunnelTypes: 'vxlan'
+
+  # Neutron Logical bridge mapping between a custom name and OVS bridge
+  NeutronBridgeMappings: 'external:br-ex,datacentre0:br-link0,datacentre1:br-link1'
+
+  # Neutron VLAN range per bridge
+  NeutronNetworkVLANRanges: 'datacentre0,datacentre1'
+
+  # Neutron Flat Network
+  NeutronFlatNetworks: 'external'
+
+  # Default global MTU for the platform
+  # In ExtraConfig specific override for overlay
+  NeutronGlobalPhysnetMtu: 9000
+
+  # DNS forwarder for the DNSMasq
+  NeutronDhcpAgentDnsmasqDnsServers: ['1.1.1.1']
+
+  # Datapath type to be used by OVS-DPDK
+  NeutronDatapathType: "netdev"
+
+  # Directory used by Neutron for the VHU ports
+  NeutronVhostuserSocketDir: "/var/lib/vhost_sockets"
+
+  # Neutron enabled mechanism drivers
+  NeutronMechanismDrivers: ['sriovnicswitch', 'openvswitch']
+
+  # OVS can be used with the Connection tracking system where
+  # OpenFlow flow can be used to match on the state of a TCP,
+  # UDP, ICMP, etc., connections.
+  # Connection tracking in conjunction with Firewall rules 
+  # provides a stateful firewall for any VirtIO ports.
+  # WARNING: this option has a huge performance degradation (over 80%).
+  # When OVS acts also as firewall no SLA can be ensured
+  NeutronFirewallDriver: 'openvswitch'
+  NeutronOVSFirewallDriver: 'openvswitch'
+
+  # The exact-match cache (EMC) is the first and fastest mechanism
+  # OVS uses to determine what to do with an incoming packet
+  # Based on field observation as the number of flows increase, the 
+  # performance of OvS-DPDK with the EMC seems to diminish below
+  # OvS-DPDK performance with no EMC at all.
+  # Upstream has proposed alternative caching (SMC in OVS 2.10) and
+  # ways to speed up next lookup layer Datapath Classifier (dpcls)
+  # The EMC is left enabled here as OVS-DPDK is not supposed to handle 
+  # lots of traffic as it's relegated to signaling only traffic
+  OvsDisableEMC: false

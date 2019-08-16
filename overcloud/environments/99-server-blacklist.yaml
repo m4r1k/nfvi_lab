@@ -1,0 +1,24 @@
+parameter_defaults:
+  # You can exclude overcloud nodes from receiving an updated deployment.
+  # This is useful in scenarios where you aim to scale new node while excluding
+  # existing nodes from receiving an updated set of parameters and resources from the core Heat template collection. 
+
+  # WARNING #
+
+  # It is possible create a hung stack or configure the overcloud incorrectly using the blacklist feature.
+  # For example, if a cluster configuration changes applies to all members of a Pacemaker cluster, blacklisting a Pacemaker cluster member during this change can cause the cluster to fail.
+
+  # Do not use the blacklist during update or upgrade procedures.
+  # Those procedures have their own methods for isolating changes to particular servers.
+
+  # When adding servers to the blacklist, further changes to those nodes are not supported until the server is removed from the blacklist.
+
+  # NEVER blacklist the OpenStack Controller when Ceph is deployed by TripleO as the Stack Update will fail!
+  DeploymentServerBlacklist: []
+
+  # Example #
+  # DeploymentServerBlacklist:
+  #   - overcloud-ceph-0
+  #   - overcloud-ceph-1
+  #   - overcloud-ceph-2
+  #   - overcloud-telco-compute-0

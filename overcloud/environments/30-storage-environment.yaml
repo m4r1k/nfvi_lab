@@ -1,0 +1,28 @@
+parameter_defaults:
+  # Whether to enable iscsi backend for Cinder.
+  CinderEnableIscsiBackend: false
+
+  # Whether to enable NFS backend for Cinder.
+  CinderEnableNfsBackend: false
+
+  # Whether to enable rbd (Ceph) backend for Cinder.
+  CinderEnableRbdBackend: false
+
+  # Cinder Backup backend can be either 'ceph', 'swift' or 'nfs'.
+  # CinderBackupBackend: ceph
+
+  # Whether to enable rbd (Ceph) backend for Nova ephemeral storage.
+  NovaEnableRbdBackend: false
+
+  # Glance backend can be either 'rbd' (Ceph), 'swift' or 'file'.
+  GlanceBackend: swift
+
+  # Gnocchi backend can be either 'rbd' (Ceph), 'swift' or 'file'.
+  GnocchiBackend: swift
+
+  # Use a local directory for Swift storage services when building rings
+  SwiftUseLocalDir: true
+
+  # DEPRECATED options for compatibility with overcloud.yaml
+  # Whether to enable Swift Storage on the Controller
+  ControllerEnableSwiftStorage: true

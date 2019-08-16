@@ -1,0 +1,33 @@
+heat_template_version: queens
+
+description: >
+  Compute Deterministic pre-configuration hook
+
+parameters:
+  server:
+    type: string
+  DeployIdentifier:
+    type: string
+
+resources:
+  QemuCronJob:
+    type: OS::Heat::SoftwareConfig
+    properties:
+      group: script
+      inputs:
+        - name: DeployIdentifier
+      config: {get_file: scripts/qemu-cron-job}
+
+  QemuCronJobDeployment:
+    type: OS::Heat::SoftwareDeployment
+    properties:
+      actions: ['CREATE', 'UPDATE'] # Do this on CREATE and UPDATE as well
+      server: {get_param: server}
+      config: {get_resource: QemuCronJob}
+      input_values:
+        deploy_identifier: {get_param: DeployIdentifier}
+
+outputs:
+  deploy_stdout:
+    description: Deployment reference, used to trigger puppet apply on changes
+    value: {get_attr: [QemuCronJobDeployment, deploy_stdout]}

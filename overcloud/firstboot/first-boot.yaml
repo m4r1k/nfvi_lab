@@ -1,0 +1,86 @@
+heat_template_version: queens
+
+description: >
+  FirstBoot Script that applies some configuration through CloudInit
+
+parameters:
+  NodeRootPassword:
+    description: Root password for the nodes
+    hidden: true
+    type: string
+
+resources:
+  userdata:
+    type: OS::Heat::MultipartMime
+    properties:
+      parts:
+      - config: {get_resource: root_config}
+      - config: {get_resource: disk_wipe}
+
+  root_config:
+    type: OS::Heat::CloudConfig
+    properties:
+      cloud_config:
+        ssh_pwauth: true
+        disable_root: false
+        chpasswd:
+          list:
+            str_replace:
+              template: "root:PASSWORD"
+              params:
+                PASSWORD: {get_param: NodeRootPassword}
+          expire: False
+
+  disk_wipe:
+    type: OS::Heat::SoftwareConfig
+    properties:
+      config: |
+        #!/bin/bash
+        # LVM partitions are always in use by the kernel. Destroy all of the
+        # LVM components here so the disks are not in use and sgdisk and
+        # partprobe can do their thing
+        
+        # Destroy all the logical volumes
+        lvs --noheadings -o lv_name | awk '{print $1}' | while read lv;
+        do
+            cmd="lvremove -f $lv"
+            echo $cmd
+            $cmd
+        done
+        
+        # Destroy all the volume groups
+        vgs --noheadings -o vg_name | awk '{print $1}' | while read lvg;
+        do
+            cmd="vgremove -f $lvg"
+            echo $cmd
+            $cmd
+        done
+        
+        # Destroy all the physical volumes
+        pvs --noheadings -o pv_name | awk '{print $1}' | while read pv;
+        do
+            cmd="pvremove -ff $pv"
+            echo $cmd
+            $cmd
+        done
+        
+        lsblk -dno NAME,TYPE | \
+        while read disk type; do
+          # Skip if the device type isn't "disk" or if it's mounted
+          [ "${type}" == "disk" ] || continue
+          device="/dev/${disk}"
+          if grep -q ^${device}[1-9] /proc/mounts; then
+            echo "Skipping ${device} because it's mounted"
+            continue
+          fi
+          echo "Partitioning disk: ${disk}"
+          sgdisk -Z ${device}
+          wipefs -a ${device}
+          echo ""
+        done
+        partprobe -s
+        parted -lm
+
+outputs:
+  OS::stack_id:
+    value: {get_resource: userdata}

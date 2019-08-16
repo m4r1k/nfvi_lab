@@ -1,0 +1,36 @@
+heat_template_version: queens
+
+description: >
+  Controller post-configuration hook
+
+parameters:
+  servers:
+    type: json
+  DeployIdentifier:
+    type: string
+  input_values:
+     type: json
+     description: input values for the software deployments
+
+resources:
+  HeatCache:
+    type: OS::Heat::SoftwareConfig
+    properties:
+      group: script
+      inputs:
+        - name: DeployIdentifier
+      config: {get_file: scripts/heatcache.sh}
+  HeatCacheDeployment:
+    type: OS::Heat::SoftwareDeploymentGroup
+    properties:
+      actions: ['CREATE', 'UPDATE'] # Do this on CREATE and UPDATE as well
+      servers: {get_param: [servers, 'Controller']}
+      config: {get_resource: HeatCache}
+      input_values:
+        get_param: input_values
+        deploy_identifier: {get_param: DeployIdentifier}
+
+outputs:
+  deploy_stdout:
+    description: Deployment reference, used to trigger puppet apply on changes
+    value: {get_attr: [HeatCacheDeployment, deploy_stdout]}

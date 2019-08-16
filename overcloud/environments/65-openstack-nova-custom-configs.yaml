@@ -1,0 +1,22 @@
+parameter_defaults:
+  # Enable various IPv6 features in Nova
+  NovaIPv6: True
+
+  # Nova Scheduler filters
+  # DiskFilter removed as Nova Ceph Ephemeral is enabled
+  NovaSchedulerDefaultFilters: 
+    - RetryFilter
+    - AvailabilityZoneFilter
+    - RamFilter
+    - CoreFilter
+    - ComputeFilter
+    - ImagePropertiesFilter
+    - ServerGroupAntiAffinityFilter
+    - ServerGroupAffinityFilter
+    - PciPassthroughFilter
+    - NUMATopologyFilter
+    - AggregateInstanceExtraSpecsFilter
+    - ComputeCapabilitiesFilter
+
+  # Nova Scheduler drivers
+  NovaSchedulerAvailableFilters: ["nova.scheduler.filters.all_filters","nova.scheduler.filters.pci_passthrough_filter.PciPassthroughFilter"]
