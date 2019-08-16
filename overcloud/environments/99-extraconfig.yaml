@@ -75,7 +75,7 @@ parameter_defaults:
     # Array of Physical network and custom MTU size
     # Ensure MTU is 1500 Bytes for external floating IP network
     # Datacentre and Niantic_pool both at 9000Byte
-    neutron::plugins::ml2::physical_network_mtus: ['external:1500','datacentre:9000','niantic_pool:9000']
+    neutron::plugins::ml2::physical_network_mtus: ['external:1500','datacentre0:9000','datacentre1:9000','niantic_pool:9000']
 
     # Ensure Overlay VXLAN has 1500 Byte
     neutron::plugins::ml2::path_mtu: 1550
@@ -86,14 +86,57 @@ parameter_defaults:
   # Required config in order to have a custom Ceilometer pipeline
   ManagePipeline: true
 
+  ComputeOvsDpdkExtraConfig:
+    # Reserved HugePagaes consumed by OVS-DPDK
+    nova::compute::reserved_huge_pages:
+      - node:0,size:1GB,count:4
+      - node:1,size:1GB,count:4
+
+    # Array of Physical network and custom MTU size
+    # Datacentre at 9000Byte
+    neutron::plugins::ml2::physical_network_mtus: ['datacentre0:9000']
+
+    # Ensure Overlay VXLAN has 1500 Byte
+    neutron::plugins::ml2::path_mtu: 1550
+
+  ComputeDualOvsDpdkSriovExtraConfig:
+    # Reserved HugePagaes consumed by OVS-DPDK
+    nova::compute::reserved_huge_pages:
+      - node:0,size:1GB,count:4
+      - node:1,size:1GB,count:4
+
+    # Array of Physical network and custom MTU size
+    # Both Datacentre at 9000Byte
+    neutron::plugins::ml2::physical_network_mtus: ['datacentre0:9000','datacentre1:9000']
+
+    # Ensure Overlay VXLAN has 1500 Byte
+    neutron::plugins::ml2::path_mtu: 1550
+
+  ComputeSriovExtraConfig:
+    # Array of Physical network and custom MTU size
+    # Niantic_pool at 9000Byte
+    neutron::plugins::ml2::physical_network_mtus: ['niantic_pool:9000']
+
+    # Ensure Overlay VXLAN has 1500 Byte
+    neutron::plugins::ml2::path_mtu: 1550
+
+  ComputeDualSriovExtraConfig:
+    # Array of Physical network and custom MTU size
+    # Niantic_pool at 9000Byte
+    neutron::plugins::ml2::physical_network_mtus: ['niantic_pool:9000']
+
+    # Ensure Overlay VXLAN has 1500 Byte
+    neutron::plugins::ml2::path_mtu: 1550
+
   ComputeOvsDpdkSriovExtraConfig:
+    # Reserved HugePagaes consumed by OVS-DPDK
     nova::compute::reserved_huge_pages:
       - node:0,size:1GB,count:4
       - node:1,size:1GB,count:4
 
     # Array of Physical network and custom MTU size
     # Datacentre and Niantic_pool both at 9000Byte
-    neutron::plugins::ml2::physical_network_mtus: ['datacentre:9000','niantic_pool:9000']
+    neutron::plugins::ml2::physical_network_mtus: ['datacentre0:9000','niantic_pool:9000']
 
     # Ensure Overlay VXLAN has 1500 Byte
     neutron::plugins::ml2::path_mtu: 1550

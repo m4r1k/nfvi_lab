@@ -11,7 +11,7 @@ parameter_defaults:
   NeutronBridgeMappings: 'external:br-ex,datacentre0:br-link0,datacentre1:br-link1'
 
   # Neutron VLAN range per bridge
-  NeutronNetworkVLANRanges: 'datacentre0,datacentre1'
+  NeutronNetworkVLANRanges: 'datacentre0,datacentre1,niantic_pool'
 
   # Neutron Flat Network
   NeutronFlatNetworks: 'external'
