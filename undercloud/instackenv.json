@@ -1,0 +1,64 @@
+{
+    "nodes": [
+        {
+            "arch": "x86_64",
+            "name": "controller-node-0",
+            "mac": [
+              "52:54:00:05:30:a0"
+            ],
+            "pm_addr": "192.168.178.28",
+            "pm_user": "root",
+            "pm_password": "calvin",
+            "ipmi_port": "623",
+            "pm_type": "pxe_ipmitool",
+            "cpu": "8",
+            "memory": "22000",
+            "disk": "50",
+            "capabilities": "node:controller-node-0,boot_option:local",
+            "root_device": {
+               "name":"/dev/sda"
+               },
+            "_comment": "CTRL0"
+        },
+        {
+            "arch": "x86_64",
+            "name": "controller-node-1",
+            "mac": [
+              "52:54:00:80:cc:28"
+            ],
+            "pm_addr": "192.168.178.29",
+            "pm_user": "root",
+            "pm_password": "calvin",
+            "ipmi_port": "623",
+            "pm_type": "pxe_ipmitool",
+            "cpu": "8",
+            "memory": "22000",
+            "disk": "50",
+            "capabilities": "node:controller-node-1,boot_option:local",
+            "root_device": {
+               "name":"/dev/sda"
+               },
+            "_comment": "CTRL1"
+        },
+        {
+            "arch": "x86_64",
+            "name": "controller-node-2",
+            "mac": [
+              "52:54:00:18:79:7c"
+            ],
+            "pm_addr": "192.168.178.30",
+            "pm_user": "root",
+            "pm_password": "calvin",
+            "ipmi_port": "623",
+            "pm_type": "pxe_ipmitool",
+            "cpu": "8",
+            "memory": "22000",
+            "disk": "50",
+            "capabilities": "node:controller-node-2,boot_option:local",
+            "root_device": {
+               "name":"/dev/sda"
+               },
+            "_comment": "CTRL2"
+        }
+    ]
+}
