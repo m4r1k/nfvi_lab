@@ -5,7 +5,7 @@ parameter_defaults:
 
   # Neutron allowed Network types
   NeutronNetworkType: 'vxlan,vlan,flat'
-  NeutronTunnelTypes: 'vxlan'
+  NeutronTunnelTypes: 'vxlan,gre'
 
   # Neutron Logical bridge mapping between a custom name and OVS bridge
   NeutronBridgeMappings: 'external:br-ex,datacentre0:br-link0,datacentre1:br-link1'
