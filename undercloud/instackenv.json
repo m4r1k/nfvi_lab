@@ -59,6 +59,46 @@
                "name":"/dev/sda"
                },
             "_comment": "CTRL2"
+        },
+        {
+            "arch": "x86_64",
+            "name": "r730-0",
+            "mac": [
+              "ec:f4:bb:dd:49:34"
+            ],
+            "pm_addr": "192.168.178.231",
+            "pm_user": "root",
+            "pm_password": "calvin",
+            "ipmi_port": "623",
+            "pm_type": "pxe_ipmitool",
+            "cpu": "48",
+            "memory": "128000",
+            "disk": "100",
+            "capabilities": "node:r730-0,boot_option:local",
+            "root_device": {
+               "name":"/dev/sda"
+               },
+            "_comment": "R730-0"
+        },
+        {
+            "arch": "x86_64",
+            "name": "r630-0",
+            "mac": [
+              "ec:f4:bb:dd:96:28"
+            ],
+            "pm_addr": "192.168.178.232",
+            "pm_user": "root",
+            "pm_password": "calvin",
+            "ipmi_port": "623",
+            "pm_type": "pxe_ipmitool",
+            "cpu": "48",
+            "memory": "128000",
+            "disk": "100",
+            "capabilities": "node:r630-0,boot_option:local",
+            "root_device": {
+               "name":"/dev/sda"
+               },
+            "_comment": "R630-0"
         }
     ]
 }
