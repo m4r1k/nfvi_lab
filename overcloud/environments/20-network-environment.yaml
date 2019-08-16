@@ -1,11 +1,11 @@
 resource_registry:
   # NIC Configuration files for all the roles
   OS::TripleO::Controller::Net::SoftwareConfig:             ../nic-configs/controller.yaml
-  OS::TripleO::ComputeOvsDpdk::Net::SoftwareConfig:         ../nic-configs/compute.yaml
-  OS::TripleO::ComputeDualOvsDpdk::Net::SoftwareConfig:     ../nic-configs/compute.yaml
-  OS::TripleO::ComputeSriov::Net::SoftwareConfig:           ../nic-configs/compute.yaml
-  OS::TripleO::ComputeDualSriov::Net::SoftwareConfig:       ../nic-configs/compute.yaml
-  OS::TripleO::ComputeOvsDpdkSriov::Net::SoftwareConfig:    ../nic-configs/compute.yaml
+  OS::TripleO::ComputeOvsDpdk::Net::SoftwareConfig:         ../nic-configs/compute-ovsdpdk.yaml
+  OS::TripleO::ComputeDualOvsDpdk::Net::SoftwareConfig:     ../nic-configs/compute-dual-ovsdpdk.yaml
+  OS::TripleO::ComputeSriov::Net::SoftwareConfig:           ../nic-configs/compute-sriov.yaml
+  OS::TripleO::ComputeDualSriov::Net::SoftwareConfig:       ../nic-configs/compute-dual-sriov.yaml
+  OS::TripleO::ComputeOvsDpdkSriov::Net::SoftwareConfig:    ../nic-configs/compute-ovsdpdk-sriov.yaml
 
   # IP Port for Controller
   OS::TripleO::Controller::Ports::ExternalPort:             /usr/share/openstack-tripleo-heat-templates/network/ports/external_from_pool.yaml

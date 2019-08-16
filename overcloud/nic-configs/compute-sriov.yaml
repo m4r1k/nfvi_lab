@@ -94,8 +94,9 @@ resources:
               network_config:
               - type: interface
                 name: nic1
-                mtu: 1496
+                mtu: 1500
                 use_dhcp: false
+                dns_servers: {get_param: DnsServers}
                 addresses:
                 - ip_netmask:
                     list_join:
@@ -104,8 +105,9 @@ resources:
                       - get_param: ControlPlaneSubnetCidr
                 routes:
                 - ip_netmask: 169.254.169.254/32
-                  next_hop:
-                    get_param: EC2MetadataIp
+                  next_hop: {get_param: EC2MetadataIp}
+                - default: true
+                  next_hop: {get_param: ControlPlaneDefaultRoute}
 
               - type: interface
                 name: nic2
@@ -114,76 +116,34 @@ resources:
                 onboot: true
 
               - type: vlan
-                vlan_id: {get_param: ExternalNetworkVlanID}
                 device: nic2
                 mtu: 1500
-                dns_servers:
-                  get_param: DnsServers
+                vlan_id: {get_param: InternalApiNetworkVlanID}
                 addresses:
-                - ip_netmask: {get_param: ExternalIpSubnet}
-                routes:
-                - default: true
-                  next_hop: {get_param: ExternalInterfaceDefaultRoute}
-
-              - type: linux_bond
-                name: bond1
-                mtu: 8950
-                bonding_options: "mode=active-backup"
-                use_dhcp: false
-                dns_servers: {get_param: DnsServers}
-                members:
-                - type: interface
-                  name: nic3
-                  mtu: 8950
-                - type: interface
-                  name: nic4
-                  mtu: 8950
+                - ip_netmask: {get_param: InternalApiIpSubnet}
 
               - type: vlan
-                device: bond1
-                mtu: 8950
-                vlan_id:
-                  get_param: InternalApiNetworkVlanID
+                device: nic2
+                mtu: 1500
+                vlan_id: {get_param: TenantNetworkVlanID}
                 addresses:
-                - ip_netmask:
-                    get_param: InternalApiIpSubnet
-              - type: vlan
-                device: bond1
-                mtu: 8950
-                vlan_id:
-                  get_param: StorageNetworkVlanID
-                addresses:
-                - ip_netmask:
-                    get_param: StorageIpSubnet
-              - type: vlan
-                device: bond1
-                mtu: 8950
-                vlan_id:
-                  get_param: StorageMgmtNetworkVlanID
-                addresses:
-                - ip_netmask:
-                    get_param: StorageMgmtIpSubnet
-              - type: ovs_bridge
-                name: br-link
-                mtu: 8950
+                - ip_netmask: {get_param: TenantIpSubnet}
+
+              - type: interface
+                name: nic3
+                mtu: 9216
                 use_dhcp: false
-                members:
-                - type: ovs_bond
-                  name: bond2
-                  ovs_options: {get_param: BondInterfaceOvsOptions}
-                  members:
-                  - type: interface
-                    name: nic5
-                    mtu: 8950
-                    primary: true
-                  - type: interface
-                    name: nic6
-                    mtu: 8950
-                - type: vlan
-                  mtu: 8950
-                  vlan_id: {get_param: TenantNetworkVlanID}
-                  addresses:
-                  - ip_netmask: {get_param: TenantIpSubnet}
+                defroute: false
+                nm_controlled: true
+                hotplug: true
+
+              - type: interface
+                name: nic4
+                mtu: 9216
+                use_dhcp: false
+                defroute: false
+                nm_controlled: true
+                hotplug: true
 
 outputs:
   OS::stack_id:

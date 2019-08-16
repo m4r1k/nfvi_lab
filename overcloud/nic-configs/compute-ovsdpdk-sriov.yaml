@@ -94,8 +94,9 @@ resources:
               network_config:
               - type: interface
                 name: nic1
-                mtu: 1496
+                mtu: 1500
                 use_dhcp: false
+                dns_servers: {get_param: DnsServers}
                 addresses:
                 - ip_netmask:
                     list_join:
@@ -104,8 +105,9 @@ resources:
                       - get_param: ControlPlaneSubnetCidr
                 routes:
                 - ip_netmask: 169.254.169.254/32
-                  next_hop:
-                    get_param: EC2MetadataIp
+                  next_hop: {get_param: EC2MetadataIp}
+                - default: true
+                  next_hop: {get_param: ControlPlaneDefaultRoute}
 
               - type: interface
                 name: nic2
@@ -114,44 +116,15 @@ resources:
                 onboot: true
 
               - type: vlan
-                vlan_id: {get_param: ExternalNetworkVlanID}
                 device: nic2
                 mtu: 1500
-                dns_servers:
-                  get_param: DnsServers
+                vlan_id: {get_param: InternalApiNetworkVlanID}
                 addresses:
-                - ip_netmask: {get_param: ExternalIpSubnet}
-                routes:
-                - default: true
-                  next_hop: {get_param: ExternalInterfaceDefaultRoute}
-
-              - type: interface
-                name: nic4
-                mtu: 8950
-                use_dhcp: false
-                onboot: true
-
-              - type: vlan
-                device: nic4
-                mtu: 8950
-                vlan_id:
-                  get_param: InternalApiNetworkVlanID
-                addresses:
-                - ip_netmask:
-                    get_param: InternalApiIpSubnet
-
-              - type: vlan
-                device: nic4
-                mtu: 8950
-                vlan_id:
-                  get_param: StorageNetworkVlanID
-                addresses:
-                - ip_netmask:
-                    get_param: StorageIpSubnet
+                - ip_netmask: {get_param: InternalApiIpSubnet}
 
               - type: ovs_user_bridge
-                name: br-link
-                mtu: 8950
+                name: br-link0
+                mtu: 9216
                 use_dhcp: false
                 ovs_extra:
                 - str_replace:
@@ -162,28 +135,51 @@ resources:
                 addresses:
                 - ip_netmask: {get_param: TenantIpSubnet}
                 members:
-                - type: ovs_dpdk_port
-                  name: dpdk0
-                  mtu: 8950
-                  rx_queue: 1
+                - type: ovs_dpdk_bond
+                  name: ovsbond0
+                  ovs_options: {get_param: BondInterfaceOvsOptions}
+                  mtu: 9216
+                  ovs_extra:
+                  # - set port $DEVICE bond_mode=balance-tcp lacp=active
+                  # - set port $DEVICE bond_mode=active-backup lacp=active
+                  # - set port $DEVICE bond_mode=balance-slb
+                  - set port $DEVICE bond_mode=balance-slb
+                  # Dell
+                  - set interface dpdk0 other_config:pmd-rxq-affinity="0:2,1:4"
+                  - set interface dpdk1 other_config:pmd-rxq-affinity="0:4,1:2"
+                  # HPE
+                  # - set interface dpdk0 other_config:pmd-rxq-affinity="0:1,1:2"
+                  # - set interface dpdk1 other_config:pmd-rxq-affinity="0:2,1:1"
+                  # DPDK DRIVERS
                   # driver "vfio-pci" to be used for:
                   #  - Broadcom NetXtreme-E
                   #  - Intel Fortivilla series - X710, XXV710, XL710
                   #  - Intel Niantic series - X520, X540, X550
                   #  - Cavium QLogic FastLinQ QL4xxxx 
                   #  - Netronome NFP-4xxx, NFP-6xxx
-                  # driver "mlx5_core" to be used for:
+                  # Driver "mlx5_core" to be used for:
                   #  - Mellanox ConnectX-4
                   #  - Mellanox ConnectX-5
-                  # driver "mlx4_core" to be used for:
+                  # Driver "mlx4_core" to be used for:
                   #  - Mellanox ConnectX-3 Pro
-                  # both igb_uio and uio_pci_generic and UNSUPPORTED
-                  driver: vfio-pci
                   members:
-                  - type: interface
-                    name: nic3
+                  - type: ovs_dpdk_port
+                    name: dpdk0
+                    driver: vfio-pci
+                    mtu: 9216
+                    rx_queue: 2
+                    members:
+                    - type: interface
+                      name: nic3
+                  - type: ovs_dpdk_port
+                    name: dpdk1
+                    driver: vfio-pci
+                    mtu: 9216
+                    rx_queue: 2
+                    members:
+                    - type: interface
+                      name: nic4
 
-              # SR-IOV Interfaces
               - type: interface
                 name: nic5
                 mtu: 9216
@@ -194,54 +190,6 @@ resources:
 
               - type: interface
                 name: nic6
-                mtu: 9216
-                use_dhcp: false
-                defroute: false
-                nm_controlled: true
-                hotplug: true
-
-              - type: interface
-                name: nic7
-                mtu: 9216
-                use_dhcp: false
-                defroute: false
-                nm_controlled: true
-                hotplug: true
-
-              - type: interface
-                name: nic8
-                mtu: 9216
-                use_dhcp: false
-                defroute: false
-                nm_controlled: true
-                hotplug: true
-
-              - type: interface
-                name: nic9
-                mtu: 9216
-                use_dhcp: false
-                defroute: false
-                nm_controlled: true
-                hotplug: true
-
-              - type: interface
-                name: nic10
-                mtu: 9216
-                use_dhcp: false
-                defroute: false
-                nm_controlled: true
-                hotplug: true
-
-              - type: interface
-                name: nic11
-                mtu: 9216
-                use_dhcp: false
-                defroute: false
-                nm_controlled: true
-                hotplug: true
-
-              - type: interface
-                name: nic12
                 mtu: 9216
                 use_dhcp: false
                 defroute: false
