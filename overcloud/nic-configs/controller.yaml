@@ -131,13 +131,13 @@ resources:
                 - type: vlan
                   vlan_id: {get_param: StorageNetworkVlanID}
                   device: br-ex
-                  mtu: 1500
+                  mtu: 9000
                   addresses:
                   - ip_netmask: {get_param: StorageIpSubnet}
                 - type: vlan
                   vlan_id: {get_param: StorageMgmtNetworkVlanID}
                   device: br-ex
-                  mtu: 1500
+                  mtu: 9000
                   addresses:
                   - ip_netmask: {get_param: StorageMgmtIpSubnet}
 
