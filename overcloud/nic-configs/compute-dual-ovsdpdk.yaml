@@ -184,14 +184,6 @@ resources:
                 name: br-link1
                 mtu: 9216
                 use_dhcp: false
-                ovs_extra:
-                - str_replace:
-                    template: set port $DEVICE tag=_VLAN_TAG_
-                    params:
-                      _VLAN_TAG_: {get_param: TenantNetworkVlanID}
-                - set interface $DEVICE mtu_request=$MTU
-                addresses:
-                - ip_netmask: {get_param: TenantIpSubnet}
                 members:
                 - type: ovs_dpdk_bond
                   name: ovsbond1
