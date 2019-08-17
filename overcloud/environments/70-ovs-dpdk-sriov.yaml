@@ -3,24 +3,20 @@ resource_registry:
   OS::TripleO::Services::NeutronSriovAgent:      /usr/share/openstack-tripleo-heat-templates/docker/services/neutron-sriov-agent.yaml
   OS::TripleO::Services::NeutronSriovHostConfig: /usr/share/openstack-tripleo-heat-templates/puppet/services/neutron-sriov-host-config.yaml
 
-
 parameter_defaults:
-  # COMMON PLATFORM PARAMETERS
-
-  # GRUB Kernel CLI
-  KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
-  # Tuned profile
-  TunedProfileName: "cpu-partitioning"
-  # Isolated pCPU from Kernel, NMI, IRQ, and userland
-  IsolCpusList: "2-23,26-47"
-  # VHU Socket Group
-  VhostuserSocketGroup: "hugetlbfs"
-  # CPU Share for the QEMU Emulator Threads
-  NovaComputeCpuSharedSet: "0,1,24,25"
-  # Reserved mamory for the hypervisor
-  NovaReservedHostMemory: 16384
-
   ComputeOvsDpdkParameters:
+    # GRUB Kernel CLI
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    # Tuned profile
+    TunedProfileName: "cpu-partitioning"
+    # Isolated pCPU from Kernel, NMI, IRQ, and userland
+    IsolCpusList: "2-23,26-47"
+    # VHU Socket Group
+    VhostuserSocketGroup: "hugetlbfs"
+    # CPU Share for the QEMU Emulator Threads
+    NovaComputeCpuSharedSet: "0,1,24,25"
+    # Reserved mamory for the hypervisor
+    NovaReservedHostMemory: 16384
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['10-23,34-47']
     # OVS-DPDK Memory size for NUMA node
@@ -39,6 +35,18 @@ parameter_defaults:
     NeutronTunnelNUMANodes: 0
 
   ComputeDualOvsDpdkParameters:
+    # GRUB Kernel CLI
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    # Tuned profile
+    TunedProfileName: "cpu-partitioning"
+    # Isolated pCPU from Kernel, NMI, IRQ, and userland
+    IsolCpusList: "2-23,26-47"
+    # VHU Socket Group
+    VhostuserSocketGroup: "hugetlbfs"
+    # CPU Share for the QEMU Emulator Threads
+    NovaComputeCpuSharedSet: "0,1,24,25"
+    # Reserved mamory for the hypervisor
+    NovaReservedHostMemory: 16384
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['10-23,34-47']
     # OVS-DPDK Memory size for NUMA node
@@ -57,6 +65,18 @@ parameter_defaults:
     NeutronTunnelNUMANodes: 0
 
   ComputeSriovParameters:
+    # GRUB Kernel CLI
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    # Tuned profile
+    TunedProfileName: "cpu-partitioning"
+    # Isolated pCPU from Kernel, NMI, IRQ, and userland
+    IsolCpusList: "2-23,26-47"
+    # VHU Socket Group
+    VhostuserSocketGroup: "hugetlbfs"
+    # CPU Share for the QEMU Emulator Threads
+    NovaComputeCpuSharedSet: "0,1,24,25"
+    # Reserved mamory for the hypervisor
+    NovaReservedHostMemory: 16384
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['2-23,26-47']
     # Neutron Physical mapping between a custom name and physical devices
@@ -75,6 +95,18 @@ parameter_defaults:
         physical_network: "niantic_pool"
 
   ComputeDualSriovParameters:
+    # GRUB Kernel CLI
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    # Tuned profile
+    TunedProfileName: "cpu-partitioning"
+    # Isolated pCPU from Kernel, NMI, IRQ, and userland
+    IsolCpusList: "2-23,26-47"
+    # VHU Socket Group
+    VhostuserSocketGroup: "hugetlbfs"
+    # CPU Share for the QEMU Emulator Threads
+    NovaComputeCpuSharedSet: "0,1,24,25"
+    # Reserved mamory for the hypervisor
+    NovaReservedHostMemory: 16384
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['2-23,26-47']
     # Neutron Physical mapping between a custom name and physical devices
@@ -101,6 +133,18 @@ parameter_defaults:
         physical_network: "niantic_pool"
 
   ComputeOvsDpdkSriovParameters:
+    # GRUB Kernel CLI
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    # Tuned profile
+    TunedProfileName: "cpu-partitioning"
+    # Isolated pCPU from Kernel, NMI, IRQ, and userland
+    IsolCpusList: "2-23,26-47"
+    # VHU Socket Group
+    VhostuserSocketGroup: "hugetlbfs"
+    # CPU Share for the QEMU Emulator Threads
+    NovaComputeCpuSharedSet: "0,1,24,25"
+    # Reserved mamory for the hypervisor
+    NovaReservedHostMemory: 16384
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['10-23,34-47']
     # OVS-DPDK Memory size for NUMA node
