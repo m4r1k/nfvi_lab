@@ -146,7 +146,7 @@ parameter_defaults:
 
   ExtraConfig:
     # Ceilometer custom Polling frequency
-    ceilometer::agent::polling::polling_interval: 60
+    ceilometer::agent::polling::polling_interval: 600
 
     ceilometer::agent::polling::polling_meters:
       - cpu
