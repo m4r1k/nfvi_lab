@@ -163,6 +163,11 @@ parameter_defaults:
     # Disable force RAW images
     nova::compute::force_raw_images: false
 
+    # Expose real hypervisor CPU
+    nova::compute::libvirt::libvirt_cpu_mode: 'host-passthrough'
+    # Ensure extra CPU flags are exposed
+    nova::compute::libvirt::libvirt_cpu_model_extra_flags: 'tsc-deadline'
+
     # Memcached everywhere
     # https://review.openstack.org/#/c/634505/
     aodh::keystone::authtoken::memcached_servers: 'overcloud-controller-0.internalapi:11211,overcloud-controller-1.internalapi:11211,overcloud-controller-2.internalapi:11211'
