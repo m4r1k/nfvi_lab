@@ -366,6 +366,7 @@
   CountDefault: 0
   networks:
     - InternalApi
+    - Tenant
   RoleParametersDefault:
     TunedProfileName: "cpu-partitioning"
   disable_upgrade_deployment: True
