@@ -1,0 +1,52 @@
+heat::keystone::authtoken::memcached_servers: 'localhost:11211'
+heat::keystone::authtoken::memcache_pool_conn_get_timeout: 1
+heat::keystone::authtoken::memcache_pool_dead_retry: 600
+heat::keystone::authtoken::memcache_pool_socket_timeout: 1
+heat::keystone::authtoken::memcache_pool_unused_timeout: 10
+mistral::keystone::authtoken::memcached_servers: 'localhost:11211'
+mistral::keystone::authtoken::memcache_pool_conn_get_timeout: 1
+mistral::keystone::authtoken::memcache_pool_dead_retry: 600
+mistral::keystone::authtoken::memcache_pool_socket_timeout: 1
+mistral::keystone::authtoken::memcache_pool_unused_timeout: 10
+keystone::cache_memcache_servers: 'localhost:11211'
+keystone::memcache_dead_retry: 600
+keystone::memcache_socket_timeout: 1
+keystone::memcache_pool_unused_timeout: 10
+keystone::memcache_pool_connection_get_timeout: 1
+keystone::cache_enabled: true
+keystone::cache_backend: 'oslo_cache.memcache_pool'
+neutron::keystone::authtoken::memcached_servers: 'localhost:11211'
+neutron::keystone::authtoken::memcache_pool_conn_get_timeout: 1
+neutron::keystone::authtoken::memcache_pool_dead_retry: 600
+neutron::keystone::authtoken::memcache_pool_socket_timeout: 1
+neutron::keystone::authtoken::memcache_pool_unused_timeout: 10
+nova::keystone::authtoken::memcached_servers: 'localhost:11211'
+nova::keystone::authtoken::memcache_pool_conn_get_timeout: 1
+nova::keystone::authtoken::memcache_pool_dead_retry: 600
+nova::keystone::authtoken::memcache_pool_socket_timeout: 1
+nova::keystone::authtoken::memcache_pool_unused_timeout: 10
+ironic::api::authtoken::memcached_servers: 'localhost:11211'
+ironic::api::authtoken::memcache_pool_conn_get_timeout: 1
+ironic::api::authtoken::memcache_pool_dead_retry: 600
+ironic::api::authtoken::memcache_pool_socket_timeout: 1
+ironic::api::authtoken::memcache_pool_unused_timeout: 10
+
+keystone::config::keystone_config:
+    catalog/caching:
+        value: true
+    domain_config/caching:
+        value: true
+    federation/caching:
+        value: true
+    revoke/caching:
+        value: true
+    role/caching:
+        value: true
+    token/cache_on_issue:
+        value: true
+    identity/caching:
+        value: true
+    identity/cache_time:
+        value: '600'
+    identity/password_hash_algorithm:
+        value: pbkdf2_sha512
