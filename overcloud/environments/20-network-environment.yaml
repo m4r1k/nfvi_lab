@@ -105,7 +105,7 @@ parameter_defaults:
   DnsServers: ['1.1.1.1']
 
   # NTP Server
-  NtpServer:  ['72.87.88.202']
+  NtpServer:  ['10.0.10.1']
 
   # Bonding options for OVS (only active/backup works in a virtual environment)
   BondInterfaceOvsOptions: 'bond_mode=balance-slb'
