@@ -2,13 +2,13 @@
 
 source ~/overcloudrc
 
-openstack server remove floating ip vm-vxlan-dpdk1 192.168.178.21
-openstack server remove floating ip vm-vxlan-dpdk2 192.168.178.22
+openstack server remove floating ip vm-dpdk1 192.168.178.21
+openstack server remove floating ip vm-dpdk2 192.168.178.22
 
 wait
 
-openstack server delete --wait vm-vxlan-dpdk1 &
-openstack server delete --wait vm-vxlan-dpdk2 &
+openstack server delete --wait vm-dpdk1 &
+openstack server delete --wait vm-dpdk2 &
 
 wait
 
@@ -18,6 +18,7 @@ openstack floating ip delete 192.168.178.22 &
 wait
 
 openstack router remove subnet router mgmt
+openstack router remove subnet router mgmt-gre
 openstack router unset --external-gateway router
 openstack router delete router
 

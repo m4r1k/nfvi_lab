@@ -104,40 +104,17 @@ if [[ "$?" != "0" ]]; then
 	ext
 fi
 
-# openstack network show vlan406 >/dev/null 2>&1
-# if [[ "$?" != "0" ]]; then
-# 	openstack network create \
-# 	--provider-network-type vlan \
-# 	--provider-physical-network niantic_pool \
-# 	--provider-segment 406 \
-# 	--mtu 9000 \
-# 	vlan406
-# 	openstack subnet create \
-# 	--network vlan406 \
-# 	--no-dhcp \
-# 	--gateway none \
-# 	--subnet-range 172.19.0.0/24 \
-# 	vlan406
-# 
-# 	openstack port create --network vlan406 --fixed-ip ip-address=172.19.0.20 \
-# 	--vnic-type direct --binding-profile type=dict --binding-profile trusted=true \
-# 	--qos-policy policy0 \
-# 	172.19.0.20
-# 	openstack port create --network vlan406 --fixed-ip ip-address=172.19.0.21 \
-# 	--vnic-type direct-physical \
-# 	172.19.0.21
-# fi
-
 openstack router show router >/dev/null 2>&1
 if [[ "$?" != "0" ]]; then
 	openstack router create --ha router
 	openstack router set router --external-gateway ext --fixed-ip ip-address=192.168.178.20
 	openstack router add subnet router mgmt
+	openstack router add subnet router mgmt-gre
 	openstack floating ip create --floating-ip-address 192.168.178.21 ext
 	openstack floating ip create --floating-ip-address 192.168.178.22 ext
 fi
 
-openstack server show vm-vxlan-dpdk1 >/dev/null 2>&1
+openstack server show vm-dpdk1 >/dev/null 2>&1
 if [[ "$?" != "0" ]]; then
 	openstack server create \
 	--image fedora \
@@ -148,10 +125,10 @@ if [[ "$?" != "0" ]]; then
 	--config-drive true\
 	--key-name undercloud \
 	--wait \
-	vm-vxlan-dpdk1 &
+	vm-dpdk1 &
 fi
 
-openstack server show vm-vxlan-dpdk2 >/dev/null 2>&1
+openstack server show vm-dpdk2 >/dev/null 2>&1
 if [[ "$?" != "0" ]]; then
 	openstack server create \
 	--image fedora \
@@ -161,18 +138,19 @@ if [[ "$?" != "0" ]]; then
 	--nic net-id=$(openstack network show vlan2001 --format value --column id) \
 	--key-name undercloud \
 	--wait \
-	vm-vxlan-dpdk2 &
+	vm-dpdk2 &
 fi
 
 wait
 
-openstack server add floating ip vm-vxlan-dpdk1 192.168.178.21
-openstack server add floating ip vm-vxlan-dpdk2 192.168.178.22
+openstack server add floating ip vm-dpdk1 192.168.178.21
+openstack server add floating ip vm-dpdk2 192.168.178.22
 
 ping -c 5 192.168.178.21
 ping -c 5 192.168.178.22
 
 openstack port list --network mgmt --format value --column ID | xargs -n1 openstack port set --no-security-group --disable-port-security
+openstack port list --network mgmt-gre --format value --column ID | xargs -n1 openstack port set --no-security-group --disable-port-security
 openstack port list --network vlan2000 --format value --column ID | xargs -n1 openstack port set --no-security-group --disable-port-security
 openstack port list --network vlan2001 --format value --column ID | xargs -n1 openstack port set --no-security-group --disable-port-security
 
