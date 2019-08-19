@@ -1,4 +1,6 @@
 # Red Hat OpenStack 13 for NFVi Lab
+## Low-Level Design
+[NFVi Lab Low-Level Design](https://docs.google.com/spreadsheets/d/12ry5fyyKL8N18SxkPSbe-LevxOxU65WrCu3-VAWD7ew/edit?usp=sharing)
 ## How to
 ### Use those templates
 Those templates have been developed using the infra-as-code principles and crafted from production ones.
