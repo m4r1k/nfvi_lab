@@ -25,7 +25,7 @@ parameter_defaults:
 
     # The size in bytes of the buffer pool, the memory area where InnoDB caches table and index data.
     # Tuned at 10GB in order to store in-memory the entire DB dataset
-    tripleo::profile::base::database::mysql::innodb_buffer_pool_size: '10G'
+    tripleo::profile::base::database::mysql::innodb_buffer_pool_size: '2G'
 
     # Defines the method used to flush data to InnoDB data files and log files, which can affect I/O throughput.
     # Tuned at O_DIRECT to help avoid double buffering between the InnoDB buffer pool and the operating system file system cache.
