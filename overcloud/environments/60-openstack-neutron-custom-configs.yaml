@@ -1,4 +1,9 @@
 parameter_defaults:
+  # List of plugins enabled in Neutron
+  NeutronServicePlugins: "router,qos,segments,trunk"
+  NeutronPluginExtensions: "qos,port_security"
+  NeutronSriovAgentExtensions: "qos"
+
   # Metadata through Neutron DHCP
   NeutronEnableIsolatedMetadata: true
   NeutronEnableForceMetadata: true
