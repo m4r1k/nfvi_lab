@@ -22,16 +22,16 @@ parameter_defaults:
   ComputeSriovSchedulerHints:
     'capabilities:node': 'r630-%index%'
   ComputeSriovCount: 0
-  ComputeSriovHostnameFormat: '%stackname%-ovs-dpdk-compute-%index%'
+  ComputeSriovHostnameFormat: '%stackname%-sriov-compute-%index%'
 
   # OvercloudComputeDualSriovFlavor: computedualsriov
   ComputeDualSriovSchedulerHints:
     'capabilities:node': 'r730-%index%'
   ComputeDualSriovCount: 0
-  ComputeDualSriovHostnameFormat: '%stackname%-dual-ovs-dpdk-compute-%index%'
+  ComputeDualSriovHostnameFormat: '%stackname%-dual-sriov-compute-%index%'
 
   # OvercloudComputeOvsDpdkSriovFlavor: computedpdksriov
   ComputeOvsDpdkSriovSchedulerHints:
     'capabilities:node': 'r730-%index%'
   ComputeOvsDpdkSriovCount: 0
-  ComputeOvsDpdkSriovHostnameFormat: '%stackname%-sriov-ovs-dpdk-compute-%index%'
+  ComputeOvsDpdkSriovHostnameFormat: '%stackname%-ovs-dpdk-sriov-compute-%index%'
