@@ -170,7 +170,7 @@ resources:
                     rx_queue: 2
                     members:
                     - type: interface
-                      name: nic3
+                      name: nic5
                   - type: ovs_dpdk_port
                     name: dpdk1
                     driver: vfio-pci
@@ -178,10 +178,10 @@ resources:
                     rx_queue: 2
                     members:
                     - type: interface
-                      name: nic4
+                      name: nic6
 
               - type: interface
-                name: nic5
+                name: nic3
                 mtu: 9216
                 use_dhcp: false
                 defroute: false
@@ -189,7 +189,7 @@ resources:
                 hotplug: true
 
               - type: interface
-                name: nic6
+                name: nic4
                 mtu: 9216
                 use_dhcp: false
                 defroute: false
