@@ -22,14 +22,15 @@ openstack router remove subnet router mgmt-gre
 openstack router unset --external-gateway router
 openstack router delete router
 
-
 openstack port delete 10.20.0.21 &
 openstack port delete 10.20.0.22 &
-
+openstack port delete 10.30.0.21 &
+openstack port delete 10.30.0.22 &
 
 wait
 
 openstack network delete vlan2000 &
+openstack network delete vlan2001 &
 openstack network delete ext &
 openstack network delete mgmt &
 openstack network delete mgmt-gre &

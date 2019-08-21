@@ -72,15 +72,39 @@ if [[ "$?" != "0" ]]; then
 	--subnet-range 10.20.0.0/24 \
 	vlan2000
 
- 	openstack port create --network vlan2000 --fixed-ip ip-address=10.20.0.21 \
- 	--vnic-type direct --binding-profile type=dict --binding-profile trusted=true \
- 	--qos-policy policy0 \
- 	10.20.0.21
- 	openstack port create --network vlan2000 --fixed-ip ip-address=10.20.0.22 \
- 	--vnic-type direct --binding-profile type=dict --binding-profile trusted=true \
- 	--qos-policy policy0 \
- 	10.20.0.22
+	openstack port create --network vlan2000 --fixed-ip ip-address=10.20.0.21 \
+	--vnic-type direct --binding-profile type=dict --binding-profile trusted=true \
+	--qos-policy policy0 \
+	10.20.0.21
+	openstack port create --network vlan2000 --fixed-ip ip-address=10.20.0.22 \
+	--vnic-type direct --binding-profile type=dict --binding-profile trusted=true \
+	--qos-policy policy0 \
+	10.20.0.22
 fi
+
+openstack network show vlan2001 >/dev/null 2>&1
+if [[ "$?" != "0" ]]; then
+	openstack network create \
+	--provider-network-type vlan \
+	--provider-physical-network niantic_pool \
+	--provider-segment 2001 \
+	--mtu 9000 \
+	vlan2001
+	openstack subnet create \
+	--network vlan2001 \
+	--dhcp \
+	--gateway none \
+	--subnet-range 10.30.0.0/24 \
+	vlan2001
+
+	openstack port create --network vlan2001 --fixed-ip ip-address=10.30.0.21 \
+	--vnic-type direct --binding-profile type=dict --binding-profile trusted=true \
+	10.30.0.21
+	openstack port create --network vlan2001 --fixed-ip ip-address=10.30.0.22 \
+	--vnic-type direct --binding-profile type=dict --binding-profile trusted=true \
+	10.30.0.22
+fi
+
 
 openstack network show ext >/dev/null 2>&1
 if [[ "$?" != "0" ]]; then
@@ -115,6 +139,7 @@ if [[ "$?" != "0" ]]; then
 	--flavor nfv \
 	--nic net-id=$(openstack network show mgmt --format value --column id) \
 	--nic port-id=$(openstack port show 10.20.0.21 --format value --column id) \
+	--nic port-id=$(openstack port show 10.30.0.21 --format value --column id) \
 	--config-drive true\
 	--key-name undercloud \
 	--wait \
@@ -128,6 +153,7 @@ if [[ "$?" != "0" ]]; then
 	--flavor nfv \
 	--nic net-id=$(openstack network show mgmt --format value --column id) \
 	--nic port-id=$(openstack port show 10.20.0.22 --format value --column id) \
+	--nic port-id=$(openstack port show 10.30.0.22 --format value --column id) \
 	--key-name undercloud \
 	--wait \
 	vm-sriov2 &
