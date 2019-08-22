@@ -275,7 +275,7 @@ parameter_defaults:
     # Reserved mamory for the hypervisor
     NovaReservedHostMemory: 16384
     # Nova pCPU to be used by the vCPU
-    NovaVcpuPinSet: ['10-23,34-47']
+    NovaVcpuPinSet: ['5,7,9-23,29,31,33-47']
     # OVS-DPDK Memory size for NUMA node
     OvsDpdkSocketMemory: "4096,4096"
     # OVS-DPDK DPC config (DPC1 here)
@@ -283,7 +283,7 @@ parameter_defaults:
     # OVS housekeeper cores
     OvsDpdkCoreList: "0,1,24,25"
     # OVS-DPDK PMD Threads pCPU
-    OvsPmdCoreList: "2,3,4,5,6,7,8,9,26,27,28,29,30,31,32,33"
+    OvsPmdCoreList: "2,3,4,6,8,26,27,28,30,32"
     # Default OVS-DPDK Driver for the PHY device
     OvsDpdkDriverType: "vfio-pci"
     # NUMA-aware vSwitch for the bridge mapping
@@ -319,7 +319,7 @@ parameter_defaults:
     # Reserved mamory for the hypervisor
     NovaReservedHostMemory: 16384
     # Nova pCPU to be used by the vCPU
-    NovaVcpuPinSet: ['10-23']
+    NovaVcpuPinSet: ['5,7,9-23']
     # OVS-DPDK Memory size for NUMA node
     OvsDpdkSocketMemory: "4096,4096"
     # OVS-DPDK DPC config (DPC1 here)
@@ -327,7 +327,7 @@ parameter_defaults:
     # OVS housekeeper cores
     OvsDpdkCoreList: "0,1,24,25"
     # OVS-DPDK PMD Threads pCPU
-    OvsPmdCoreList: "2,3,4,5,6,7,8,9"
+    OvsPmdCoreList: "2,3,4,6,8"
     # Default OVS-DPDK Driver for the PHY device
     OvsDpdkDriverType: "vfio-pci"
     # NUMA-aware vSwitch for the bridge mapping
