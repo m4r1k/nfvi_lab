@@ -37,10 +37,11 @@ Usually changes between clouds can be found in the following files
 ```
 ├── README.md						=> This Readme
 ├── deployment_wrappers
-│   ├── 001-create_update_osp_images.sh			=> Wrapper to create and update the overcloud RHEL images
-│   ├── 002-import_instackenv_nodes.sh			=> Wrapper to import/update the virtual/physical server into Ironic
-│   ├── 003-create_update_docker_osp_images.sh		=> Wrapper to download and update the container images from the Red Hat DCN - active subscription required
-│   └── 004-deploy.sh					=> Wrapper to deploy the platform and also to apply incremental changes
+│   ├── 001-create_update_images.sh			=> Wrapper to create and update the overcloud RHEL images
+│   ├── 002-create_update_realtime_image.sh		=> Wrapper to create and update the overcloud RealTime RHEL images
+│   ├── 003-import_instackenv_nodes.sh			=> Wrapper to import/update the virtual/physical server into Ironic
+│   ├── 004-create_update_docker_osp_images.sh		=> Wrapper to download and update the container images from the Red Hat DCN - active subscription required
+│   └── 005-deploy.sh					=> Wrapper to deploy the platform and also to apply incremental changes
 ├── overcloud
 │   ├── environments					=> Main environment folder with all the templates describing the deployment
 │   │   ├── 10-commons-parameters.yaml			=> Common environment parameters (e.g. TimeZone, root password, SSH config, and DNS cloud name)

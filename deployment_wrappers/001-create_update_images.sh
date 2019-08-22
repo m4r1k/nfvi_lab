@@ -16,5 +16,6 @@ for i in /usr/share/rhosp-director-images/overcloud-full-latest-13.0.tar /usr/sh
 echo "#### Uploading updated overcloud image to the Undercloud's Glance Registry"
 source ~/stackrc
 openstack overcloud image upload --image-path ~/images/ --update-existing
+openstack overcloud node configure $(openstack baremetal node list -c UUID -f value)
 
 exit 0
