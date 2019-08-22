@@ -105,7 +105,6 @@ if [[ "$?" != "0" ]]; then
 	10.30.0.22
 fi
 
-
 openstack network show ext >/dev/null 2>&1
 if [[ "$?" != "0" ]]; then
 	openstack network create \

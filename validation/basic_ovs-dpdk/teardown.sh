@@ -41,4 +41,3 @@ openstack flavor delete nfv
 openstack metric resource batch delete "ended_at < '-1min'"
 
 wait
-
