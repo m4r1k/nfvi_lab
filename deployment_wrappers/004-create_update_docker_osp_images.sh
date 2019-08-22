@@ -16,6 +16,12 @@ fi
 _THT="/usr/share/openstack-tripleo-heat-templates"
 _LTHT="../overcloud"
 
+# The CLI openstack overcloud container image prepare ignore any Role that has CountDefault set to 0
+# Ensure no Roles with CountDefault set to 0 exist
+# All Container Image Services will be correctly downloaded
+cp ${_LTHT}/roles-data.yaml ~/roles-data.yaml
+sed -e "s/CountDefault: 0/CountDefault: 1/g" -i ~/roles-data.yaml
+
 source ~/stackrc
 
 rm -f ${_LTHT}/overcloud_images.yaml
@@ -27,7 +33,7 @@ sudo -E openstack overcloud container image prepare \
     --tag-from-label {version}-{release} \
     --output-env-file=${_LTHT}/overcloud_images.yaml \
     --output-images-file /home/stack/local_registry_images.yaml \
-    -r ${_LTHT}/roles-data.yaml \
+    -r ~/roles-data.yaml \
     -e ${_THT}/environments/sshd-banner.yaml \
     -e ${_THT}/environments/network-isolation.yaml \
     -e ${_THT}/environments/host-config-and-reboot.yaml \
@@ -43,10 +49,11 @@ sudo -E openstack overcloud container image prepare \
     -e ${_LTHT}/environments/99-server-blacklist.yaml
 
 sudo -E openstack overcloud container image upload \
-  --config-file  /home/stack/local_registry_images.yaml \
+  --config-file /home/stack/local_registry_images.yaml \
   --verbose
 
 curl -s $(ip -4 -o address show br-ctlplane|awk '{print $4}'|sed "s/\/.*$//g"):8787/v2/_catalog|jq .
-rm -f /home/stack/local_registry_images.yaml
+sudo rm -f ~/local_registry_images.yaml
+rm -f ~/roles-data.yaml
 
 exit 0
