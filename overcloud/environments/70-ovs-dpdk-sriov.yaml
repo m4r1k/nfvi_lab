@@ -34,6 +34,37 @@ parameter_defaults:
     # NUMA-aware vSwitch for the VXLAN overlay
     NeutronTunnelNUMANodes: 0
 
+  ComputeOvsDpdkRTParameters:
+    # RealTime requires to disable Intel HTT (SMT)
+    # GRUB Kernel CLI
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    # Tuned profile
+    TunedProfileName: "realtime-virtual-host"
+    # Isolated pCPU from Kernel, NMI, IRQ, and userland
+    IsolCpusList: "2-23,26-47"
+    # VHU Socket Group
+    VhostuserSocketGroup: "hugetlbfs"
+    # CPU Share for the QEMU Emulator Threads
+    NovaComputeCpuSharedSet: "0,1,24,25"
+    # Reserved mamory for the hypervisor
+    NovaReservedHostMemory: 16384
+    # Nova pCPU to be used by the vCPU
+    NovaVcpuPinSet: ['10-23']
+    # OVS-DPDK Memory size for NUMA node
+    OvsDpdkSocketMemory: "4096,4096"
+    # OVS-DPDK DPC config (DPC1 here)
+    OvsDpdkMemoryChannels: "4"
+    # OVS housekeeper cores
+    OvsDpdkCoreList: "0,1,24,25"
+    # OVS-DPDK PMD Threads pCPU
+    OvsPmdCoreList: "2,3,4,5,6,7,8,9"
+    # Default OVS-DPDK Driver for the PHY device
+    OvsDpdkDriverType: "vfio-pci"
+    # NUMA-aware vSwitch for the bridge mapping
+    NeutronPhysnetNUMANodesMapping: {'datacentre0': [0, 1]}
+    # NUMA-aware vSwitch for the VXLAN overlay
+    NeutronTunnelNUMANodes: 0
+
   ComputeDualOvsDpdkParameters:
     # GRUB Kernel CLI
     KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
@@ -64,6 +95,36 @@ parameter_defaults:
     # NUMA-aware vSwitch for the VXLAN overlay
     NeutronTunnelNUMANodes: 0
 
+  ComputeDualOvsDpdkRTParameters:
+    # GRUB Kernel CLI
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    # Tuned profile
+    TunedProfileName: "realtime-virtual-host"
+    # Isolated pCPU from Kernel, NMI, IRQ, and userland
+    IsolCpusList: "2-23,26-47"
+    # VHU Socket Group
+    VhostuserSocketGroup: "hugetlbfs"
+    # CPU Share for the QEMU Emulator Threads
+    NovaComputeCpuSharedSet: "0,1,24,25"
+    # Reserved mamory for the hypervisor
+    NovaReservedHostMemory: 16384
+    # Nova pCPU to be used by the vCPU
+    NovaVcpuPinSet: ['10-23']
+    # OVS-DPDK Memory size for NUMA node
+    OvsDpdkSocketMemory: "4096,4096"
+    # OVS-DPDK DPC config (DPC1 here)
+    OvsDpdkMemoryChannels: "4"
+    # OVS housekeeper cores
+    OvsDpdkCoreList: "0,1,24,25"
+    # OVS-DPDK PMD Threads pCPU
+    OvsPmdCoreList: "2,3,4,5,6,7,8,9"
+    # Default OVS-DPDK Driver for the PHY device
+    OvsDpdkDriverType: "vfio-pci"
+    # NUMA-aware vSwitch for the bridge mapping
+    NeutronPhysnetNUMANodesMapping: {'datacentre0': [0],'datacentre1': [1]}
+    # NUMA-aware vSwitch for the VXLAN overlay
+    NeutronTunnelNUMANodes: 0
+
   ComputeSriovParameters:
     # GRUB Kernel CLI
     KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
@@ -79,6 +140,36 @@ parameter_defaults:
     NovaReservedHostMemory: 16384
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['2-23,26-47']
+    # Neutron Physical mapping between a custom name and physical devices
+    NeutronPhysicalDevMappings: "niantic_pool:p3p1,niantic_pool:p3p2"
+    # Number of VFs that needs to be configured for a physical interface
+    NeutronSriovNumVFs:
+      - p3p1:16
+      - p3p2:16
+    # Mapping of SR-IOV PF interface to neutron physical_network.
+    NovaPCIPassthrough:
+      - devname: "p3p1"
+        trusted: "true"
+        physical_network: "niantic_pool"
+      - devname: "p3p2"
+        trusted: "true"
+        physical_network: "niantic_pool"
+
+  ComputeSriovRTParameters:
+    # GRUB Kernel CLI
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    # Tuned profile
+    TunedProfileName: "realtime-virtual-host"
+    # Isolated pCPU from Kernel, NMI, IRQ, and userland
+    IsolCpusList: "2-23,26-47"
+    # VHU Socket Group
+    VhostuserSocketGroup: "hugetlbfs"
+    # CPU Share for the QEMU Emulator Threads
+    NovaComputeCpuSharedSet: "0,1,24,25"
+    # Reserved mamory for the hypervisor
+    NovaReservedHostMemory: 16384
+    # Nova pCPU to be used by the vCPU
+    NovaVcpuPinSet: ['2-23']
     # Neutron Physical mapping between a custom name and physical devices
     NeutronPhysicalDevMappings: "niantic_pool:p3p1,niantic_pool:p3p2"
     # Number of VFs that needs to be configured for a physical interface
@@ -132,6 +223,44 @@ parameter_defaults:
         trusted: "true"
         physical_network: "niantic_pool"
 
+  ComputeDualSriovRTParameters:
+    # GRUB Kernel CLI
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    # Tuned profile
+    TunedProfileName: "realtime-virtual-host"
+    # Isolated pCPU from Kernel, NMI, IRQ, and userland
+    IsolCpusList: "2-23,26-47"
+    # VHU Socket Group
+    VhostuserSocketGroup: "hugetlbfs"
+    # CPU Share for the QEMU Emulator Threads
+    NovaComputeCpuSharedSet: "0,1,24,25"
+    # Reserved mamory for the hypervisor
+    NovaReservedHostMemory: 16384
+    # Nova pCPU to be used by the vCPU
+    NovaVcpuPinSet: ['2-23']
+    # Neutron Physical mapping between a custom name and physical devices
+    NeutronPhysicalDevMappings: "niantic_pool:p4p1,niantic_pool:p4p2,niantic_pool:p6p1,niantic_pool:p6p2"
+    # Number of VFs that needs to be configured for a physical interface
+    NeutronSriovNumVFs:
+      - p4p1:16
+      - p4p2:16
+      - p6p1:16
+      - p6p2:16
+    # Mapping of SR-IOV PF interface to neutron physical_network.
+    NovaPCIPassthrough:
+      - devname: "p4p1"
+        trusted: "true"
+        physical_network: "niantic_pool"
+      - devname: "p4p2"
+        trusted: "true"
+        physical_network: "niantic_pool"
+      - devname: "p6p1"
+        trusted: "true"
+        physical_network: "niantic_pool"
+      - devname: "p6p2"
+        trusted: "true"
+        physical_network: "niantic_pool"
+
   ComputeOvsDpdkSriovParameters:
     # GRUB Kernel CLI
     KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
@@ -155,6 +284,50 @@ parameter_defaults:
     OvsDpdkCoreList: "0,1,24,25"
     # OVS-DPDK PMD Threads pCPU
     OvsPmdCoreList: "2,3,4,5,6,7,8,9,26,27,28,29,30,31,32,33"
+    # Default OVS-DPDK Driver for the PHY device
+    OvsDpdkDriverType: "vfio-pci"
+    # NUMA-aware vSwitch for the bridge mapping
+    NeutronPhysnetNUMANodesMapping: {'datacentre0': [0],'datacentre1': [1]}
+    # NUMA-aware vSwitch for the VXLAN overlay
+    NeutronTunnelNUMANodes: 0
+    # Neutron Physical mapping between a custom name and physical devices
+    NeutronPhysicalDevMappings: "niantic_pool:p6p1,niantic_pool:p6p2"
+    # Number of VFs that needs to be configured for a physical interface
+    NeutronSriovNumVFs:
+      - p6p1:16
+      - p6p2:16
+    # Mapping of SR-IOV PF interface to neutron physical_network.
+    NovaPCIPassthrough:
+      - devname: "p6p1"
+        trusted: "true"
+        physical_network: "niantic_pool"
+      - devname: "p6p2"
+        trusted: "true"
+        physical_network: "niantic_pool"
+
+  ComputeOvsDpdkSriovRTParameters:
+    # GRUB Kernel CLI
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    # Tuned profile
+    TunedProfileName: "realtime-virtual-host"
+    # Isolated pCPU from Kernel, NMI, IRQ, and userland
+    IsolCpusList: "2-23,26-47"
+    # VHU Socket Group
+    VhostuserSocketGroup: "hugetlbfs"
+    # CPU Share for the QEMU Emulator Threads
+    NovaComputeCpuSharedSet: "0,1,24,25"
+    # Reserved mamory for the hypervisor
+    NovaReservedHostMemory: 16384
+    # Nova pCPU to be used by the vCPU
+    NovaVcpuPinSet: ['10-23']
+    # OVS-DPDK Memory size for NUMA node
+    OvsDpdkSocketMemory: "4096,4096"
+    # OVS-DPDK DPC config (DPC1 here)
+    OvsDpdkMemoryChannels: "4"
+    # OVS housekeeper cores
+    OvsDpdkCoreList: "0,1,24,25"
+    # OVS-DPDK PMD Threads pCPU
+    OvsPmdCoreList: "2,3,4,5,6,7,8,9"
     # Default OVS-DPDK Driver for the PHY device
     OvsDpdkDriverType: "vfio-pci"
     # NUMA-aware vSwitch for the bridge mapping

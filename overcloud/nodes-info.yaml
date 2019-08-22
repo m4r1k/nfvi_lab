@@ -12,11 +12,23 @@ parameter_defaults:
   ComputeOvsDpdkCount: 0
   ComputeOvsDpdkHostnameFormat: '%stackname%-ovs-dpdk-compute-%index%'
 
+  # OvercloudComputeOvsDpdkRTFlavor: computedpdkrt
+  ComputeOvsDpdkRTSchedulerHints:
+    'capabilities:node': 'r630-%index%'
+  ComputeOvsDpdkRTCount: 0
+  ComputeOvsDpdkRTHostnameFormat: '%stackname%-ovs-dpdk-rt-compute-%index%'
+
   # OvercloudComputeDualOvsDpdkFlavor: computedualdpdk
   ComputeDualOvsDpdkSchedulerHints:
     'capabilities:node': 'r730-%index%'
   ComputeDualOvsDpdkCount: 0
   ComputeDualOvsDpdkHostnameFormat: '%stackname%-dual-ovs-dpdk-compute-%index%'
+
+  # OvercloudComputeDualOvsDpdkRTFlavor: computedualdpdkrt
+  ComputeDualOvsDpdkRTSchedulerHints:
+    'capabilities:node': 'r730-%index%'
+  ComputeDualOvsDpdkRTCount: 0
+  ComputeDualOvsDpdkRTHostnameFormat: '%stackname%-dual-ovs-dpdk-rt-compute-%index%'
 
   # OvercloudComputeSriovFlavor: computesriov
   ComputeSriovSchedulerHints:
@@ -24,14 +36,32 @@ parameter_defaults:
   ComputeSriovCount: 0
   ComputeSriovHostnameFormat: '%stackname%-sriov-compute-%index%'
 
+  # OvercloudComputeSriovRTFlavor: computesriovrt
+  ComputeSriovRTSchedulerHints:
+    'capabilities:node': 'r630-%index%'
+  ComputeSriovRTCount: 0
+  ComputeSriovRTHostnameFormat: '%stackname%-sriov-rt-compute-%index%'
+
   # OvercloudComputeDualSriovFlavor: computedualsriov
   ComputeDualSriovSchedulerHints:
     'capabilities:node': 'r730-%index%'
   ComputeDualSriovCount: 0
   ComputeDualSriovHostnameFormat: '%stackname%-dual-sriov-compute-%index%'
 
+  # OvercloudComputeDualSriovRTFlavor: computedualsriovrt
+  ComputeDualSriovRTSchedulerHints:
+    'capabilities:node': 'r730-%index%'
+  ComputeDualSriovRTCount: 0
+  ComputeDualSriovRTHostnameFormat: '%stackname%-dual-sriov-rt-compute-%index%'
+
   # OvercloudComputeOvsDpdkSriovFlavor: computedpdksriov
   ComputeOvsDpdkSriovSchedulerHints:
     'capabilities:node': 'r730-%index%'
   ComputeOvsDpdkSriovCount: 0
   ComputeOvsDpdkSriovHostnameFormat: '%stackname%-ovs-dpdk-sriov-compute-%index%'
+
+  # OvercloudComputeOvsDpdkSriovRTFlavor: computedpdksriovrt
+  ComputeOvsDpdkSriovRTSchedulerHints:
+    'capabilities:node': 'r730-%index%'
+  ComputeOvsDpdkSriovRTCount: 0
+  ComputeOvsDpdkSriovRTHostnameFormat: '%stackname%-ovs-dpdk-sriov-rt-compute-%index%'

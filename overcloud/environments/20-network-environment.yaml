@@ -2,58 +2,103 @@ resource_registry:
   # NIC Configuration files for all the roles
   OS::TripleO::Controller::Net::SoftwareConfig:             ../nic-configs/controller.yaml
   OS::TripleO::ComputeOvsDpdk::Net::SoftwareConfig:         ../nic-configs/compute-ovsdpdk.yaml
+  OS::TripleO::ComputeOvsDpdkRT::Net::SoftwareConfig:       ../nic-configs/compute-ovsdpdk.yaml
   OS::TripleO::ComputeDualOvsDpdk::Net::SoftwareConfig:     ../nic-configs/compute-dual-ovsdpdk.yaml
+  OS::TripleO::ComputeDualOvsDpdkRT::Net::SoftwareConfig:   ../nic-configs/compute-dual-ovsdpdk.yaml
   OS::TripleO::ComputeSriov::Net::SoftwareConfig:           ../nic-configs/compute-sriov.yaml
+  OS::TripleO::ComputeSriovRT::Net::SoftwareConfig:         ../nic-configs/compute-sriov.yaml
   OS::TripleO::ComputeDualSriov::Net::SoftwareConfig:       ../nic-configs/compute-dual-sriov.yaml
+  OS::TripleO::ComputeDualSriovRT::Net::SoftwareConfig:     ../nic-configs/compute-dual-sriov.yaml
   OS::TripleO::ComputeOvsDpdkSriov::Net::SoftwareConfig:    ../nic-configs/compute-ovsdpdk-sriov.yaml
+  OS::TripleO::ComputeOvsDpdkSriovRT::Net::SoftwareConfig:  ../nic-configs/compute-ovsdpdk-sriov.yaml
 
   # IP Port for Controller
-  OS::TripleO::Controller::Ports::ExternalPort:             /usr/share/openstack-tripleo-heat-templates/network/ports/external_from_pool.yaml
-  OS::TripleO::Controller::Ports::InternalApiPort:          /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
-  OS::TripleO::Controller::Ports::StoragePort:              /usr/share/openstack-tripleo-heat-templates/network/ports/storage_from_pool.yaml
-  OS::TripleO::Controller::Ports::StorageMgmtPort:          /usr/share/openstack-tripleo-heat-templates/network/ports/storage_mgmt_from_pool.yaml
-  OS::TripleO::Controller::Ports::TenantPort:               /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
-  OS::TripleO::Controller::Ports::ManagementPort:           /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::Controller::Ports::ExternalPort:               /usr/share/openstack-tripleo-heat-templates/network/ports/external_from_pool.yaml
+  OS::TripleO::Controller::Ports::InternalApiPort:            /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
+  OS::TripleO::Controller::Ports::StoragePort:                /usr/share/openstack-tripleo-heat-templates/network/ports/storage_from_pool.yaml
+  OS::TripleO::Controller::Ports::StorageMgmtPort:            /usr/share/openstack-tripleo-heat-templates/network/ports/storage_mgmt_from_pool.yaml
+  OS::TripleO::Controller::Ports::TenantPort:                 /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
+  OS::TripleO::Controller::Ports::ManagementPort:             /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
 
   # IP Port for Compute OVS-DPDK
-  OS::TripleO::ComputeOvsDpdk::Ports::ExternalPort:         /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
-  OS::TripleO::ComputeOvsDpdk::Ports::InternalApiPort:      /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
-  OS::TripleO::ComputeOvsDpdk::Ports::StoragePort:          /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
-  OS::TripleO::ComputeOvsDpdk::Ports::StorageMgmtPort:      /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
-  OS::TripleO::ComputeOvsDpdk::Ports::TenantPort:           /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
-  OS::TripleO::ComputeOvsDpdk::Ports::ManagementPort:       /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeOvsDpdk::Ports::ExternalPort:           /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeOvsDpdk::Ports::InternalApiPort:        /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
+  OS::TripleO::ComputeOvsDpdk::Ports::StoragePort:            /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeOvsDpdk::Ports::StorageMgmtPort:        /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeOvsDpdk::Ports::TenantPort:             /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
+  OS::TripleO::ComputeOvsDpdk::Ports::ManagementPort:         /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+
+  # IP Port for Compute OVS-DPDK RT
+  OS::TripleO::ComputeOvsDpdkRT::Ports::ExternalPort:         /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeOvsDpdkRT::Ports::InternalApiPort:      /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
+  OS::TripleO::ComputeOvsDpdkRT::Ports::StoragePort:          /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeOvsDpdkRT::Ports::StorageMgmtPort:      /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeOvsDpdkRT::Ports::TenantPort:           /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
+  OS::TripleO::ComputeOvsDpdkRT::Ports::ManagementPort:       /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
 
   # IP Port for Compute Dual OVS-DPDK
-  OS::TripleO::ComputeDualOvsDpdk::Ports::ExternalPort:     /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
-  OS::TripleO::ComputeDualOvsDpdk::Ports::InternalApiPort:  /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
-  OS::TripleO::ComputeDualOvsDpdk::Ports::StoragePort:      /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
-  OS::TripleO::ComputeDualOvsDpdk::Ports::StorageMgmtPort:  /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
-  OS::TripleO::ComputeDualOvsDpdk::Ports::TenantPort:       /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
-  OS::TripleO::ComputeDualOvsDpdk::Ports::ManagementPort:   /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeDualOvsDpdk::Ports::ExternalPort:       /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeDualOvsDpdk::Ports::InternalApiPort:    /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
+  OS::TripleO::ComputeDualOvsDpdk::Ports::StoragePort:        /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeDualOvsDpdk::Ports::StorageMgmtPort:    /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeDualOvsDpdk::Ports::TenantPort:         /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
+  OS::TripleO::ComputeDualOvsDpdk::Ports::ManagementPort:     /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+
+  # IP Port for Compute Dual OVS-DPDK RT
+  OS::TripleO::ComputeDualOvsDpdkRT::Ports::ExternalPort:     /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeDualOvsDpdkRT::Ports::InternalApiPort:  /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
+  OS::TripleO::ComputeDualOvsDpdkRT::Ports::StoragePort:      /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeDualOvsDpdkRT::Ports::StorageMgmtPort:  /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeDualOvsDpdkRT::Ports::TenantPort:       /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
+  OS::TripleO::ComputeDualOvsDpdkRT::Ports::ManagementPort:   /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
 
   # IP Port for Compute SRIOV
-  OS::TripleO::ComputeSriov::Ports::ExternalPort:           /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
-  OS::TripleO::ComputeSriov::Ports::InternalApiPort:        /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
-  OS::TripleO::ComputeSriov::Ports::StoragePort:            /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
-  OS::TripleO::ComputeSriov::Ports::StorageMgmtPort:        /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
-  OS::TripleO::ComputeSriov::Ports::TenantPort:             /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
-  OS::TripleO::ComputeSriov::Ports::ManagementPort:         /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeSriov::Ports::ExternalPort:             /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeSriov::Ports::InternalApiPort:          /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
+  OS::TripleO::ComputeSriov::Ports::StoragePort:              /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeSriov::Ports::StorageMgmtPort:          /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeSriov::Ports::TenantPort:               /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
+  OS::TripleO::ComputeSriov::Ports::ManagementPort:           /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+
+  # IP Port for Compute SRIOV RT
+  OS::TripleO::ComputeSriovRT::Ports::ExternalPort:           /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeSriovRT::Ports::InternalApiPort:        /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
+  OS::TripleO::ComputeSriovRT::Ports::StoragePort:            /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeSriovRT::Ports::StorageMgmtPort:        /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeSriovRT::Ports::TenantPort:             /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
+  OS::TripleO::ComputeSriovRT::Ports::ManagementPort:         /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
 
   # IP Port for Compute Dual SRIOV
-  OS::TripleO::ComputeDualSriov::Ports::ExternalPort:       /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
-  OS::TripleO::ComputeDualSriov::Ports::InternalApiPort:    /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
-  OS::TripleO::ComputeDualSriov::Ports::StoragePort:        /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
-  OS::TripleO::ComputeDualSriov::Ports::StorageMgmtPort:    /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
-  OS::TripleO::ComputeDualSriov::Ports::TenantPort:         /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
-  OS::TripleO::ComputeDualSriov::Ports::ManagementPort:     /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeDualSriov::Ports::ExternalPort:         /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeDualSriov::Ports::InternalApiPort:      /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
+  OS::TripleO::ComputeDualSriov::Ports::StoragePort:          /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeDualSriov::Ports::StorageMgmtPort:      /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeDualSriov::Ports::TenantPort:           /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
+  OS::TripleO::ComputeDualSriov::Ports::ManagementPort:       /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+
+  # IP Port for Compute Dual SRIOV RT
+  OS::TripleO::ComputeDualSriovRT::Ports::ExternalPort:       /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeDualSriovRT::Ports::InternalApiPort:    /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
+  OS::TripleO::ComputeDualSriovRT::Ports::StoragePort:        /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeDualSriovRT::Ports::StorageMgmtPort:    /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeDualSriovRT::Ports::TenantPort:         /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
+  OS::TripleO::ComputeDualSriovRT::Ports::ManagementPort:     /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
 
   # IP Port for Compute OVS-DPDK and SRIOV
-  OS::TripleO::ComputeOvsDpdkSriov::Ports::ExternalPort:    /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
-  OS::TripleO::ComputeOvsDpdkSriov::Ports::InternalApiPort: /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
-  OS::TripleO::ComputeOvsDpdkSriov::Ports::StoragePort:     /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
-  OS::TripleO::ComputeOvsDpdkSriov::Ports::StorageMgmtPort: /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
-  OS::TripleO::ComputeOvsDpdkSriov::Ports::TenantPort:      /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
-  OS::TripleO::ComputeOvsDpdkSriov::Ports::ManagementPort:  /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeOvsDpdkSriov::Ports::ExternalPort:      /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeOvsDpdkSriov::Ports::InternalApiPort:   /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
+  OS::TripleO::ComputeOvsDpdkSriov::Ports::StoragePort:       /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeOvsDpdkSriov::Ports::StorageMgmtPort:   /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeOvsDpdkSriov::Ports::TenantPort:        /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
+  OS::TripleO::ComputeOvsDpdkSriov::Ports::ManagementPort:    /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+
+  # IP Port for Compute OVS-DPDK and SRIOV RT
+  OS::TripleO::ComputeOvsDpdkSriovRT::Ports::ExternalPort:    /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeOvsDpdkSriovRT::Ports::InternalApiPort: /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api_from_pool.yaml
+  OS::TripleO::ComputeOvsDpdkSriovRT::Ports::StoragePort:     /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeOvsDpdkSriovRT::Ports::StorageMgmtPort: /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
+  OS::TripleO::ComputeOvsDpdkSriovRT::Ports::TenantPort:      /usr/share/openstack-tripleo-heat-templates/network/ports/tenant_from_pool.yaml
+  OS::TripleO::ComputeOvsDpdkSriovRT::Ports::ManagementPort:  /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
 
   # VIP ports
   OS::TripleO::Network::Ports::InternalApiVipPort:          /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api.yaml
@@ -158,8 +203,24 @@ parameter_defaults:
     - 10.0.11.19
     tenant:
     - 10.0.12.19
+  # Static IP Address for Compute OVS-DPDK RT
+  ComputeOvsDpdkRTIPs:
+    ctlplane:
+    - 10.0.10.19
+    internal_api:
+    - 10.0.11.19
+    tenant:
+    - 10.0.12.19
   # Static IP Address for Compute Dual OVS-DPDK
   ComputeDualOvsDpdkIPs:
+    ctlplane:
+    - 10.0.10.20
+    internal_api:
+    - 10.0.11.20
+    tenant:
+    - 10.0.12.20
+  # Static IP Address for Compute Dual OVS-DPDK RT
+  ComputeDualOvsDpdkRTIPs:
     ctlplane:
     - 10.0.10.20
     internal_api:
@@ -174,6 +235,14 @@ parameter_defaults:
     - 10.0.11.21
     tenant:
     - 10.0.12.21
+  # Static IP Address for Compute SR-IOV RT
+  ComputeSriovRTIPs:
+    ctlplane:
+    - 10.0.10.21
+    internal_api:
+    - 10.0.11.21
+    tenant:
+    - 10.0.12.21
   # Static IP Address for Compute Dual SR-IOV
   ComputeDualSriovIPs:
     ctlplane:
@@ -182,8 +251,24 @@ parameter_defaults:
     - 10.0.11.22
     tenant:
     - 10.0.12.22
+  # Static IP Address for Compute Dual SR-IOV RT
+  ComputeDualSriovRTIPs:
+    ctlplane:
+    - 10.0.10.22
+    internal_api:
+    - 10.0.11.22
+    tenant:
+    - 10.0.12.22
   # Static IP Address for Compute OVS-DPDK and SR-IOV
   ComputeOvsDpdkSriovIPs:
+    ctlplane:
+    - 10.0.10.23
+    internal_api:
+    - 10.0.11.23
+    tenant:
+    - 10.0.12.23
+  # Static IP Address for Compute OVS-DPDK and SR-IOV RT
+  ComputeOvsDpdkSriovRTIPs:
     ctlplane:
     - 10.0.10.23
     internal_api:
