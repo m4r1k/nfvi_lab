@@ -37,15 +37,15 @@ parameter_defaults:
   ComputeOvsDpdkRTParameters:
     # RealTime requires to disable Intel HTT (SMT)
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf"
     # Tuned profile
     TunedProfileName: "realtime-virtual-host"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
-    IsolCpusList: "2-23,26-47"
+    IsolCpusList: "2-23"
     # VHU Socket Group
     VhostuserSocketGroup: "hugetlbfs"
     # CPU Share for the QEMU Emulator Threads
-    NovaComputeCpuSharedSet: "0,1,24,25"
+    NovaComputeCpuSharedSet: "0,1"
     # Reserved mamory for the hypervisor
     NovaReservedHostMemory: 16384
     # Nova pCPU to be used by the vCPU
@@ -55,7 +55,7 @@ parameter_defaults:
     # OVS-DPDK DPC config (DPC1 here)
     OvsDpdkMemoryChannels: "4"
     # OVS housekeeper cores
-    OvsDpdkCoreList: "0,1,24,25"
+    OvsDpdkCoreList: "0,1"
     # OVS-DPDK PMD Threads pCPU
     OvsPmdCoreList: "2,3,4,5,6,7,8,9"
     # Default OVS-DPDK Driver for the PHY device
@@ -96,16 +96,17 @@ parameter_defaults:
     NeutronTunnelNUMANodes: 0,1
 
   ComputeDualOvsDpdkRTParameters:
+    # RealTime requires to disable Intel HTT (SMT)
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf"
     # Tuned profile
     TunedProfileName: "realtime-virtual-host"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
-    IsolCpusList: "2-23,26-47"
+    IsolCpusList: "2-23"
     # VHU Socket Group
     VhostuserSocketGroup: "hugetlbfs"
     # CPU Share for the QEMU Emulator Threads
-    NovaComputeCpuSharedSet: "0,1,24,25"
+    NovaComputeCpuSharedSet: "0,1"
     # Reserved mamory for the hypervisor
     NovaReservedHostMemory: 16384
     # Nova pCPU to be used by the vCPU
@@ -115,7 +116,7 @@ parameter_defaults:
     # OVS-DPDK DPC config (DPC1 here)
     OvsDpdkMemoryChannels: "4"
     # OVS housekeeper cores
-    OvsDpdkCoreList: "0,1,24,25"
+    OvsDpdkCoreList: "0,1"
     # OVS-DPDK PMD Threads pCPU
     OvsPmdCoreList: "2,3,4,5,6,7,8,9"
     # Default OVS-DPDK Driver for the PHY device
@@ -156,16 +157,17 @@ parameter_defaults:
         physical_network: "niantic_pool"
 
   ComputeSriovRTParameters:
+    # RealTime requires to disable Intel HTT (SMT)
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf"
     # Tuned profile
     TunedProfileName: "realtime-virtual-host"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
-    IsolCpusList: "2-23,26-47"
+    IsolCpusList: "2-23"
     # VHU Socket Group
     VhostuserSocketGroup: "hugetlbfs"
     # CPU Share for the QEMU Emulator Threads
-    NovaComputeCpuSharedSet: "0,1,24,25"
+    NovaComputeCpuSharedSet: "0,1"
     # Reserved mamory for the hypervisor
     NovaReservedHostMemory: 16384
     # Nova pCPU to be used by the vCPU
@@ -224,16 +226,17 @@ parameter_defaults:
         physical_network: "niantic_pool"
 
   ComputeDualSriovRTParameters:
+    # RealTime requires to disable Intel HTT (SMT)
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf"
     # Tuned profile
     TunedProfileName: "realtime-virtual-host"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
-    IsolCpusList: "2-23,26-47"
+    IsolCpusList: "2-23"
     # VHU Socket Group
     VhostuserSocketGroup: "hugetlbfs"
     # CPU Share for the QEMU Emulator Threads
-    NovaComputeCpuSharedSet: "0,1,24,25"
+    NovaComputeCpuSharedSet: "0,1"
     # Reserved mamory for the hypervisor
     NovaReservedHostMemory: 16384
     # Nova pCPU to be used by the vCPU
@@ -306,16 +309,17 @@ parameter_defaults:
         physical_network: "niantic_pool"
 
   ComputeOvsDpdkSriovRTParameters:
+    # RealTime requires to disable Intel HTT (SMT)
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf"
     # Tuned profile
     TunedProfileName: "realtime-virtual-host"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
-    IsolCpusList: "2-23,26-47"
+    IsolCpusList: "2-23"
     # VHU Socket Group
     VhostuserSocketGroup: "hugetlbfs"
     # CPU Share for the QEMU Emulator Threads
-    NovaComputeCpuSharedSet: "0,1,24,25"
+    NovaComputeCpuSharedSet: "0,1"
     # Reserved mamory for the hypervisor
     NovaReservedHostMemory: 16384
     # Nova pCPU to be used by the vCPU
@@ -325,7 +329,7 @@ parameter_defaults:
     # OVS-DPDK DPC config (DPC1 here)
     OvsDpdkMemoryChannels: "4"
     # OVS housekeeper cores
-    OvsDpdkCoreList: "0,1,24,25"
+    OvsDpdkCoreList: "0,1"
     # OVS-DPDK PMD Threads pCPU
     OvsPmdCoreList: "2,3,4,6,8"
     # Default OVS-DPDK Driver for the PHY device
