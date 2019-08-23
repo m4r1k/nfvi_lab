@@ -1,4 +1,6 @@
 # Red Hat OpenStack 13 for NFVi Lab
+## Reasons and Design decisions
+[NFVi Lab](https://docs.google.com/document/d/1wRIaOTZs_lQYS7LjX6rsvTg9-o_3w8LKfUiF8ps9Lsw/edit?usp=sharing)
 ## Low-Level Design
 [NFVi Lab Low-Level Design](https://docs.google.com/spreadsheets/d/12ry5fyyKL8N18SxkPSbe-LevxOxU65WrCu3-VAWD7ew/edit?usp=sharing)
 ## How to
