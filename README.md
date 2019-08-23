@@ -10,10 +10,10 @@ Knowledge about how those have been developed can be found in the [Red Hat OpenS
 To deploy a platform, the undercloud must be installed. No wrapper is provided for this scope. The undercloud configuration is under versioning control.
 Then moving into the script folder, in numerical order all must be executed.
 ### Apply Incremental Changes
-Simply re-execute the `004-deploy.sh` wrapper.
+Simply re-execute the `005-deploy.sh` wrapper.
 ### Use those templates as a baseline for a new NFVi platform
 Usually changes between clouds can be found in the following files
- - The `003-create_update_docker_osp_images.sh` and `004-deploy.sh` -> To include the right templates
+ - The `004-create_update_docker_osp_images.sh` and `005-deploy.sh` -> To include the right templates
  - 10-commons-parameters.yaml -> For the root password and cloud name
  - 20-network-environment.yaml -> Network details (VLAN, Subnets, allocation ranges, etc)
  - 40-fencing.yaml -> MAC addreses and IPMI details
