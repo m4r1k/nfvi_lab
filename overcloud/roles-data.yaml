@@ -218,6 +218,7 @@
     - OS::TripleO::Services::NeutronBgpVpnBagpipe
     - OS::TripleO::Services::NovaCompute
     - OS::TripleO::Services::NovaLibvirt
+    - OS::TripleO::Services::NovaLibvirtGuests
     - OS::TripleO::Services::NovaMigrationTarget
     - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
@@ -251,8 +252,7 @@
     TunedProfileName: "realtime-virtual-host"
     NovaLibvirtRxQueueSize: 1024
     NovaLibvirtTxQueueSize: 1024
-    # TODO remove comment once OSP13z8 is out
-    # NovaLibvirtMemStatsPeriodSeconds: 0
+    NovaLibvirtMemStatsPeriodSeconds: 0
   disable_upgrade_deployment: True
   update_serial: 25
   ServicesDefault:
@@ -281,6 +281,7 @@
     - OS::TripleO::Services::NeutronBgpVpnBagpipe
     - OS::TripleO::Services::NovaCompute
     - OS::TripleO::Services::NovaLibvirt
+    - OS::TripleO::Services::NovaLibvirtGuests
     - OS::TripleO::Services::NovaMigrationTarget
     - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
@@ -341,6 +342,7 @@
     - OS::TripleO::Services::NeutronBgpVpnBagpipe
     - OS::TripleO::Services::NovaCompute
     - OS::TripleO::Services::NovaLibvirt
+    - OS::TripleO::Services::NovaLibvirtGuests
     - OS::TripleO::Services::NovaMigrationTarget
     - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
@@ -374,8 +376,7 @@
     TunedProfileName: "realtime-virtual-host"
     NovaLibvirtRxQueueSize: 1024
     NovaLibvirtTxQueueSize: 1024
-    # TODO remove comment once OSP13z8 is out
-    # NovaLibvirtMemStatsPeriodSeconds: 0
+    NovaLibvirtMemStatsPeriodSeconds: 0
   disable_upgrade_deployment: True
   update_serial: 25
   ServicesDefault:
@@ -404,6 +405,7 @@
     - OS::TripleO::Services::NeutronBgpVpnBagpipe
     - OS::TripleO::Services::NovaCompute
     - OS::TripleO::Services::NovaLibvirt
+    - OS::TripleO::Services::NovaLibvirtGuests
     - OS::TripleO::Services::NovaMigrationTarget
     - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
@@ -464,6 +466,7 @@
     - OS::TripleO::Services::NeutronVppAgent
     - OS::TripleO::Services::NovaCompute
     - OS::TripleO::Services::NovaLibvirt
+    - OS::TripleO::Services::NovaLibvirtGuests
     - OS::TripleO::Services::NovaMigrationTarget
     - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
@@ -496,8 +499,7 @@
   ImageDefault: overcloud-realtime-compute
   RoleParametersDefault:
     TunedProfileName: "realtime-virtual-host"
-    # TODO remove comment once OSP13z8 is out
-    # NovaLibvirtMemStatsPeriodSeconds: 0
+    NovaLibvirtMemStatsPeriodSeconds: 0
   disable_upgrade_deployment: True
   update_serial: 25
   ServicesDefault:
@@ -529,6 +531,7 @@
     - OS::TripleO::Services::NeutronVppAgent
     - OS::TripleO::Services::NovaCompute
     - OS::TripleO::Services::NovaLibvirt
+    - OS::TripleO::Services::NovaLibvirtGuests
     - OS::TripleO::Services::NovaMigrationTarget
     - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
@@ -591,6 +594,7 @@
     - OS::TripleO::Services::NeutronVppAgent
     - OS::TripleO::Services::NovaCompute
     - OS::TripleO::Services::NovaLibvirt
+    - OS::TripleO::Services::NovaLibvirtGuests
     - OS::TripleO::Services::NovaMigrationTarget
     - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
@@ -623,8 +627,7 @@
   ImageDefault: overcloud-realtime-compute
   RoleParametersDefault:
     TunedProfileName: "realtime-virtual-host"
-    # TODO remove comment once OSP13z8 is out
-    # NovaLibvirtMemStatsPeriodSeconds: 0
+    NovaLibvirtMemStatsPeriodSeconds: 0
   disable_upgrade_deployment: True
   update_serial: 25
   ServicesDefault:
@@ -656,6 +659,7 @@
     - OS::TripleO::Services::NeutronVppAgent
     - OS::TripleO::Services::NovaCompute
     - OS::TripleO::Services::NovaLibvirt
+    - OS::TripleO::Services::NovaLibvirtGuests
     - OS::TripleO::Services::NovaMigrationTarget
     - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
@@ -718,6 +722,7 @@
     - OS::TripleO::Services::NeutronSriovHostConfig
     - OS::TripleO::Services::NovaCompute
     - OS::TripleO::Services::NovaLibvirt
+    - OS::TripleO::Services::NovaLibvirtGuests
     - OS::TripleO::Services::NovaMigrationTarget
     - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
@@ -751,8 +756,7 @@
     TunedProfileName: "realtime-virtual-host"
     NovaLibvirtRxQueueSize: 1024
     NovaLibvirtTxQueueSize: 1024
-    # TODO remove comment once OSP13z8 is out
-    # NovaLibvirtMemStatsPeriodSeconds: 0
+    NovaLibvirtMemStatsPeriodSeconds: 0
   disable_upgrade_deployment: True
   update_serial: 25
   ServicesDefault:
@@ -781,6 +785,7 @@
     - OS::TripleO::Services::NeutronSriovHostConfig
     - OS::TripleO::Services::NovaCompute
     - OS::TripleO::Services::NovaLibvirt
+    - OS::TripleO::Services::NovaLibvirtGuests
     - OS::TripleO::Services::NovaMigrationTarget
     - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
