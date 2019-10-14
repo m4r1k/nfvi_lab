@@ -140,34 +140,29 @@ resources:
                   ovs_options: {get_param: BondInterfaceOvsOptions}
                   mtu: 9216
                   ovs_extra:
-                  # - set port $DEVICE bond_mode=balance-tcp lacp=active
-                  # - set port $DEVICE bond_mode=active-backup lacp=active
-                  # - set port $DEVICE bond_mode=balance-slb
-                  - set port $DEVICE bond_mode=balance-slb
-                  # Dell
+                  - set interface dpdk0 options:n_rxq=2
                   - set interface dpdk0 other_config:pmd-rxq-affinity="0:2,1:4"
+                  - set interface dpdk1 options:n_rxq=2
                   - set interface dpdk1 other_config:pmd-rxq-affinity="0:4,1:2"
-                  # HPE
-                  # - set interface dpdk0 other_config:pmd-rxq-affinity="0:1,1:2"
-                  # - set interface dpdk1 other_config:pmd-rxq-affinity="0:2,1:1"
                   # DPDK DRIVERS
-                  # driver "vfio-pci" to be used for:
-                  #  - Broadcom NetXtreme-E
-                  #  - Intel Fortivilla series - X710, XXV710, XL710
-                  #  - Intel Niantic series - X520, X540, X550
-                  #  - Cavium QLogic FastLinQ QL4xxxx 
-                  #  - Netronome NFP-4xxx, NFP-6xxx
+                  # https://access.redhat.com/articles/3538141
+                  # Driver "vfio-pci" for the following NIC Families:
+                  #  - Intel:
+                  #    - Niantic: 82598, 82599, X520, X540, X550
+                  #    - Fortville: X710, XL710, XXV710, X722
+                  #  - Broadcom: NetXtreme-C, NetXtreme-E, StrataGX, 573xxm 574xx
+                  #  - Marvell / Cavium: FastLinQ QL4xxxx
+                  #  - Netronome: Agilio CX Series
+                  #  - Cisco: VIC 1340, VIC 1400
                   # Driver "mlx5_core" to be used for:
-                  #  - Mellanox ConnectX-4
-                  #  - Mellanox ConnectX-5
+                  #  - Mellanox: ConnectX-4, ConnectX-4 Lx, ConnectX-5, ConnectX-6
                   # Driver "mlx4_core" to be used for:
-                  #  - Mellanox ConnectX-3 Pro
+                  #  - Mellanox: ConnectX-3, ConnectX-3 Pro (RHEL7-only)
                   members:
                   - type: ovs_dpdk_port
                     name: dpdk0
                     driver: vfio-pci
                     mtu: 9216
-                    rx_queue: 2
                     members:
                     - type: interface
                       name: nic5
@@ -175,7 +170,6 @@ resources:
                     name: dpdk1
                     driver: vfio-pci
                     mtu: 9216
-                    rx_queue: 2
                     members:
                     - type: interface
                       name: nic6
