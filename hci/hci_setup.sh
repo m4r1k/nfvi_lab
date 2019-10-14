@@ -59,6 +59,7 @@ NM_CONTROLLED=no
 DEVICETYPE=ovs
 TYPE=OVSBridge
 BOOTPROTO=none
+ZONE=trusted
 EOF
 
 cat > /etc/sysconfig/network-scripts/ifcfg-br2 << EOF
@@ -69,6 +70,8 @@ NM_CONTROLLED=no
 DEVICETYPE=ovs
 TYPE=OVSBridge
 BOOTPROTO=none
+ZONE=trusted
+MTU=9000
 EOF
 
 cat > /etc/sysconfig/network-scripts/ifcfg-eno1 << EOF
@@ -91,6 +94,7 @@ OVS_BRIDGE=br1
 BOOTPROTO=none
 HOTPLUG=no
 NM_CONTROLLED=no
+ZONE=trusted
 EOF
 
 cat > /etc/sysconfig/network-scripts/ifcfg-enp130s0 << EOF
@@ -102,6 +106,8 @@ OVS_BRIDGE=br2
 BOOTPROTO=none
 HOTPLUG=no
 NM_CONTROLLED=no
+ZONE=trusted
+MTU=9000
 EOF
 
 cat > /etc/sysconfig/network-scripts/ifcfg-eno3 << EOF
