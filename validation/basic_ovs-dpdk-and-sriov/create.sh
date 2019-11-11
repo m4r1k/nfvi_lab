@@ -1,5 +1,12 @@
 #!/bin/bash
 
+_IMAGE=Fedora-Cloud-Base-31-1.9.x86_64.qcow2
+_URL=https://download.fedoraproject.org/pub/fedora/linux/releases/31/Cloud/x86_64/images/${_IMAGE}
+
+if [ ! -f ~/${_IMAGE} ]; then
+        curl -o ~/${_IMAGE} -L ${_URL}
+fi
+
 source ~/overcloudrc
 
 openstack quota set --ram -1 admin
@@ -10,7 +17,7 @@ openstack image show fedora >/dev/null 2>&1 || openstack image create \
 	--disk-format qcow2 \
 	--min-disk 4 \
 	--public \
-	--file ~/Fedora-Cloud-Base-30-1.2.x86_64.qcow2 \
+	--file ~/${_IMAGE} \
 	--property hw_disk_bus=scsi \
 	--property hw_scsi_model=virtio-scsi \
 	--property hw_watchdog_action=reset \
