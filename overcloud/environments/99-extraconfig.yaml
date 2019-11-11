@@ -31,6 +31,18 @@ parameter_defaults:
     # Tuned at O_DIRECT to help avoid double buffering between the InnoDB buffer pool and the operating system file system cache.
     tripleo::profile::base::database::mysql::innodb_flush_method: 'O_DIRECT'
 
+    # Additiona MySQL Tuning options
+    tripleo::profile::base::database::mysql::mysql_server_options:
+      mysqld:
+        # MySQL InnoDB equally divided in 1GB instances
+        innodb_buffer_pool_instances: 2
+        # Query network write timeout raised to 120 seconds
+        net_write_timeout: 120
+        # Query network read timeout raised to 120 seconds
+        net_read_timeout: 120
+        # MySQL connection timeout set to 8 hours
+        connect_timeout: 28800
+
     keystone::config::keystone_config:
         # memcached everywhere
         catalog/caching:
