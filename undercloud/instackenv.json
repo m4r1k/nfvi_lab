@@ -74,7 +74,7 @@
             "cpu": "48",
             "memory": "128000",
             "disk": "100",
-            "capabilities": "node:r730-0,boot_option:local",
+            "capabilities": "node:r730-0,boot_option:local,boot_mode:uefi",
             "root_device": {
                "name":"/dev/sda"
                },
@@ -94,7 +94,7 @@
             "cpu": "48",
             "memory": "128000",
             "disk": "100",
-            "capabilities": "node:r630-0,boot_option:local",
+            "capabilities": "node:r630-0,boot_option:local,boot_mode:uefi",
             "root_device": {
                "name":"/dev/sda"
                },
