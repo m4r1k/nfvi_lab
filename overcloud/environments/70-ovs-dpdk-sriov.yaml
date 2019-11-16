@@ -26,7 +26,7 @@ parameter_defaults:
     # OVS housekeeper cores
     OvsDpdkCoreList: "0,1,24,25"
     # OVS-DPDK PMD Threads pCPU
-    OvsPmdCoreList: "2,3,4,5,6,7,8,9,26,27,28,29,30,31,32,33"
+    OvsPmdCoreList: "2,3,4,5,6,7,8,9"
     # Default OVS-DPDK Driver for the PHY device
     OvsDpdkDriverType: "vfio-pci"
     # NUMA-aware vSwitch for the bridge mapping
@@ -87,7 +87,7 @@ parameter_defaults:
     # OVS housekeeper cores
     OvsDpdkCoreList: "0,1,24,25"
     # OVS-DPDK PMD Threads pCPU
-    OvsPmdCoreList: "2,3,4,5,6,7,8,9,26,27,28,29,30,31,32,33"
+    OvsPmdCoreList: "2,3,4,5,6,7,8,9"
     # Default OVS-DPDK Driver for the PHY device
     OvsDpdkDriverType: "vfio-pci"
     # NUMA-aware vSwitch for the bridge mapping
@@ -286,7 +286,7 @@ parameter_defaults:
     # OVS housekeeper cores
     OvsDpdkCoreList: "0,1,24,25"
     # OVS-DPDK PMD Threads pCPU
-    OvsPmdCoreList: "2,3,4,6,8,26,27,28,30,32"
+    OvsPmdCoreList: "2,3,4,6,8"
     # Default OVS-DPDK Driver for the PHY device
     OvsDpdkDriverType: "vfio-pci"
     # NUMA-aware vSwitch for the bridge mapping
