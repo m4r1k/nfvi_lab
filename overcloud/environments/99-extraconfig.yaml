@@ -233,7 +233,7 @@ parameter_defaults:
     # Expose real hypervisor CPU
     nova::compute::libvirt::libvirt_cpu_mode: 'host-passthrough'
     # Ensure extra CPU flags are exposed
-    nova::compute::libvirt::libvirt_cpu_model_extra_flags: 'tsc-deadline'
+    nova::compute::libvirt::libvirt_cpu_model_extra_flags: 'tsc-deadline, invtsc'
 
     # Memcached everywhere
     # https://review.openstack.org/#/c/634505/
