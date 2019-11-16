@@ -5,6 +5,9 @@
 
 dnf makecache
 
+dnf module -y reset virt
+dnf module -y enable virt:8.1
+
 dnf upgrade -y
 
 dnf install -y cockpit cockpit-machines cockpit-storaged cockpit-dashboard qemu-kvm qemu-kvm-common
