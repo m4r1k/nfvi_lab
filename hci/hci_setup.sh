@@ -167,9 +167,15 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 sed 's/^\(GRUB_CMDLINE_LINUX=".*\)"/\1 mitigations=off"/g' -i /etc/default/grub
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
+qemu-img create -o preallocation=full -f qcow2 /var/lib/libvirt/images/UC.qcow2 50G
 qemu-img create -o preallocation=full -f qcow2 /var/lib/libvirt/images/CTRL0.qcow2 50G
 qemu-img create -o preallocation=full -f qcow2 /var/lib/libvirt/images/CTRL1.qcow2 50G
 qemu-img create -o preallocation=full -f qcow2 /var/lib/libvirt/images/CTRL2.qcow2 50G
+
+curl -o /tmp/dell_ome.zip -L https://downloads.dell.com/FOLDER05774382M/1/openmanage_enterprise_kvm_format_3.2.1.zip
+unzip /tmp/dell_ome.zip -x openmanage_enterprise.qcow2 -d /tmp/
+mv /tmp/appliance/qemu-kvm/openmanage_enterprise.qcow2 /var/lib/libvirt/images/
+rm -rf /tmp/dell_ome.zip /tmp/appliance
 
 cat > /etc/sysctl.d/asynchronous_io_tuning.conf << EOF
 # http://kvmonz.blogspot.com/p/knowledge-choosing-right-configuration.html
@@ -179,9 +185,10 @@ fs.aio-max-nr = 4194304
 EOF
 sysctl -w fs.aio-max-nr=4194304
 
-dnf define --file ./UC.xml --validate
-dnf define --file ./CTRL0.xml --validate
-dnf define --file ./CTRL1.xml --validate
-dnf define --file ./CTRL2.xml --validate
+virsh define --file ./UC.xml --validate
+virsh define --file ./CTRL0.xml --validate
+virsh define --file ./CTRL1.xml --validate
+virsh define --file ./CTRL2.xml --validate
+virsh define --file ./OME.xml --validate
 
 echo "## REBOOT THE HCI NODE PLEASE ##"
