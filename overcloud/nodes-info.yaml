@@ -9,7 +9,7 @@ parameter_defaults:
   # OvercloudComputeOvsDpdkFlavor: computedpdk
   ComputeOvsDpdkSchedulerHints:
     'capabilities:node': 'r630-%index%'
-  ComputeOvsDpdkCount: 0
+  ComputeOvsDpdkCount: 1
   ComputeOvsDpdkHostnameFormat: '%stackname%-ovs-dpdk-compute-%index%'
 
   # OvercloudComputeOvsDpdkRTFlavor: computedpdkrt
@@ -45,7 +45,7 @@ parameter_defaults:
   # OvercloudComputeDualSriovFlavor: computedualsriov
   ComputeDualSriovSchedulerHints:
     'capabilities:node': 'r730-%index%'
-  ComputeDualSriovCount: 0
+  ComputeDualSriovCount: 1
   ComputeDualSriovHostnameFormat: '%stackname%-dual-sriov-compute-%index%'
 
   # OvercloudComputeDualSriovRTFlavor: computedualsriovrt
