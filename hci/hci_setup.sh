@@ -163,7 +163,8 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 
 # This is a fully disconnected system, disabling any mitigations for the Side Channel Attacks
 # Side Channel Attacks Cheat Sheet -> https://access.redhat.com/articles/3629031
-sed 's/^\(GRUB_CMDLINE_LINUX=".*\)"/\1 spectre_v2=off nopti spec_store_bypass_disable=off l1tf=off mds=off"/g' -i /etc/default/grub
+# Also see /usr/share/doc/kernel-doc-4.18.0/Documentation/admin-guide/kernel-parameters.txt
+sed 's/^\(GRUB_CMDLINE_LINUX=".*\)"/\1 mitigations=off"/g' -i /etc/default/grub
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
 qemu-img create -o preallocation=full -f qcow2 /var/lib/libvirt/images/CTRL0.qcow2 50G
