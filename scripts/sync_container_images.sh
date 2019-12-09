@@ -5,7 +5,7 @@ _LOREG="$(hostname -f)"
 
 _CEPH="rhceph/rhceph-3-rhel7"
 _CEPHVER="3"
-for _TAG in $(skopeo inspect docker://${_REREG}/${_CEPH}:latest|jq '.RepoTags'|grep ${_CEPHVER}|sed -e 's/[",\ ]//g'|sort -t "-" -k 2 -n|tail -4)
+for _TAG in $(skopeo inspect docker://${_REREG}/${_CEPH}:latest|jq '.RepoTags'|grep ${_CEPHVER}|sed -e 's/[",\ ]//g'|sort -n -k1.3|tail -4)
 do
 	skopeo copy docker://${_REREG}/${_CEPH}:${_TAG} docker://${_LOREG}/${_CEPH}:${_TAG}
 done
@@ -56,7 +56,7 @@ _OSP[41]="rhosp13/openstack-redis"
 _OSPVER="13.0"
 for _IMG in "${_OSP[@]}"
 do
-	for _TAG in $(skopeo inspect docker://${_REREG}/${_IMG}:latest|jq '.RepoTags'|grep ${_OSPVER}|sed -e 's/[",\ ]//g'|sort|tail -4)
+	for _TAG in $(skopeo inspect docker://${_REREG}/${_IMG}:latest|jq '.RepoTags'|grep ${_OSPVER}|sed -e 's/[",\ ]//g'|sort -n -k1.6|tail -4)
 	do
 		skopeo copy docker://${_REREG}/${_IMG}:${_TAG} docker://${_LOREG}/${_IMG}:${_TAG}
 	done
