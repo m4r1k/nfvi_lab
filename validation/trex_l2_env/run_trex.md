@@ -77,7 +77,8 @@ Attaching 1 streams to port(s) [0._]:                        [SUCCES
 Attaching 1 streams to port(s) [1._]:                        [SUCCESS]
 Starting traffic on port(s) [0._, 1._]:                      [SUCCESS]
 42.42 [ms]
-```To see the interactive traffic statistics ```tui``` is the way to go:
+```
+To see the interactive traffic statistics ```tui``` is the way to go:
 ```
 trex>tui
 Global Statistics
