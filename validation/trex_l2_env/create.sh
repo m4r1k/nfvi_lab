@@ -43,7 +43,7 @@ if [[ "$?" != "0" ]]; then
 	openstack subnet create --network mgmt --dhcp --subnet-range 192.168.125.0/24 mgmt
 fi
 
-openstack network show pf >/dev/null 2>&1
+openstack network show sriov-vlan2000 >/dev/null 2>&1
 if [[ "$?" != "0" ]]; then
 	openstack network create \
 	--disable-port-security \
@@ -51,16 +51,40 @@ if [[ "$?" != "0" ]]; then
 	--provider-physical-network niantic_pool \
 	--provider-segment 2000 \
 	--mtu 9000 \
-	pf
+	sriov-vlan2000
 	openstack subnet create \
-	--network pf \
+	--network sriov-vlan2000 \
 	--no-dhcp \
 	--gateway none \
 	--subnet-range 10.30.0.0/24 \
-	pf
+	sriov-vlan2000
 
- 	openstack port create --network pf --vnic-type direct-physical nfvbench_a
- 	openstack port create --network pf --vnic-type direct-physical nfvbench_b
+	openstack port create --network sriov-vlan2000 \
+	--mac-address 00:00:00:00:00:21 \
+	--vnic-type direct --binding-profile type=dict --binding-profile trusted=true \
+	trafficgen_a
+fi
+
+openstack network show sriov-vlan2001 >/dev/null 2>&1
+if [[ "$?" != "0" ]]; then
+        openstack network create \
+        --disable-port-security \
+        --provider-network-type vlan \
+        --provider-physical-network niantic_pool \
+        --provider-segment 2001 \
+        --mtu 9000 \
+        sriov-vlan2001
+        openstack subnet create \
+        --network sriov-vlan2001 \
+        --no-dhcp \
+        --gateway none \
+        --subnet-range 10.30.1.0/24 \
+        sriov-vlan2001
+
+	openstack port create --network sriov-vlan2001 \
+	--mac-address 00:00:00:00:00:22 \
+	--vnic-type direct --binding-profile type=dict --binding-profile trusted=true \
+	trafficgen_b
 fi
 
 openstack network show vlan2000 >/dev/null 2>&1
@@ -78,6 +102,10 @@ if [[ "$?" != "0" ]]; then
 	--gateway none \
 	--subnet-range 10.20.0.0/24 \
 	vlan2000
+
+	openstack port create --network vlan2000 \
+	--mac-address aa:aa:aa:aa:aa:21 \
+	reflector_a
 fi
 
 openstack network show vlan2001 >/dev/null 2>&1
@@ -95,6 +123,10 @@ if [[ "$?" != "0" ]]; then
         --gateway none \
         --subnet-range 10.20.1.0/24 \
         vlan2001
+
+	openstack port create --network vlan2001 \
+	--mac-address aa:aa:aa:aa:aa:22 \
+	reflector_b
 fi
 
 openstack network show ext >/dev/null 2>&1
@@ -123,18 +155,18 @@ if [[ "$?" != "0" ]]; then
 	openstack floating ip create --floating-ip-address 192.168.178.22 ext
 fi
 
-openstack server show nfvbench >/dev/null 2>&1
+openstack server show trex >/dev/null 2>&1
 if [[ "$?" != "0" ]]; then
 	openstack server create \
 	--image rhel \
 	--flavor nfv \
 	--nic net-id=$(openstack network show mgmt --format value --column id) \
-	--nic port-id=$(openstack port show nfvbench_a --format value --column id) \
-	--nic port-id=$(openstack port show nfvbench_b --format value --column id) \
+	--nic port-id=$(openstack port show trafficgen_a --format value --column id) \
+	--nic port-id=$(openstack port show trafficgen_b --format value --column id) \
 	--config-drive true\
 	--key-name undercloud \
 	--wait \
-	nfvbench &
+	trex &
 fi
 
 openstack server show testpmd >/dev/null 2>&1
@@ -143,8 +175,8 @@ if [[ "$?" != "0" ]]; then
 	--image rhel \
 	--flavor nfv \
 	--nic net-id=$(openstack network show mgmt --format value --column id) \
-	--nic net-id=$(openstack network show vlan2000 --format value --column id) \
-	--nic net-id=$(openstack network show vlan2001 --format value --column id) \
+	--nic port-id=$(openstack port show reflector_a --format value --column id) \
+	--nic port-id=$(openstack port show reflector_b --format value --column id) \
 	--key-name undercloud \
 	--wait \
 	testpmd &
@@ -152,7 +184,7 @@ fi
 
 wait
 
-openstack server add floating ip nfvbench 192.168.178.21
+openstack server add floating ip trex 192.168.178.21
 openstack server add floating ip testpmd 192.168.178.22
 
 ping -c 5 192.168.178.21
