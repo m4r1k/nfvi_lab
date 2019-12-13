@@ -56,12 +56,13 @@ if [[ "$?" != "0" ]]; then
 	--network sriov-vlan2000 \
 	--no-dhcp \
 	--gateway none \
-	--subnet-range 10.30.0.0/24 \
+	--subnet-range 10.10.1.0/24 \
 	sriov-vlan2000
 
 	openstack port create --network sriov-vlan2000 \
 	--mac-address 00:00:00:00:00:21 \
 	--vnic-type direct --binding-profile type=dict --binding-profile trusted=true \
+	--fixed-ip ip-address=10.10.1.1 \
 	trafficgen_a
 fi
 
@@ -78,12 +79,13 @@ if [[ "$?" != "0" ]]; then
         --network sriov-vlan2001 \
         --no-dhcp \
         --gateway none \
-        --subnet-range 10.30.1.0/24 \
+        --subnet-range 10.20.2.0/24 \
         sriov-vlan2001
 
 	openstack port create --network sriov-vlan2001 \
 	--mac-address 00:00:00:00:00:22 \
 	--vnic-type direct --binding-profile type=dict --binding-profile trusted=true \
+	--fixed-ip ip-address=10.10.1.1 \
 	trafficgen_b
 fi
 
@@ -100,11 +102,12 @@ if [[ "$?" != "0" ]]; then
 	--network vlan2000 \
 	--dhcp \
 	--gateway none \
-	--subnet-range 10.20.0.0/24 \
+	--subnet-range 10.10.1.0/24 \
 	vlan2000
 
 	openstack port create --network vlan2000 \
 	--mac-address aa:aa:aa:aa:aa:21 \
+	--fixed-ip ip-address=10.10.1.2 \
 	reflector_a
 fi
 
@@ -121,11 +124,12 @@ if [[ "$?" != "0" ]]; then
         --network vlan2001 \
         --dhcp \
         --gateway none \
-        --subnet-range 10.20.1.0/24 \
+        --subnet-range 10.10.2.0/24 \
         vlan2001
 
 	openstack port create --network vlan2001 \
 	--mac-address aa:aa:aa:aa:aa:22 \
+	--fixed-ip ip-address=10.10.2.2 \
 	reflector_b
 fi
 
