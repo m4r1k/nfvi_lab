@@ -114,3 +114,4 @@ Usually changes between clouds can be found in the following files
 - [dropped packets noticed in dpctl/show in balance-slb with passive lacp bonds](https://bugzilla.redhat.com/show_bug.cgi?id=1701825)
 - [IRQs silently spilling over onto isolated cores](https://bugzilla.redhat.com/show_bug.cgi?id=1714686)
 - [do not raise timer softirq unconditionally](https://bugzilla.redhat.com/show_bug.cgi?id=1730016)
+- [8 vCPU guest need max latency < 20 us with stress](https://bugzilla.redhat.com/show_bug.cgi?id=1757165)
