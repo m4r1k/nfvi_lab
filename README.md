@@ -90,9 +90,33 @@ Usually changes between clouds can be found in the following files
     │   ├── create_gre.sh				=> Create simple validation virtual environment with GRE tenant networks
     │   ├── create_vxlan.sh				=> Create simple validation virtual environment with VXLAN tenant networks
     │   └── teardown.sh					=> Virtual environment teardown
-    └── basic_sriov
-        ├── create_pf.sh				=> Create simple validation virtual environment with SR-IOV PF (also called PCI-Passthrough)
-        ├── create_vf.sh				=> Create simple validation virtual environment with SR-IOV VF
+    ├── basic_ovs-dpdk-and-sriov
+    │   ├── create.sh					=> Create simple validation virtual environment with VIRTIO and SR-IOV
+    │   └── teardown.sh					=> Virtual environment teardown
+    ├── basic_sriov
+    │   ├── create_pf.sh				=> Create simple validation virtual environment with SR-IOV PF (also called PCI-Passthrough)
+    │   ├── create_vf.sh				=> Create simple validation virtual environment with SR-IOV VF
+    │   └── teardown.sh					=> Virtual environment teardown
+    ├── nfvbench_l3_env
+    │   ├── README.md					=> README
+    │   ├── create.sh					=> Create virtual environment for L3 traffic with two VM, NFVBench using SR-IOV PF anf VPP using VIRTIO on OVS-DPDK
+    │   ├── nfvbench
+    │   │   ├── nfvbench.cfg				=> NFVBench configuration file
+    │   │   └── run.sh					=> NFVBench wrapper
+    │   ├── prepare_nfvbench.sh				=> Script to prepare the NFVBench VM
+    │   ├── prepare_vpp.sh				=> Script to prepare the VPP VM
+    │   ├── run_nfvbench.md				=> README about NFVBench
+    │   ├── run_vpp.md					=> README about VPP
+    │   ├── teardown.sh					=> Virtual environment teardown
+    │   ├── traffic_flow.png				=> Traffic Flow PNG
+    │   └── traffic_flow.svg				=> Traffic Flow source in SVG
+    └── trex_l2_env
+        ├── README.md					=> README
+        ├── create.sh					=> Create virtual environment for L2 traffic with two VM, TRex using SR-IOV VF anf TestPMD using VIRTIO on OVS-DPDK
+        ├── prepare_testpmd.sh				=> Script to prepare the TestPMD VM
+        ├── prepare_trex.sh				=> Script to prepare the TRex VM
+        ├── run_testpmd.md				=> README about TestPMD
+        ├── run_trex.md					=> README about TRex
         └── teardown.sh					=> Virtual environment teardown
 ```
 ## Userful Knowledge Base

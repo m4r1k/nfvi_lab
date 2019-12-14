@@ -1,2 +1,0 @@
-# TODO
-- Upstreamed NFVBench testing
