@@ -87,9 +87,19 @@ vpp# show errors
 To clear those statistics one can simply run ```clear interfaces``` and ```clear errors```
 
 ## CLI Commands
-[CLI](https://docs.fd.io/vpp/19.08/clicmd.html)
+- [CLI](https://docs.fd.io/vpp/19.08/clicmd.html)
 
 ## Tutorial
-[Progressive Tutorial](https://wiki.fd.io/view/VPP/Progressive_VPP_Tutorial)
-[Routing & Switching](https://wiki.fd.io/view/VPP/Tutorial_Routing_and_Switching)
-[VPP and Trex](https://fd.io/docs/vpp/master/usecases/simpleperf/trex.html)
+- [Progressive Tutorial](https://wiki.fd.io/view/VPP/Progressive_VPP_Tutorial)
+- [Routing & Switching](https://wiki.fd.io/view/VPP/Tutorial_Routing_and_Switching)
+- [VPP and TRex](https://fd.io/docs/vpp/master/usecases/simpleperf/trex.html)
+
+# Useful links
+- [VPP WIKI](https://wiki.fd.io/view/VPP)
+- [VPP Perf Lab](https://docs.fd.io/csit/rls1908_1/report/index.html)
+- [VPP Perf Lab topology](https://docs.fd.io/csit/rls1908_1/report/vpp_performance_tests/overview.html#logical-topologies)
+- [VPP Perf Lab HW validation](https://docs.fd.io/csit/rls1908_1/report/dpdk_performance_tests/test_environment.html#)
+- [VPP Perf Lab Skylake vs Haswell](https://docs.fd.io/csit/rls1908_1/report/vpp_performance_tests/comparisons/3n-skx_vs_3n-hsw_testbeds.html)
+- [VPP Perf Lab NIC Comparison](https://docs.fd.io/csit/rls1908_1/report/vpp_performance_tests/comparisons/nic_comparison.html)
+- [VPP vHost Perf](https://docs.fd.io/csit/rls1908_1/report/vpp_performance_tests/packet_throughput_graphs/vm_vhost.html)
+- [VPP BFD details](https://docs.fd.io/vpp/19.08.1/de/d7a/bfd_doc.html)
