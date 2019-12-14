@@ -79,13 +79,13 @@ if [[ "$?" != "0" ]]; then
         --network sriov-vlan2001 \
         --no-dhcp \
         --gateway none \
-        --subnet-range 10.20.2.0/24 \
+        --subnet-range 10.10.2.0/24 \
         sriov-vlan2001
 
 	openstack port create --network sriov-vlan2001 \
 	--mac-address 00:00:00:00:00:22 \
 	--vnic-type direct-physical \
-	--fixed-ip ip-address=10.10.1.1 \
+	--fixed-ip ip-address=10.10.2.1 \
 	trafficgen_b
 fi
 
@@ -100,7 +100,7 @@ if [[ "$?" != "0" ]]; then
 	vlan2000
 	openstack subnet create \
 	--network vlan2000 \
-	--dhcp \
+	--no-dhcp \
 	--gateway none \
 	--subnet-range 10.10.1.0/24 \
 	vlan2000
@@ -122,7 +122,7 @@ if [[ "$?" != "0" ]]; then
         vlan2001
         openstack subnet create \
         --network vlan2001 \
-        --dhcp \
+	--no-dhcp \
         --gateway none \
         --subnet-range 10.10.2.0/24 \
         vlan2001
