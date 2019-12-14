@@ -89,6 +89,7 @@ ip route add 16.0.0.0/8 via 10.10.1.2
 ip route add 48.0.0.0/8 via 10.10.2.2
 EOF
 
-systemctl enable --now vpp
+# Let's start VPP after the reboot
+systemctl enable vpp
 
 reboot
