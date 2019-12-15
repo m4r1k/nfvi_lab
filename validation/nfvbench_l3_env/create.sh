@@ -181,6 +181,7 @@ if [[ "$?" != "0" ]]; then
 	--nic net-id=$(openstack network show mgmt --format value --column id) \
 	--nic port-id=$(openstack port show reflector_a --format value --column id) \
 	--nic port-id=$(openstack port show reflector_b --format value --column id) \
+	--config-drive true\
 	--key-name undercloud \
 	--wait \
 	vpp &
