@@ -62,7 +62,7 @@ if [[ "$?" != "0" ]]; then
 	openstack port create --network sriov-vlan2000 \
 	--mac-address 00:00:00:00:00:21 \
 	--vnic-type direct-physical \
-	--fixed-ip ip-address=10.10.1.1 \
+	--fixed-ip ip-address=10.10.1.2 \
 	trafficgen_a
 fi
 
@@ -85,7 +85,7 @@ if [[ "$?" != "0" ]]; then
 	openstack port create --network sriov-vlan2001 \
 	--mac-address 00:00:00:00:00:22 \
 	--vnic-type direct-physical \
-	--fixed-ip ip-address=10.10.2.1 \
+	--fixed-ip ip-address=10.10.2.2 \
 	trafficgen_b
 fi
 
@@ -107,7 +107,7 @@ if [[ "$?" != "0" ]]; then
 
 	openstack port create --network vlan2000 \
 	--mac-address aa:aa:aa:aa:aa:21 \
-	--fixed-ip ip-address=10.10.1.2 \
+	--fixed-ip ip-address=10.10.1.1 \
 	reflector_a
 fi
 
@@ -129,7 +129,7 @@ if [[ "$?" != "0" ]]; then
 
 	openstack port create --network vlan2001 \
 	--mac-address aa:aa:aa:aa:aa:22 \
-	--fixed-ip ip-address=10.10.2.2 \
+	--fixed-ip ip-address=10.10.2.1 \
 	reflector_b
 fi
 
