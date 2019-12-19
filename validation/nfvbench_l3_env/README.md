@@ -57,3 +57,7 @@ udp,orig=(src=16.0.0.0,dst=48.0.0.0,sport=1234,dport=4321),reply=(src=48.0.0.0,d
 udp,orig=(src=16.0.0.0,dst=48.0.0.1,sport=1234,dport=4321),reply=(src=48.0.0.1,dst=16.0.0.0,sport=4321,dport=1234),zone=4
 udp,orig=(src=48.0.0.0,dst=16.0.0.1,sport=1234,dport=4321),reply=(src=16.0.0.1,dst=48.0.0.0,sport=4321,dport=1234),zone=6
 ```
+
+# Useful links
+- [OVS Conntrack Tutorial](http://docs.openvswitch.org/en/latest/tutorials/ovs-conntrack/)
+- [OVS readable stats](https://github.com/m4r1k/ovs_stats/)
