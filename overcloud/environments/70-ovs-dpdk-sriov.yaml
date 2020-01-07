@@ -6,7 +6,7 @@ resource_registry:
 parameter_defaults:
   ComputeOvsDpdkParameters:
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=56 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=58 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
     # Tuned profile
     TunedProfileName: "cpu-partitioning"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
@@ -16,7 +16,9 @@ parameter_defaults:
     # CPU Share for the QEMU Emulator Threads
     NovaComputeCpuSharedSet: "0,1,24,25"
     # Reserved mamory for the hypervisor
-    NovaReservedHostMemory: 16384
+    # 4GB left for the Kernel + Userland
+    # Also added 8GB (4 per NUMA) for OVS-DPDK
+    NovaReservedHostMemory: 12288
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['10-23,34-47']
     # OVS-DPDK Memory size for NUMA node
@@ -37,7 +39,7 @@ parameter_defaults:
   ComputeOvsDpdkRTParameters:
     # RealTime requires to disable Intel HTT (SMT)
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=56 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf mitigations=off"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=58 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf mitigations=off"
     # Tuned profile
     TunedProfileName: "realtime-virtual-host"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
@@ -47,7 +49,9 @@ parameter_defaults:
     # CPU Share for the QEMU Emulator Threads
     NovaComputeCpuSharedSet: "0,1"
     # Reserved mamory for the hypervisor
-    NovaReservedHostMemory: 16384
+    # 4GB left for the Kernel + Userland
+    # Also added 8GB (4 per NUMA) for OVS-DPDK
+    NovaReservedHostMemory: 12288
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['10-23']
     # OVS-DPDK Memory size for NUMA node
@@ -67,7 +71,7 @@ parameter_defaults:
 
   ComputeDualOvsDpdkParameters:
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=118 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
     # Tuned profile
     TunedProfileName: "cpu-partitioning"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
@@ -77,7 +81,8 @@ parameter_defaults:
     # CPU Share for the QEMU Emulator Threads
     NovaComputeCpuSharedSet: "0,1,24,25"
     # Reserved mamory for the hypervisor
-    NovaReservedHostMemory: 16384
+    # 5GB left for the Kernel + Userland
+    NovaReservedHostMemory: 5120
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['10-23,34-47']
     # OVS-DPDK Memory size for NUMA node
@@ -98,7 +103,7 @@ parameter_defaults:
   ComputeDualOvsDpdkRTParameters:
     # RealTime requires to disable Intel HTT (SMT)
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf mitigations=off"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=118 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf mitigations=off"
     # Tuned profile
     TunedProfileName: "realtime-virtual-host"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
@@ -108,7 +113,8 @@ parameter_defaults:
     # CPU Share for the QEMU Emulator Threads
     NovaComputeCpuSharedSet: "0,1"
     # Reserved mamory for the hypervisor
-    NovaReservedHostMemory: 16384
+    # 5GB left for the Kernel + Userland
+    NovaReservedHostMemory: 5120
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['10-23']
     # OVS-DPDK Memory size for NUMA node
@@ -128,7 +134,7 @@ parameter_defaults:
 
   ComputeSriovParameters:
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=56 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=58 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
     # Tuned profile
     TunedProfileName: "cpu-partitioning"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
@@ -138,7 +144,9 @@ parameter_defaults:
     # CPU Share for the QEMU Emulator Threads
     NovaComputeCpuSharedSet: "0,1,24,25"
     # Reserved mamory for the hypervisor
-    NovaReservedHostMemory: 16384
+    # 4GB left for the Kernel + Userland
+    # Also added 8GB (4 per NUMA) for OVS-DPDK
+    NovaReservedHostMemory: 12288
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['2-23,26-47']
     # Neutron Physical mapping between a custom name and physical devices
@@ -159,7 +167,7 @@ parameter_defaults:
   ComputeSriovRTParameters:
     # RealTime requires to disable Intel HTT (SMT)
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=56 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf mitigations=off"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=58 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf mitigations=off"
     # Tuned profile
     TunedProfileName: "realtime-virtual-host"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
@@ -169,7 +177,9 @@ parameter_defaults:
     # CPU Share for the QEMU Emulator Threads
     NovaComputeCpuSharedSet: "0,1"
     # Reserved mamory for the hypervisor
-    NovaReservedHostMemory: 16384
+    # 4GB left for the Kernel + Userland
+    # Also added 8GB (4 per NUMA) for OVS-DPDK
+    NovaReservedHostMemory: 12288
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['2-23']
     # Neutron Physical mapping between a custom name and physical devices
@@ -189,7 +199,7 @@ parameter_defaults:
 
   ComputeDualSriovParameters:
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=118 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
     # Tuned profile
     TunedProfileName: "cpu-partitioning"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
@@ -199,7 +209,8 @@ parameter_defaults:
     # CPU Share for the QEMU Emulator Threads
     NovaComputeCpuSharedSet: "0,1,24,25"
     # Reserved mamory for the hypervisor
-    NovaReservedHostMemory: 16384
+    # 5GB left for the Kernel + Userland
+    NovaReservedHostMemory: 5120
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['2-23,26-47']
     # Neutron Physical mapping between a custom name and physical devices
@@ -228,7 +239,7 @@ parameter_defaults:
   ComputeDualSriovRTParameters:
     # RealTime requires to disable Intel HTT (SMT)
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf mitigations=off"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=118 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf mitigations=off"
     # Tuned profile
     TunedProfileName: "realtime-virtual-host"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
@@ -238,7 +249,8 @@ parameter_defaults:
     # CPU Share for the QEMU Emulator Threads
     NovaComputeCpuSharedSet: "0,1"
     # Reserved mamory for the hypervisor
-    NovaReservedHostMemory: 16384
+    # 5GB left for the Kernel + Userland
+    NovaReservedHostMemory: 5120
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['2-23']
     # Neutron Physical mapping between a custom name and physical devices
@@ -266,7 +278,7 @@ parameter_defaults:
 
   ComputeOvsDpdkSriovParameters:
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=118 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
     # Tuned profile
     TunedProfileName: "cpu-partitioning"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
@@ -276,7 +288,9 @@ parameter_defaults:
     # CPU Share for the QEMU Emulator Threads
     NovaComputeCpuSharedSet: "0,1,24,25"
     # Reserved mamory for the hypervisor
-    NovaReservedHostMemory: 16384
+    # 5GB left for the Kernel + Userland
+    # Also added 8GB (4 per NUMA) for OVS-DPDK
+    NovaReservedHostMemory: 13312
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['5,7,9-23,29,31,33-47']
     # OVS-DPDK Memory size for NUMA node
@@ -311,7 +325,7 @@ parameter_defaults:
   ComputeOvsDpdkSriovRTParameters:
     # RealTime requires to disable Intel HTT (SMT)
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf mitigations=off"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=118 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf mitigations=off"
     # Tuned profile
     TunedProfileName: "realtime-virtual-host"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
@@ -321,7 +335,9 @@ parameter_defaults:
     # CPU Share for the QEMU Emulator Threads
     NovaComputeCpuSharedSet: "0,1"
     # Reserved mamory for the hypervisor
-    NovaReservedHostMemory: 16384
+    # 5GB left for the Kernel + Userland
+    # Also added 8GB (4 per NUMA) for OVS-DPDK
+    NovaReservedHostMemory: 13312
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['5,7,9-23']
     # OVS-DPDK Memory size for NUMA node
