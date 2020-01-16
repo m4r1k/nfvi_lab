@@ -1,4 +1,4 @@
-# Generated with the following on 2019-12-20T19:13:34.020326
+# Generated with the following on 2020-01-16T11:08:48.032910
 #
 #   openstack overcloud container image prepare --namespace=registry.access.redhat.com/rhosp13 --push-destination=10.0.10.10:8787 --prefix=openstack- --tag-from-label {version}-{release} --output-env-file=../overcloud/overcloud_images.yaml --output-images-file /home/stack/local_registry_images.yaml -r /home/stack/roles-data.yaml -e /usr/share/openstack-tripleo-heat-templates/environments/sshd-banner.yaml -e /usr/share/openstack-tripleo-heat-templates/environments/network-isolation.yaml -e /usr/share/openstack-tripleo-heat-templates/environments/host-config-and-reboot.yaml -e ../overcloud/environments/10-commons-parameters.yaml -e ../overcloud/environments/20-network-environment.yaml -e ../overcloud/environments/30-storage-environment.yaml -e ../overcloud/environments/40-fencing.yaml -e ../overcloud/environments/50-keystone-admin-endpoint.yaml -e ../overcloud/environments/60-openstack-neutron-custom-configs.yaml -e ../overcloud/environments/65-openstack-nova-custom-configs.yaml -e ../overcloud/environments/70-ovs-dpdk-sriov.yaml -e ../overcloud/environments/99-extraconfig.yaml -e ../overcloud/environments/99-server-blacklist.yaml
 #
@@ -55,12 +55,12 @@ parameter_defaults:
   DockerNeutronMetadataImage: 10.0.10.10:8787/rhosp13/openstack-neutron-metadata-agent:13.0-106
   DockerNeutronSriovImage: 10.0.10.10:8787/rhosp13/openstack-neutron-sriov-agent:13.0-103
   DockerNovaApiImage: 10.0.10.10:8787/rhosp13/openstack-nova-api:13.0-105
-  DockerNovaComputeImage: 10.0.10.10:8787/rhosp13/openstack-nova-compute:13.0-119
+  DockerNovaComputeImage: 10.0.10.10:8787/rhosp13/openstack-nova-compute:13.0-119.1577111040
   DockerNovaConductorImage: 10.0.10.10:8787/rhosp13/openstack-nova-conductor:13.0-104
   DockerNovaConfigImage: 10.0.10.10:8787/rhosp13/openstack-nova-api:13.0-105
   DockerNovaConsoleauthImage: 10.0.10.10:8787/rhosp13/openstack-nova-consoleauth:13.0-103
-  DockerNovaLibvirtConfigImage: 10.0.10.10:8787/rhosp13/openstack-nova-compute:13.0-119
-  DockerNovaLibvirtImage: 10.0.10.10:8787/rhosp13/openstack-nova-libvirt:13.0-123
+  DockerNovaLibvirtConfigImage: 10.0.10.10:8787/rhosp13/openstack-nova-compute:13.0-119.1577111040
+  DockerNovaLibvirtImage: 10.0.10.10:8787/rhosp13/openstack-nova-libvirt:13.0-123.1578407520
   DockerNovaMetadataImage: 10.0.10.10:8787/rhosp13/openstack-nova-api:13.0-105
   DockerNovaPlacementConfigImage: 10.0.10.10:8787/rhosp13/openstack-nova-placement-api:13.0-104
   DockerNovaPlacementImage: 10.0.10.10:8787/rhosp13/openstack-nova-placement-api:13.0-104
