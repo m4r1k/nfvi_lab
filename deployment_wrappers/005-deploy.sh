@@ -1,5 +1,7 @@
 #!/bin/bash
 
+_START=$(date +%s)
+
 # Change directory to where this script is located
 # Given the above assumption, all path are local ones
 cd $(dirname $(readlink -f $0))
@@ -34,5 +36,14 @@ openstack overcloud deploy \
     -e ${_LTHT}/environments/70-ovs-dpdk-sriov.yaml \
     -e ${_LTHT}/environments/99-extraconfig.yaml \
     -e ${_LTHT}/environments/99-server-blacklist.yaml
+
+_END=$(date +%s)
+_TOTALTIME=$((${_END}-${_START}))
+echo "DEPLOYMENT STARTED: $(date --date="@${_START}" --utc)"
+if ((${_TOTALTIME} < 3600)); then
+	echo "DEPLOYMENT TIME: $(date -d@${_TOTALTIME} -u +%M'm'%S's')"
+else
+	echo "DEPLOYMENT TIME: $(date -d@${_TOTALTIME} -u +%H'h'%M'm'%S's')"
+fi
 
 exit 0
