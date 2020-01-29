@@ -26,6 +26,10 @@ systemctl enable --now tuned
 systemctl disable --now ksm.service ksmtuned.service
 tuned-adm profile virtual-host
 
+dnf install -y lm_sensors
+sensors-detect --auto
+systemctl enable --now lm_sensors.service
+
 dnf install -y ipmitool lsof tcpdump vim git
 
 dnf install -y rng-tools
