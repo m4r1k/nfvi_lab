@@ -22,7 +22,7 @@ parameter_defaults:
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['10-23,34-47']
     # OVS-DPDK Memory size for NUMA node
-    OvsDpdkSocketMemory: "4096,4096"
+    OvsDpdkSocketMemory: "8192,8192"
     # OVS-DPDK DPC config (DPC1 here)
     OvsDpdkMemoryChannels: "4"
     # OVS housekeeper cores
@@ -55,7 +55,7 @@ parameter_defaults:
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['10-23']
     # OVS-DPDK Memory size for NUMA node
-    OvsDpdkSocketMemory: "4096,4096"
+    OvsDpdkSocketMemory: "8192,8192"
     # OVS-DPDK DPC config (DPC1 here)
     OvsDpdkMemoryChannels: "4"
     # OVS housekeeper cores
@@ -86,7 +86,7 @@ parameter_defaults:
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['10-23,34-47']
     # OVS-DPDK Memory size for NUMA node
-    OvsDpdkSocketMemory: "4096,4096"
+    OvsDpdkSocketMemory: "8192,8192"
     # OVS-DPDK DPC config (DPC1 here)
     OvsDpdkMemoryChannels: "4"
     # OVS housekeeper cores
@@ -118,7 +118,7 @@ parameter_defaults:
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['10-23']
     # OVS-DPDK Memory size for NUMA node
-    OvsDpdkSocketMemory: "4096,4096"
+    OvsDpdkSocketMemory: "8192,8192"
     # OVS-DPDK DPC config (DPC1 here)
     OvsDpdkMemoryChannels: "4"
     # OVS housekeeper cores
@@ -294,7 +294,7 @@ parameter_defaults:
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['5,7,9-23,29,31,33-47']
     # OVS-DPDK Memory size for NUMA node
-    OvsDpdkSocketMemory: "4096,4096"
+    OvsDpdkSocketMemory: "8192,8192"
     # OVS-DPDK DPC config (DPC1 here)
     OvsDpdkMemoryChannels: "4"
     # OVS housekeeper cores
@@ -341,7 +341,7 @@ parameter_defaults:
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['5,7,9-23']
     # OVS-DPDK Memory size for NUMA node
-    OvsDpdkSocketMemory: "4096,4096"
+    OvsDpdkSocketMemory: "8192,8192"
     # OVS-DPDK DPC config (DPC1 here)
     OvsDpdkMemoryChannels: "4"
     # OVS housekeeper cores
