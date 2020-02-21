@@ -2,7 +2,7 @@
   <name>CTRL2</name>
   <metadata>
     <libosinfo:libosinfo xmlns:libosinfo="http://libosinfo.org/xmlns/libvirt/domain/1.0">
-      <libosinfo:os id="http://redhat.com/rhel/7.6"/>
+      <libosinfo:os id="http://redhat.com/rhel/7.7"/>
     </libosinfo:libosinfo>
   </metadata>
   <memory unit='KiB'>33554432</memory>
@@ -28,7 +28,7 @@
     <memory mode='strict' nodeset='3'/>
   </numatune>
   <os>
-    <type arch='x86_64' machine='pc-q35-rhel7.6.0'>hvm</type>
+    <type arch='x86_64' machine='q35'>hvm</type>
     <bootmenu enable='yes'/>
   </os>
   <features>
@@ -108,7 +108,7 @@
       <address type='pci' domain='0x0000' bus='0x03' slot='0x00' function='0x0'/>
     </controller>
     <controller type='scsi' index='0' model='virtio-scsi'>
-      <driver iothread='1'/>
+      <driver queues='4' iothread='1'/>
       <address type='pci' domain='0x0000' bus='0x07' slot='0x00' function='0x0'/>
     </controller>
     <controller type='sata' index='0'>
@@ -119,18 +119,30 @@
       <source network='br1'/>
       <model type='virtio'/>
       <boot order='1'/>
+      <driver name='vhost' txmode='iothread' ioeventfd='on' event_idx='on' queues='4' rx_queue_size='1024'>
+        <host csum='on' gso='on' tso4='on' tso6='on' ecn='on' ufo='on' mrg_rxbuf='on'/>
+        <guest csum='on' tso4='on' tso6='on' ecn='on' ufo='on'/>
+      </driver>
       <address type='pci' domain='0x0000' bus='0x01' slot='0x00' function='0x0'/>
     </interface>
     <interface type='network'>
       <mac address='52:54:00:5f:21:5d'/>
       <source network='br0'/>
       <model type='virtio'/>
+      <driver name='vhost' txmode='iothread' ioeventfd='on' event_idx='on' queues='4' rx_queue_size='1024'>
+        <host csum='on' gso='on' tso4='on' tso6='on' ecn='on' ufo='on' mrg_rxbuf='on'/>
+        <guest csum='on' tso4='on' tso6='on' ecn='on' ufo='on'/>
+      </driver>
       <address type='pci' domain='0x0000' bus='0x04' slot='0x00' function='0x0'/>
     </interface>
     <interface type='network'>
       <mac address='52:54:00:c4:01:0f'/>
       <source network='br2'/>
       <model type='virtio'/>
+      <driver name='vhost' txmode='iothread' ioeventfd='on' event_idx='on' queues='4' rx_queue_size='1024'>
+        <host csum='on' gso='on' tso4='on' tso6='on' ecn='on' ufo='on' mrg_rxbuf='on'/>
+        <guest csum='on' tso4='on' tso6='on' ecn='on' ufo='on'/>
+      </driver>
       <address type='pci' domain='0x0000' bus='0x08' slot='0x00' function='0x0'/>
     </interface>
     <serial type='pty'>
@@ -176,4 +188,3 @@
     </rng>
   </devices>
 </domain>
-
