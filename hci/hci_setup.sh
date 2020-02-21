@@ -40,6 +40,8 @@ virtualenv /root/vBMC
 source /root/vBMC/bin/activate
 pip install virtualbmc
 
+dnf install -y nvme-cli
+
 firewall-cmd --zone=public --permanent --add-port=623/udp
 firewall-cmd --reload
 
