@@ -20,3 +20,72 @@ parameter_defaults:
 
   # Nova Scheduler drivers
   NovaSchedulerAvailableFilters: ["nova.scheduler.filters.all_filters","nova.scheduler.filters.pci_passthrough_filter.PciPassthroughFilter"]
+
+  # Friendly name in libvirt for VM using hostname instead of "instance-%08x"
+  InstanceNameTemplate: '"%(hostname)s"'
+resource_registry:
+  # FirstBoot Script for initial configuration (i.e. Disk Wipe, Root Password, SSH Root Access)
+  OS::TripleO::NodeUserData:                     ../firstboot/first-boot.yaml
+
+  # Controller Role Post-Configuration hook for the Heat cache
+  OS::TripleO::Tasks::ControllerPostConfig: ../extraconfig/post-config/controller.yaml
+
+  ComputeOvsDpdkExtraConfig:
+    nova::config::nova_config:
+      # Friendly name in libvirt for VM using hostname instead of "instance-%08x"
+      DEFAULT/instance_name_template:
+        value: "%(hostname)s"
+
+  ComputeOvsDpdkRTExtraConfig:
+    nova::config::nova_config:
+      # Friendly name in libvirt for VM using hostname instead of "instance-%08x"
+      DEFAULT/instance_name_template:
+        value: "%(hostname)s"
+
+  ComputeDualOvsDpdkExtraConfig:
+    nova::config::nova_config:
+      # Friendly name in libvirt for VM using hostname instead of "instance-%08x"
+      DEFAULT/instance_name_template:
+        value: "%(hostname)s"
+
+  ComputeDualOvsDpdkRTExtraConfig:
+    nova::config::nova_config:
+      # Friendly name in libvirt for VM using hostname instead of "instance-%08x"
+      DEFAULT/instance_name_template:
+        value: "%(hostname)s"
+
+  ComputeSriovExtraConfig:
+    nova::config::nova_config:
+      # Friendly name in libvirt for VM using hostname instead of "instance-%08x"
+      DEFAULT/instance_name_template:
+        value: "%(hostname)s"
+
+  ComputeSriovRTExtraConfig:
+    nova::config::nova_config:
+      # Friendly name in libvirt for VM using hostname instead of "instance-%08x"
+      DEFAULT/instance_name_template:
+        value: "%(hostname)s"
+
+  ComputeDualSriovExtraConfig:
+    nova::config::nova_config:
+      # Friendly name in libvirt for VM using hostname instead of "instance-%08x"
+      DEFAULT/instance_name_template:
+        value: "%(hostname)s"
+
+  ComputeDualSriovRTExtraConfig:
+    nova::config::nova_config:
+      # Friendly name in libvirt for VM using hostname instead of "instance-%08x"
+      DEFAULT/instance_name_template:
+        value: "%(hostname)s"
+
+  ComputeOvsDpdkSriovExtraConfig:
+    nova::config::nova_config:
+      # Friendly name in libvirt for VM using hostname instead of "instance-%08x"
+      DEFAULT/instance_name_template:
+        value: "%(hostname)s"
+
+  ComputeOvsDpdkSriovRTExtraConfig:
+    nova::config::nova_config:
+      # Friendly name in libvirt for VM using hostname instead of "instance-%08x"
+      DEFAULT/instance_name_template:
+        value: "%(hostname)s"
