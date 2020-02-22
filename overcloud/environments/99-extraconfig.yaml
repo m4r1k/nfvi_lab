@@ -7,13 +7,13 @@ resource_registry:
 
 parameter_defaults:
   ControllerExtraConfig:
-    # Increase HAProxy timeout to 10m for server and client, this is for VMs with very large image
+    # HAProxy - Increase the timeouts to accommodate large API transfer (such as images)
     tripleo::haproxy::haproxy_default_timeout: [ 'http-request 40s',  'queue 4m',  'connect 40s', 'client 4m', 'server 4m', 'check 40s' ]
 
-    # Increase HAProxy total maximum connections
+    # HAProxy - Ensure to not drop any incoming request in the events the backend are busy
+    # https://stackoverflow.com/questions/8750518/difference-between-global-maxconn-and-server-maxconn-haproxy
+    # https://www.haproxy.com/blog/play_with_maxconn_avoid_server_slowness_or_crash/
     tripleo::haproxy::haproxy_global_maxconn: 5120001
-
-    # Set each HAProxy backend to a lower value in order to queue requests
     tripleo::haproxy::haproxy_default_maxconn: 20480
 
     # Keystone token expiration set at 4 hours
@@ -35,6 +35,7 @@ parameter_defaults:
     tripleo::profile::base::database::mysql::mysql_server_options:
       mysqld:
         # MySQL InnoDB equally divided in 1GB instances
+        # https://mariadb.com/kb/en/innodb-system-variables/#innodb_buffer_pool_instances
         innodb_buffer_pool_instances: 2
         # Query network write timeout raised to 120 seconds
         net_write_timeout: 120
