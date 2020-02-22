@@ -107,7 +107,7 @@ if [[ "$?" != "0" ]]; then
 	--network ext \
 	--no-dhcp \
 	--subnet-range 192.168.178.0/24 \
-	--allocation-pool start=192.168.178.20,end=192.168.178.25 \
+	--allocation-pool start=192.168.178.20,end=192.168.178.24 \
 	ext
 fi
 
