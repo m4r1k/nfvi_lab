@@ -173,10 +173,32 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 sed 's/^\(GRUB_CMDLINE_LINUX=".*\)"/\1 mitigations=off"/g' -i /etc/default/grub
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
-qemu-img create -o preallocation=full -f qcow2 /var/lib/libvirt/images/UC.qcow2 50G
-qemu-img create -o preallocation=full -f qcow2 /var/lib/libvirt/images/CTRL0.qcow2 50G
-qemu-img create -o preallocation=full -f qcow2 /var/lib/libvirt/images/CTRL1.qcow2 50G
-qemu-img create -o preallocation=full -f qcow2 /var/lib/libvirt/images/CTRL2.qcow2 50G
+virsh pool-define --file optane.xml
+virsh pool-start optane
+virsh pool-autostart optane
+
+virsh pool-define --file ssd.xml
+virsh pool-start ssd
+virsh pool-autostart ssd
+
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/UC.img 100G
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CTRL0.img 40G
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CTRL1.img 40G
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CTRL2.img 40G
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CEPH0.img 20G
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CEPH1.img 20G
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CEPH2.img 20G
+
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/ssd/CEPH0-0.img 75G
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/ssd/CEPH0-1.img 75G
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/ssd/CEPH1-0.img 75G
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/ssd/CEPH1-1.img 75G
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/ssd/CEPH2-0.img 75G
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/ssd/CEPH2-1.img 75G
+
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/optane/CEPH0.img 6G
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/optane/CEPH1.img 6G
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/optane/CEPH2.img 6G
 
 curl -o /tmp/dell_ome.zip -L https://downloads.dell.com/FOLDER05774382M/1/openmanage_enterprise_kvm_format_3.2.1.zip
 unzip /tmp/dell_ome.zip -x openmanage_enterprise.qcow2 -d /tmp/
@@ -195,6 +217,9 @@ virsh define --file ./UC.xml --validate
 virsh define --file ./CTRL0.xml --validate
 virsh define --file ./CTRL1.xml --validate
 virsh define --file ./CTRL2.xml --validate
+virsh define --file ./CEPH0.xml --validate
+virsh define --file ./CEPH1.xml --validate
+virsh define --file ./CEPH2.xml --validate
 virsh define --file ./OME.xml --validate
 
 echo "## REBOOT THE HCI NODE PLEASE ##"
