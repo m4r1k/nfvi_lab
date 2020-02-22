@@ -42,7 +42,7 @@ vlan 120 name overlay by port
  loop-detection
 !
 vlan 130 name storage by port
- tagged ethe 1/1/2 to 1/1/12
+ tagged ethe 1/1/2 to 1/1/12 ethe 1/3/8
  router-interface ve 130
  loop-detection
 !
