@@ -185,9 +185,9 @@ qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/UC.img 100G
 qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CTRL0.img 40G
 qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CTRL1.img 40G
 qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CTRL2.img 40G
-qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CEPH0.img 20G
-qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CEPH1.img 20G
-qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CEPH2.img 20G
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CEPH0.img 40G
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CEPH1.img 40G
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CEPH2.img 40G
 
 qemu-img create -f raw -o preallocation=full /var/lib/libvirt/ssd/CEPH0-0.img 75G
 qemu-img create -f raw -o preallocation=full /var/lib/libvirt/ssd/CEPH0-1.img 75G
