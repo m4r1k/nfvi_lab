@@ -28,7 +28,7 @@ Usually changes between clouds can be found in the following files
 │   ├── environments	=> Templates and configurations for the platform (network, SSL, storage, tuning, and extraconfig hooks mapping)
 │   ├── extraconfig	=> Pre and post-puppet customization hooks templates and scripts
 │   │   ├── post-config	=> Post-puppet templates (e.g. configure Heat caching)
-│   │   └── pre-config	=> (PLACE HOLDER) empty
+│   │   └── pre-config	=> Pre-puppet (e.g. Real-Time KVM Tuning)
 │   ├── firstboot	=> Very first boot cutomization template (e.g. SSH root password)
 │   └── nic-configs	=> Per role physical NIC mapping to bonds, vlan tags, subnets, and routes
 ├── scripts		=> Script directory including some various tools
@@ -57,14 +57,14 @@ Usually changes between clouds can be found in the following files
 │   │   ├── 99-extraconfig.yaml				=> Puppet Extra configuration for Pre and Post deployment hooks, tuning (oslo, memcached, rabbit, haproxy, mysql) etc
 │   │   └── 99-server-blacklist.yaml			=> Blacklist nodes useful for upgrade purpose
 │   ├── extraconfig
-│   │   ├── post-configi				=> Post deployment template folder currently only used by controller role to enable Heat cache
+│   │   ├── post-config					=> Post deployment template folder currently only used by controller role to enable Heat cache
 │   │   │   ├── controller.yaml
 │   │   │   └── scripts
 │   │   │       └── heatcache.sh
-│   │   └── pre-confi					=> (PLACE HOLDER) - Pre deployment template folder currently NOT usedg
+│   │   └── pre-config					=> Pre deployment template folder currently only used by Compute RT roles for specific KVM tuning
 │   │       ├── compute_deterministic.yaml
 │   │       └── scripts
-│   │           └── qemu-cron-job
+│   │           └── nx_huge_pages_recovery_ratio.sh
 │   ├── firstboot
 │   │   └── first-boot.yaml				=> First boot template for root SSH password and Disk Wipe (used by Ceph, not required here)
 │   ├── nic-configs
@@ -139,3 +139,4 @@ Usually changes between clouds can be found in the following files
 - [IRQs silently spilling over onto isolated cores](https://bugzilla.redhat.com/show_bug.cgi?id=1714686)
 - [do not raise timer softirq unconditionally](https://bugzilla.redhat.com/show_bug.cgi?id=1730016)
 - [8 vCPU guest need max latency < 20 us with stress](https://bugzilla.redhat.com/show_bug.cgi?id=1757165)
+- [kvm nx_huge_pages_recovery_ratio=0 is needed to meet KVM-RT low](https://bugzilla.redhat.com/show_bug.cgi?id=1772738)
