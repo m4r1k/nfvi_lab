@@ -54,8 +54,8 @@
   <devices>
     <emulator>/usr/libexec/qemu-kvm</emulator>
     <disk type='file' device='disk'>
-      <driver name='qemu' type='qcow2' cache='none' io='native' discard='unmap' detect_zeroes='unmap'/>
-      <source file='/var/lib/libvirt/images/CTRL2.qcow2'/>
+      <driver name='qemu' type='raw' cache='none' io='native' discard='unmap' detect_zeroes='unmap'/>
+      <source file='/var/lib/libvirt/images/CTRL2.img'/>
       <target dev='sda' bus='scsi'/>
       <boot order='2'/>
       <address type='drive' controller='0' bus='0' target='0' unit='0'/>
