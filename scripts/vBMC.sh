@@ -2,12 +2,12 @@
 
 source /root/vBMC/bin/activate
 
-ip addr show br0 | grep -q 192.168.178.25 || ip addr add 192.168.178.25/24 dev br0
-ip addr show br0 | grep -q 192.168.178.26 || ip addr add 192.168.178.26/24 dev br0
-ip addr show br0 | grep -q 192.168.178.27 || ip addr add 192.168.178.27/24 dev br0
-ip addr show br0 | grep -q 192.168.178.28 || ip addr add 192.168.178.28/24 dev br0
-ip addr show br0 | grep -q 192.168.178.29 || ip addr add 192.168.178.29/24 dev br0
-ip addr show br0 | grep -q 192.168.178.30 || ip addr add 192.168.178.30/24 dev br0
+ip addr show br0 | grep -q "192.168.178.25/24" || ip addr add 192.168.178.25/24 dev br0
+ip addr show br0 | grep -q "192.168.178.26/24" || ip addr add 192.168.178.26/24 dev br0
+ip addr show br0 | grep -q "192.168.178.27/24" || ip addr add 192.168.178.27/24 dev br0
+ip addr show br0 | grep -q "192.168.178.28/24" || ip addr add 192.168.178.28/24 dev br0
+ip addr show br0 | grep -q "192.168.178.29/24" || ip addr add 192.168.178.29/24 dev br0
+ip addr show br0 | grep -q "192.168.178.30/24" || ip addr add 192.168.178.30/24 dev br0
 
 vbmcd
 
