@@ -57,3 +57,92 @@ parameter_defaults:
   # The EMC is left enabled here as OVS-DPDK is not supposed to handle 
   # lots of traffic as it's relegated to signaling only traffic
   OvsDisableEMC: false
+
+  ControllerExtraConfig:
+    # Array of Physical network and custom MTU size
+    # Ensure MTU is 1500 Bytes for external floating IP network
+    # Datacentre and Niantic_pool both at 9000Byte
+    neutron::plugins::ml2::physical_network_mtus: ['external:1500','datacentre0:9000','datacentre1:9000','niantic_pool:9000']
+
+    # Ensure Overlay VXLAN has 1500 Byte
+    neutron::plugins::ml2::path_mtu: 1550
+
+  ComputeOvsDpdkExtraConfig:
+    # Array of Physical network and custom MTU size
+    # Datacentre at 9000Byte
+    neutron::plugins::ml2::physical_network_mtus: ['datacentre0:9000']
+
+    # Ensure Overlay VXLAN has 1500 Byte
+    neutron::plugins::ml2::path_mtu: 1550
+
+  ComputeOvsDpdkRTExtraConfig:
+    # Array of Physical network and custom MTU size
+    # Datacentre at 9000Byte
+    neutron::plugins::ml2::physical_network_mtus: ['datacentre0:9000']
+
+    # Ensure Overlay VXLAN has 1500 Byte
+    neutron::plugins::ml2::path_mtu: 1550
+
+  ComputeDualOvsDpdkExtraConfig:
+    # Array of Physical network and custom MTU size
+    # Both Datacentre at 9000Byte
+    neutron::plugins::ml2::physical_network_mtus: ['datacentre0:9000','datacentre1:9000']
+
+    # Ensure Overlay VXLAN has 1500 Byte
+    neutron::plugins::ml2::path_mtu: 1550
+
+  ComputeDualOvsDpdkRTExtraConfig:
+    # Array of Physical network and custom MTU size
+    # Both Datacentre at 9000Byte
+    neutron::plugins::ml2::physical_network_mtus: ['datacentre0:9000','datacentre1:9000']
+
+    # Ensure Overlay VXLAN has 1500 Byte
+    neutron::plugins::ml2::path_mtu: 1550
+
+  ComputeSriovExtraConfig:
+    # Array of Physical network and custom MTU size
+    # Niantic_pool at 9000Byte
+    neutron::plugins::ml2::physical_network_mtus: ['niantic_pool:9000']
+
+    # Ensure Overlay VXLAN has 1500 Byte
+    neutron::plugins::ml2::path_mtu: 1550
+
+  ComputeSriovRTExtraConfig:
+    # Array of Physical network and custom MTU size
+    # Niantic_pool at 9000Byte
+    neutron::plugins::ml2::physical_network_mtus: ['niantic_pool:9000']
+
+    # Ensure Overlay VXLAN has 1500 Byte
+    neutron::plugins::ml2::path_mtu: 1550
+
+  ComputeDualSriovExtraConfig:
+    # Array of Physical network and custom MTU size
+    # Niantic_pool at 9000Byte
+    neutron::plugins::ml2::physical_network_mtus: ['niantic_pool:9000']
+
+    # Ensure Overlay VXLAN has 1500 Byte
+    neutron::plugins::ml2::path_mtu: 1550
+
+  ComputeDualSriovRTExtraConfig:
+    # Array of Physical network and custom MTU size
+    # Niantic_pool at 9000Byte
+    neutron::plugins::ml2::physical_network_mtus: ['niantic_pool:9000']
+
+    # Ensure Overlay VXLAN has 1500 Byte
+    neutron::plugins::ml2::path_mtu: 1550
+
+  ComputeOvsDpdkSriovExtraConfig:
+    # Array of Physical network and custom MTU size
+    # Datacentre and Niantic_pool both at 9000Byte
+    neutron::plugins::ml2::physical_network_mtus: ['datacentre0:9000','niantic_pool:9000']
+
+    # Ensure Overlay VXLAN has 1500 Byte
+    neutron::plugins::ml2::path_mtu: 1550
+
+  ComputeOvsDpdkSriovRTExtraConfig:
+    # Array of Physical network and custom MTU size
+    # Datacentre and Niantic_pool both at 9000Byte
+    neutron::plugins::ml2::physical_network_mtus: ['datacentre0:9000','niantic_pool:9000']
+
+    # Ensure Overlay VXLAN has 1500 Byte
+    neutron::plugins::ml2::path_mtu: 1550
