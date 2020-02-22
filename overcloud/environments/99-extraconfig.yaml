@@ -96,8 +96,8 @@ parameter_defaults:
   ComputeOvsDpdkExtraConfig:
     # Reserved HugePagaes consumed by OVS-DPDK
     nova::compute::reserved_huge_pages:
-      - node:0,size:1GB,count:4
-      - node:1,size:1GB,count:4
+      - node:0,size:1GB,count:8
+      - node:1,size:1GB,count:8
 
     # Array of Physical network and custom MTU size
     # Datacentre at 9000Byte
@@ -109,8 +109,8 @@ parameter_defaults:
   ComputeOvsDpdkRTExtraConfig:
     # Reserved HugePagaes consumed by OVS-DPDK
     nova::compute::reserved_huge_pages:
-      - node:0,size:1GB,count:4
-      - node:1,size:1GB,count:4
+      - node:0,size:1GB,count:8
+      - node:1,size:1GB,count:8
 
     # Array of Physical network and custom MTU size
     # Datacentre at 9000Byte
@@ -122,8 +122,8 @@ parameter_defaults:
   ComputeDualOvsDpdkExtraConfig:
     # Reserved HugePagaes consumed by OVS-DPDK
     nova::compute::reserved_huge_pages:
-      - node:0,size:1GB,count:4
-      - node:1,size:1GB,count:4
+      - node:0,size:1GB,count:8
+      - node:1,size:1GB,count:8
 
     # Array of Physical network and custom MTU size
     # Both Datacentre at 9000Byte
@@ -135,8 +135,8 @@ parameter_defaults:
   ComputeDualOvsDpdkRTExtraConfig:
     # Reserved HugePagaes consumed by OVS-DPDK
     nova::compute::reserved_huge_pages:
-      - node:0,size:1GB,count:4
-      - node:1,size:1GB,count:4
+      - node:0,size:1GB,count:8
+      - node:1,size:1GB,count:8
 
     # Array of Physical network and custom MTU size
     # Both Datacentre at 9000Byte
@@ -180,8 +180,8 @@ parameter_defaults:
   ComputeOvsDpdkSriovExtraConfig:
     # Reserved HugePagaes consumed by OVS-DPDK
     nova::compute::reserved_huge_pages:
-      - node:0,size:1GB,count:4
-      - node:1,size:1GB,count:4
+      - node:0,size:1GB,count:8
+      - node:1,size:1GB,count:8
 
     # Array of Physical network and custom MTU size
     # Datacentre and Niantic_pool both at 9000Byte
@@ -193,8 +193,8 @@ parameter_defaults:
   ComputeOvsDpdkSriovRTExtraConfig:
     # Reserved HugePagaes consumed by OVS-DPDK
     nova::compute::reserved_huge_pages:
-      - node:0,size:1GB,count:4
-      - node:1,size:1GB,count:4
+      - node:0,size:1GB,count:8
+      - node:1,size:1GB,count:8
 
     # Array of Physical network and custom MTU size
     # Datacentre and Niantic_pool both at 9000Byte

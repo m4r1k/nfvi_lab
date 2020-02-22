@@ -17,8 +17,8 @@ parameter_defaults:
     NovaComputeCpuSharedSet: "0,1,24,25"
     # Reserved mamory for the hypervisor
     # 4GB left for the Kernel + Userland
-    # Also added 8GB (4 per NUMA) for OVS-DPDK
-    NovaReservedHostMemory: 12288
+    # Also added 16GB (8 per NUMA) for OVS-DPDK
+    NovaReservedHostMemory: 20480
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['10-23,34-47']
     # OVS-DPDK Memory size for NUMA node
@@ -50,8 +50,8 @@ parameter_defaults:
     NovaComputeCpuSharedSet: "0,1"
     # Reserved mamory for the hypervisor
     # 4GB left for the Kernel + Userland
-    # Also added 8GB (4 per NUMA) for OVS-DPDK
-    NovaReservedHostMemory: 12288
+    # Also added 16GB (8 per NUMA) for OVS-DPDK
+    NovaReservedHostMemory: 20480
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['10-23']
     # OVS-DPDK Memory size for NUMA node
@@ -81,8 +81,9 @@ parameter_defaults:
     # CPU Share for the QEMU Emulator Threads
     NovaComputeCpuSharedSet: "0,1,24,25"
     # Reserved mamory for the hypervisor
-    # 5GB left for the Kernel + Userland
-    NovaReservedHostMemory: 5120
+    # 4GB left for the Kernel + Userland
+    # Also added 16GB (8 per NUMA) for OVS-DPDK
+    NovaReservedHostMemory: 20480
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['10-23,34-47']
     # OVS-DPDK Memory size for NUMA node
@@ -113,8 +114,9 @@ parameter_defaults:
     # CPU Share for the QEMU Emulator Threads
     NovaComputeCpuSharedSet: "0,1"
     # Reserved mamory for the hypervisor
-    # 5GB left for the Kernel + Userland
-    NovaReservedHostMemory: 5120
+    # 4GB left for the Kernel + Userland
+    # Also added 16GB (8 per NUMA) for OVS-DPDK
+    NovaReservedHostMemory: 20480
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['10-23']
     # OVS-DPDK Memory size for NUMA node
@@ -145,8 +147,7 @@ parameter_defaults:
     NovaComputeCpuSharedSet: "0,1,24,25"
     # Reserved mamory for the hypervisor
     # 4GB left for the Kernel + Userland
-    # Also added 8GB (4 per NUMA) for OVS-DPDK
-    NovaReservedHostMemory: 12288
+    NovaReservedHostMemory: 4096
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['2-23,26-47']
     # Neutron Physical mapping between a custom name and physical devices
@@ -178,8 +179,7 @@ parameter_defaults:
     NovaComputeCpuSharedSet: "0,1"
     # Reserved mamory for the hypervisor
     # 4GB left for the Kernel + Userland
-    # Also added 8GB (4 per NUMA) for OVS-DPDK
-    NovaReservedHostMemory: 12288
+    NovaReservedHostMemory: 4096
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['2-23']
     # Neutron Physical mapping between a custom name and physical devices
@@ -289,8 +289,8 @@ parameter_defaults:
     NovaComputeCpuSharedSet: "0,1,24,25"
     # Reserved mamory for the hypervisor
     # 5GB left for the Kernel + Userland
-    # Also added 8GB (4 per NUMA) for OVS-DPDK
-    NovaReservedHostMemory: 13312
+    # Also added 16GB (8 per NUMA) for OVS-DPDK
+    NovaReservedHostMemory: 21504
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['5,7,9-23,29,31,33-47']
     # OVS-DPDK Memory size for NUMA node
@@ -336,8 +336,8 @@ parameter_defaults:
     NovaComputeCpuSharedSet: "0,1"
     # Reserved mamory for the hypervisor
     # 5GB left for the Kernel + Userland
-    # Also added 8GB (4 per NUMA) for OVS-DPDK
-    NovaReservedHostMemory: 13312
+    # Also added 16GB (8 per NUMA) for OVS-DPDK
+    NovaReservedHostMemory: 21504
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['5,7,9-23']
     # OVS-DPDK Memory size for NUMA node
