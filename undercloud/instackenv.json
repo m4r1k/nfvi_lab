@@ -12,8 +12,8 @@
             "ipmi_port": "623",
             "pm_type": "pxe_ipmitool",
             "cpu": "8",
-            "memory": "22000",
-            "disk": "50",
+            "memory": "32768",
+            "disk": "40",
             "capabilities": "node:controller-node-0,boot_option:local",
             "root_device": {
                "name":"/dev/sda"
@@ -32,8 +32,8 @@
             "ipmi_port": "623",
             "pm_type": "pxe_ipmitool",
             "cpu": "8",
-            "memory": "22000",
-            "disk": "50",
+            "memory": "32768",
+            "disk": "40",
             "capabilities": "node:controller-node-1,boot_option:local",
             "root_device": {
                "name":"/dev/sda"
@@ -52,13 +52,73 @@
             "ipmi_port": "623",
             "pm_type": "pxe_ipmitool",
             "cpu": "8",
-            "memory": "22000",
-            "disk": "50",
+            "memory": "32768",
+            "disk": "40",
             "capabilities": "node:controller-node-2,boot_option:local",
             "root_device": {
                "name":"/dev/sda"
                },
             "_comment": "CTRL2"
+        },
+        {
+            "arch": "x86_64",
+            "name": "ceph-node-0",
+            "mac": [
+              "52:54:00:06:12:af"
+            ],
+            "pm_addr": "192.168.178.25",
+            "pm_user": "root",
+            "pm_password": "calvin",
+            "ipmi_port": "623",
+            "pm_type": "pxe_ipmitool",
+            "cpu": "4",
+            "memory": "14336",
+            "disk": "20",
+            "capabilities": "node:ceph-node-0,boot_option:local",
+            "root_device": {
+               "name":"/dev/sda"
+               },
+            "_comment": "CEPH0"
+        },
+        {
+            "arch": "x86_64",
+            "name": "ceph-node-1",
+            "mac": [
+              "52:54:00:07:12:af"
+            ],
+            "pm_addr": "192.168.178.26",
+            "pm_user": "root",
+            "pm_password": "calvin",
+            "ipmi_port": "623",
+            "pm_type": "pxe_ipmitool",
+            "cpu": "4",
+            "memory": "14336",
+            "disk": "20",
+            "capabilities": "node:ceph-node-1,boot_option:local",
+            "root_device": {
+               "name":"/dev/sda"
+               },
+            "_comment": "CEPH1"
+        },
+        {
+            "arch": "x86_64",
+            "name": "ceph-node-2",
+            "mac": [
+              "52:54:00:08:12:af"
+            ],
+            "pm_addr": "192.168.178.27",
+            "pm_user": "root",
+            "pm_password": "calvin",
+            "ipmi_port": "623",
+            "pm_type": "pxe_ipmitool",
+            "cpu": "4",
+            "memory": "14336",
+            "disk": "20",
+            "capabilities": "node:ceph-node-2,boot_option:local",
+            "root_device": {
+               "name":"/dev/sda"
+               },
+            "_comment": "CEPH2"
         },
         {
             "arch": "x86_64",
@@ -92,7 +152,7 @@
             "ipmi_port": "623",
             "pm_type": "pxe_ipmitool",
             "cpu": "48",
-            "memory": "128000",
+            "memory": "65536",
             "disk": "100",
             "capabilities": "node:r630-0,boot_option:local,boot_mode:uefi",
             "root_device": {
