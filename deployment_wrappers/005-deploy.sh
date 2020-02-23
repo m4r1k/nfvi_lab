@@ -24,6 +24,9 @@ openstack overcloud deploy \
     -e ${_LTHT}/nodes-info.yaml \
     -e ${_THT}/environments/sshd-banner.yaml \
     -e ${_THT}/environments/network-isolation.yaml \
+    -e ${_THT}/environments/ceph-ansible/ceph-ansible.yaml \
+    -e ${_THT}/environments/ceph-ansible/ceph-rgw.yaml \
+    -e ${_THT}/environments/services-docker/cinder-backup.yaml \
     -e ${_THT}/environments/host-config-and-reboot.yaml \
     -e ${_LTHT}/overcloud_images.yaml \
     -e ${_LTHT}/environments/10-commons-parameters.yaml \

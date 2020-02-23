@@ -31,11 +31,16 @@ sudo -E openstack overcloud container image prepare \
     --push-destination=$(ip -4 -o address show br-ctlplane|awk '{print $4}'|sed "s/\/.*$//g"):8787 \
     --prefix=openstack- \
     --tag-from-label {version}-{release} \
+    --set ceph_namespace=registry.access.redhat.com/rhceph \
+    --set ceph_image=rhceph-3-rhel7 \
     --output-env-file=${_LTHT}/overcloud_images.yaml \
     --output-images-file /home/stack/local_registry_images.yaml \
     -r ~/roles-data.yaml \
     -e ${_THT}/environments/sshd-banner.yaml \
     -e ${_THT}/environments/network-isolation.yaml \
+    -e ${_THT}/environments/ceph-ansible/ceph-ansible.yaml \
+    -e ${_THT}/environments/ceph-ansible/ceph-rgw.yaml \
+    -e ${_THT}/environments/services-docker/cinder-backup.yaml \
     -e ${_THT}/environments/host-config-and-reboot.yaml \
     -e ${_LTHT}/environments/10-commons-parameters.yaml \
     -e ${_LTHT}/environments/20-network-environment.yaml \
