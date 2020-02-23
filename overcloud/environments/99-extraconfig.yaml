@@ -9,6 +9,9 @@ resource_registry:
   OS::TripleO::ComputeDualSriovRTExtraConfigPre:    ../extraconfig/pre-config/compute_deterministic.yaml
   OS::TripleO::ComputeOvsDpdkSriovRTExtraConfigPre: ../extraconfig/pre-config/compute_deterministic.yaml
 
+  # Ceph SSD Workaround
+  OS::TripleO::CephStorageExtraConfigPre:           ../extraconfig/pre-config/ceph_ssd_workaround.yaml
+
   # Controller Role Post-Configuration hook for the Heat cache
   OS::TripleO::Tasks::ControllerPostConfig:         ../extraconfig/post-config/controller.yaml
 
@@ -116,9 +119,6 @@ parameter_defaults:
       - disk.write.requests.rate
       - disk.read.bytes.rate
       - disk.write.bytes.rate
-
-    # Disable force RAW images
-    nova::compute::force_raw_images: false
 
     # Expose real hypervisor CPU
     nova::compute::libvirt::libvirt_cpu_mode: 'host-passthrough'

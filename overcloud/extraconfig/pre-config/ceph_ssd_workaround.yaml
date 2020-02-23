@@ -1,0 +1,33 @@
+heat_template_version: queens
+
+description: >
+  Ceph SSD Workaround pre-configuration hook
+
+parameters:
+  server:
+    type: string
+  DeployIdentifier:
+    type: string
+
+resources:
+  SSDWorkAround:
+    type: OS::Heat::SoftwareConfig
+    properties:
+      group: script
+      inputs:
+        - name: DeployIdentifier
+      config: {get_file: scripts/ceph_ssd_workaround.sh}
+
+  SSDWorkAroundDeployment:
+    type: OS::Heat::SoftwareDeployment
+    properties:
+      actions: ['CREATE']
+      server: {get_param: server}
+      config: {get_resource: SSDWorkAround}
+      input_values:
+        deploy_identifier: {get_param: DeployIdentifier}
+
+outputs:
+  deploy_stdout:
+    description: Deployment reference, used to trigger puppet apply on changes
+    value: {get_attr: [SSDWorkAroundDeployment, deploy_stdout]}
