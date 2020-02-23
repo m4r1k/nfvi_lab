@@ -128,18 +128,6 @@ resources:
                   mtu: 1500
                   addresses:
                   - ip_netmask: {get_param: InternalApiIpSubnet }
-                - type: vlan
-                  vlan_id: {get_param: StorageNetworkVlanID}
-                  device: br-ex
-                  mtu: 9000
-                  addresses:
-                  - ip_netmask: {get_param: StorageIpSubnet}
-                - type: vlan
-                  vlan_id: {get_param: StorageMgmtNetworkVlanID}
-                  device: br-ex
-                  mtu: 9000
-                  addresses:
-                  - ip_netmask: {get_param: StorageMgmtIpSubnet}
 
               - type: ovs_bridge
                 name: br-overlay
@@ -157,6 +145,12 @@ resources:
                   vlan_id: {get_param: TenantNetworkVlanID}
                   addresses:
                   - ip_netmask: {get_param: TenantIpSubnet}
+                - type: vlan
+                  vlan_id: {get_param: StorageNetworkVlanID}
+                  device: br-overlay
+                  mtu: 9000
+                  addresses:
+                  - ip_netmask: {get_param: StorageIpSubnet}
 
 outputs:
   OS::stack_id:

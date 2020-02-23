@@ -122,6 +122,13 @@ resources:
                 addresses:
                 - ip_netmask: {get_param: InternalApiIpSubnet}
 
+              - type: vlan
+                vlan_id: {get_param: StorageNetworkVlanID}
+                device: nic2
+                mtu: 9000
+                addresses:
+                - ip_netmask: {get_param: StorageIpSubnet}
+
               - type: ovs_user_bridge
                 name: br-link0
                 mtu: 9216
