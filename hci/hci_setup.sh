@@ -181,24 +181,30 @@ virsh pool-define --file ssd.xml
 virsh pool-start ssd
 virsh pool-autostart ssd
 
-qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/UC.img 100G
-qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CTRL0.img 40G
-qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CTRL1.img 40G
-qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CTRL2.img 40G
-qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CEPH0.img 40G
-qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CEPH1.img 40G
-qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CEPH2.img 40G
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/UC.img 100G &
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CTRL0.img 50G &
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CTRL1.img 50G &
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CTRL2.img 50G &
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CEPH0.img 50G &
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CEPH1.img 50G &
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/images/CEPH2.img 50G &
 
-qemu-img create -f raw -o preallocation=full /var/lib/libvirt/ssd/CEPH0-0.img 75G
-qemu-img create -f raw -o preallocation=full /var/lib/libvirt/ssd/CEPH0-1.img 75G
-qemu-img create -f raw -o preallocation=full /var/lib/libvirt/ssd/CEPH1-0.img 75G
-qemu-img create -f raw -o preallocation=full /var/lib/libvirt/ssd/CEPH1-1.img 75G
-qemu-img create -f raw -o preallocation=full /var/lib/libvirt/ssd/CEPH2-0.img 75G
-qemu-img create -f raw -o preallocation=full /var/lib/libvirt/ssd/CEPH2-1.img 75G
+wait
 
-qemu-img create -f raw -o preallocation=full /var/lib/libvirt/optane/CEPH0.img 6G
-qemu-img create -f raw -o preallocation=full /var/lib/libvirt/optane/CEPH1.img 6G
-qemu-img create -f raw -o preallocation=full /var/lib/libvirt/optane/CEPH2.img 6G
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/ssd/CEPH0-0.img 75G &
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/ssd/CEPH0-1.img 75G &
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/ssd/CEPH1-0.img 75G &
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/ssd/CEPH1-1.img 75G &
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/ssd/CEPH2-0.img 75G &
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/ssd/CEPH2-1.img 75G &
+
+wait
+
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/optane/CEPH0.img 8G &
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/optane/CEPH1.img 8G &
+qemu-img create -f raw -o preallocation=full /var/lib/libvirt/optane/CEPH2.img 8G &
+
+wait
 
 curl -o /tmp/dell_ome.zip -L https://downloads.dell.com/FOLDER05774382M/1/openmanage_enterprise_kvm_format_3.2.1.zip
 unzip /tmp/dell_ome.zip -x openmanage_enterprise.qcow2 -d /tmp/
