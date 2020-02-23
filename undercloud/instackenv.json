@@ -13,7 +13,7 @@
             "pm_type": "pxe_ipmitool",
             "cpu": "8",
             "memory": "32768",
-            "disk": "40",
+            "disk": "50",
             "capabilities": "node:controller-node-0,boot_option:local",
             "root_device": {
                "name":"/dev/sda"
@@ -33,7 +33,7 @@
             "pm_type": "pxe_ipmitool",
             "cpu": "8",
             "memory": "32768",
-            "disk": "40",
+            "disk": "50",
             "capabilities": "node:controller-node-1,boot_option:local",
             "root_device": {
                "name":"/dev/sda"
@@ -53,7 +53,7 @@
             "pm_type": "pxe_ipmitool",
             "cpu": "8",
             "memory": "32768",
-            "disk": "40",
+            "disk": "50",
             "capabilities": "node:controller-node-2,boot_option:local",
             "root_device": {
                "name":"/dev/sda"
@@ -73,7 +73,7 @@
             "pm_type": "pxe_ipmitool",
             "cpu": "4",
             "memory": "14336",
-            "disk": "20",
+            "disk": "50",
             "capabilities": "node:ceph-node-0,boot_option:local",
             "root_device": {
                "name":"/dev/sda"
@@ -93,7 +93,7 @@
             "pm_type": "pxe_ipmitool",
             "cpu": "4",
             "memory": "14336",
-            "disk": "20",
+            "disk": "50",
             "capabilities": "node:ceph-node-1,boot_option:local",
             "root_device": {
                "name":"/dev/sda"
@@ -113,7 +113,7 @@
             "pm_type": "pxe_ipmitool",
             "cpu": "4",
             "memory": "14336",
-            "disk": "20",
+            "disk": "50",
             "capabilities": "node:ceph-node-2,boot_option:local",
             "root_device": {
                "name":"/dev/sda"
