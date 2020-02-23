@@ -6,6 +6,12 @@ parameter_defaults:
   ControllerCount: 3
   ControllerHostnameFormat: '%stackname%-controller-%index%'
 
+  # OvercloudCephStorageFlavor: ceph
+  CephStorageSchedulerHints:
+    'capabilities:node': 'ceph-node-%index%'
+  CephStorageCount: 3
+  CephStorageHostnameFormat: '%stackname%-ceph-%index%'
+
   # OvercloudComputeOvsDpdkFlavor: computedpdk
   ComputeOvsDpdkSchedulerHints:
     'capabilities:node': 'r630-%index%'

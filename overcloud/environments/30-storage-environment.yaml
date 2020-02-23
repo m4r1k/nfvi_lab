@@ -6,23 +6,79 @@ parameter_defaults:
   CinderEnableNfsBackend: false
 
   # Whether to enable rbd (Ceph) backend for Cinder.
-  CinderEnableRbdBackend: false
+  CinderEnableRbdBackend: true
 
   # Cinder Backup backend can be either 'ceph', 'swift' or 'nfs'.
-  # CinderBackupBackend: ceph
+  CinderBackupBackend: ceph
+
+  # Glance backend can be either 'rbd' (Ceph), 'swift' or 'file'.
+  GlanceBackend: rbd
+
+  # Gnocchi backend can be either 'rbd' (Ceph), 'swift' or 'file'.
+  GnocchiBackend: rbd
+
+  # Here the Ceph Storage node config
+  # NAME   MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+  # sda      8:0    0  50G  0 disk
+  # ├─sda1   8:1    0   1M  0 part
+  # └─sda2   8:2    0  50G  0 part /
+  # sdb      8:16   0   8G  0 disk <- Optane NVME
+  # sdc      8:32   0  75G  0 disk <- SSD Data
+  # sdd      8:48   0  75G  0 disk <- SSD Data
+  CephAnsibleDisksConfig:
+    devices:
+      - /dev/sdc
+      - /dev/sdd
+      - /dev/sdb
+    osd_scenario: lvm
+    # It is recommended that the block.db size isn’t smaller than 4% of block.
+    # For example, if the block size is 1TB, then block.db shouldn’t be less than 40GB.
+    # In our environment we have 2x 75GB per Ceph Storage Node so we configure a 3GiB block.db
+    # block_db_size is in byte
+    block_db_size: 3222000000
+    osd_objectstore: bluestore
+
+  # Additiona Ceph Configs
+  CephConfigOverrides:
+    # Max PG Number per OSD
+    mon_max_pg_per_osd: 2048
+    # Increase max filelimit
+    # Default is 32K
+    max_open_files: 131072
+
+  # Reduce Ceph-Ansible verbosity - https://bugzilla.redhat.com/show_bug.cgi?id=1624254
+  CephAnsiblePlaybookVerbosity: 0
+
+  # Default Replica Count
+  # HDD CephPoolDefaultSize: 3 (and higher)
+  # Flasg CephPoolDefaultSize: 2 (and higher)
+  CephPoolDefaultSize: 2
+
+  # PG per Pool based on current hardware (Ceph PG Calc)
+  CephPoolDefaultPgNum: 8
+
+  # Ceph Pools PG numbers
+  CephPools:
+    - name: volumes
+      pg_num: 128 # assuming 30% of the datas
+      application: rbd
+    - name: vms
+      pg_num: 128 # assuming 30% of the datas
+      application: rbd
+    - name: backups
+      pg_num: 32 # assuming 10% of the datas
+      application: rbd
+    - name: images
+      pg_num: 32 # assuming 10% of the datas
+      application: rbd
+    - name: metrics
+      pg_num: 32 # assuming 7.8% of the datas
+      application: openstack_gnocchi
 
   # Whether to enable rbd (Ceph) backend for Nova ephemeral storage.
   NovaEnableRbdBackend: false
 
-  # Glance backend can be either 'rbd' (Ceph), 'swift' or 'file'.
-  GlanceBackend: swift
-
-  # Gnocchi backend can be either 'rbd' (Ceph), 'swift' or 'file'.
-  GnocchiBackend: swift
-
-  # Use a local directory for Swift storage services when building rings
-  SwiftUseLocalDir: true
-
-  # DEPRECATED options for compatibility with overcloud.yaml
-  # Whether to enable Swift Storage on the Controller
-  ControllerEnableSwiftStorage: true
+  ExtraConfig:
+    # Disable force RAW images
+    # If NovaEnableRbdBackend is set to true this flag MUST be set to true (default option)
+    nova::compute::force_raw_images: false
