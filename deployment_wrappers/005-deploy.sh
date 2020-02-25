@@ -19,7 +19,7 @@ cd ~/
 openstack overcloud deploy \
     --force-postconfig \
     --templates ${_THT} \
-    --timeout 90 \
+    --timeout 180 \
     -r ${_LTHT}/roles-data.yaml \
     -e ${_LTHT}/nodes-info.yaml \
     -e ${_THT}/environments/sshd-banner.yaml \
