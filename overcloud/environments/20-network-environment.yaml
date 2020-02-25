@@ -112,7 +112,7 @@ resource_registry:
   # VIP ports
   OS::TripleO::Network::Ports::InternalApiVipPort:          /usr/share/openstack-tripleo-heat-templates/network/ports/internal_api.yaml
   OS::TripleO::Network::Ports::StorageVipPort:              /usr/share/openstack-tripleo-heat-templates/network/ports/storage.yaml
-  OS::TripleO::Network::Ports::StorageMgmtVipPort:          /usr/share/openstack-tripleo-heat-templates/network/ports/storage_mgmt.yaml
+  OS::TripleO::Network::Ports::StorageMgmtVipPort:          /usr/share/openstack-tripleo-heat-templates/network/ports/noop.yaml
   OS::TripleO::Network::Ports::ExternalVipPort:             /usr/share/openstack-tripleo-heat-templates/network/ports/external.yaml
   OS::TripleO::Network::Ports::RedisVipPort:                /usr/share/openstack-tripleo-heat-templates/network/ports/vip.yaml
 
@@ -175,7 +175,7 @@ parameter_defaults:
   RedisVirtualFixedIPs:       [{'ip_address':'10.0.11.14'}]
   InternalApiVirtualFixedIPs: [{'ip_address':'10.0.11.15'}]
   StorageVirtualFixedIPs:     [{'ip_address':'10.0.13.15'}]
-  StorageMgmtVirtualFixedIPs: [{'ip_address':'10.0.14.15'}]
+  # StorageMgmtVirtualFixedIPs: [{'ip_address':'10.0.14.15'}]
   ControlFixedIPs:            [{'ip_address':'10.0.10.15'}]
 
   # Static IP Address for Controller
