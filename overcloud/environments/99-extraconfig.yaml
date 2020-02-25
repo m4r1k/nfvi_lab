@@ -12,7 +12,13 @@ resource_registry:
   # Ceph SSD Workaround
   OS::TripleO::CephStorageExtraConfigPre:           ../extraconfig/pre-config/ceph_ssd_workaround.yaml
 
-  # Controller Role Post-Configuration hook for the Heat cache
+  # Controller Role Post-Configuration hook for the Heat cache and to Beast RadosGW frontend
+  # Queens TripleO RGW template hardcodes civetweb effectively disabling Beast
+  # https://github.com/openstack/tripleo-heat-templates/blob/stable/queens/docker/services/ceph-ansible/ceph-rgw.yaml#L80
+  # It's NOT possible to enable Beast by CephConfigOverrides
+  # CephConfigOverrides:
+  #   radosgw_frontend_type: beast
+  #   radosgw_frontend_port: 8080
   OS::TripleO::Tasks::ControllerPostConfig:         ../extraconfig/post-config/controller.yaml
 
 parameter_defaults:

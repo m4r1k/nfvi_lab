@@ -1,3 +1,11 @@
+resource_registry:
+  # Custom endpoint_map.yaml to expose PublicURL in RadosGW
+  #  - https://github.com/openstack/tripleo-heat-templates/commit/7c379543cc
+  #  - https://bugzilla.redhat.com/show_bug.cgi?id=1699206
+  #  - https://access.redhat.com/solutions/3228661
+  #  - https://access.redhat.com/solutions/4010951
+  OS::TripleO::EndpointMap: endpoints/endpoint_map.yaml
+
 parameter_defaults:
   # Whether to enable iscsi backend for Cinder.
   CinderEnableIscsiBackend: false
@@ -45,6 +53,10 @@ parameter_defaults:
     # Increase max filelimit
     # Default is 32K
     max_open_files: 131072
+    # Support all the base OpenStack roles
+    rgw_keystone_accepted_roles: 'Member, _member_, admin, swiftoperator'
+    # Allow RadosGW to expose PublicURL
+    rgw_swift_account_in_url: true
 
   # Reduce Ceph-Ansible verbosity - https://bugzilla.redhat.com/show_bug.cgi?id=1624254
   CephAnsiblePlaybookVerbosity: 0
@@ -82,3 +94,5 @@ parameter_defaults:
     # Disable force RAW images
     # If NovaEnableRbdBackend is set to true this flag MUST be set to true (default option)
     nova::compute::force_raw_images: false
+    # Enable the Cinder Backup dashboard in Horizon
+    horizon::cinder_options: { enable_backup: true }
