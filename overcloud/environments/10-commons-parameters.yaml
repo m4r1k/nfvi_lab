@@ -8,6 +8,9 @@ parameter_defaults:
   # Node Root Password (through CloudInit)
   NodeRootPassword: 'temproot'
 
+  # Admin Keystone user password
+  AdminPassword: 'diablo'
+
   # Custom SSH Config to allow password and Root login 
   SshServerOptions:
     HostKey:
