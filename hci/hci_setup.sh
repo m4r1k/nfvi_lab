@@ -27,6 +27,9 @@ dnf makecache
 dnf module -y reset virt
 dnf module -y enable virt:8.1
 
+dnf module -y enable container-tools
+dnf module -y install container-tools
+
 dnf upgrade -y
 
 dnf install -y cockpit cockpit-machines cockpit-storaged cockpit-dashboard qemu-kvm qemu-kvm-common
@@ -58,10 +61,25 @@ dnf install -y python3-virtualenv python3-libvirt libvirt-devel gcc make
 virtualenv /root/vBMC
 source /root/vBMC/bin/activate
 pip install virtualbmc
+firewall-cmd --zone=public --permanent --add-port=623/udp
+firewall-cmd --reload
 
 dnf install -y nvme-cli
 
-firewall-cmd --zone=public --permanent --add-port=623/udp
+dnf install -y perf
+podman run -d --name=netdata \
+  -p 19999:19999 \
+  -v /etc/passwd:/host/etc/passwd:ro \
+  -v /etc/group:/host/etc/group:ro \
+  -v /proc:/host/proc:ro \
+  -v /sys:/host/sys:ro \
+  -v /etc/os-release:/host/etc/os-release:ro \
+  --cap-add SYS_PTRACE \
+  --security-opt label=disable \
+  --restart always \
+  --cpuset-cpus 0,1,20,21,40,41,60,61 \
+  netdata/netdata:v1.20.0
+firewall-cmd --zone=public --permanent --add-port=19999/tcp
 firewall-cmd --reload
 
 cat > /etc/sysconfig/network-scripts/ifcfg-br0 << EOF
