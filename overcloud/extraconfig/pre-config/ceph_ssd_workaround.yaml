@@ -21,7 +21,7 @@ resources:
   SSDWorkAroundDeployment:
     type: OS::Heat::SoftwareDeployment
     properties:
-      actions: ['CREATE']
+      actions: ['CREATE', 'UPDATE'] # Do this on CREATE and UPDATE as well
       server: {get_param: server}
       config: {get_resource: SSDWorkAround}
       input_values:
