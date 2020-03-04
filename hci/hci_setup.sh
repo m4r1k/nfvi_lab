@@ -82,6 +82,10 @@ podman run -d --name=netdata \
 firewall-cmd --zone=public --permanent --add-port=19999/tcp
 firewall-cmd --reload
 
+# Do not accept forwarded locale
+sed -e 's/^\(AcceptEnv LANG.*\)/#\1/g' -e 's/^\(AcceptEnv LC_.*\)/#\1/g' -i /etc/ssh/sshd_config
+systemctl restart sshd
+
 cat > /etc/sysconfig/network-scripts/ifcfg-br0 << EOF
 DEVICE=br0
 ONBOOT=yes
