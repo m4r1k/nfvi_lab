@@ -3,6 +3,25 @@
 # Make sure Subscription is done
 # Make sure packages can be downloaded
 
+subscription-manager attach --pool 8a85f99c6e417e37016e6c2fb484073e
+
+subscription-manager repos \
+--disable "*" \
+--enable rhel-8-for-x86_64-baseos-rpms \
+--enable rhel-8-for-x86_64-appstream-rpms \
+--enable rhel-8-for-x86_64-highavailability-rpms \
+--enable rhel-8-for-x86_64-nfv-rpms \
+--enable rhel-8-for-x86_64-rt-rpms \
+--enable rhel-8-for-x86_64-supplementary-rpms \
+--enable codeready-builder-for-rhel-8-x86_64-rpms \
+--enable ansible-2.9-for-rhel-8-x86_64-rpms \
+--enable advanced-virt-for-rhel-8-x86_64-rpms \
+--enable satellite-tools-6.6-for-rhel-8-x86_64-rpms \
+--enable openstack-16-for-rhel-8-x86_64-rpms \
+--enable openstack-16-tools-for-rhel-8-x86_64-rpms \
+--enable openstack-16-devtools-for-rhel-8-x86_64-rpms \
+--enable fast-datapath-for-rhel-8-x86_64-rpms
+
 dnf makecache
 
 dnf module -y reset virt
