@@ -4,6 +4,16 @@ resource_registry:
   OS::TripleO::Services::NeutronSriovHostConfig: /usr/share/openstack-tripleo-heat-templates/puppet/services/neutron-sriov-host-config.yaml
 
 parameter_defaults:
+  # Custom tuned profile to configure all cores in C-State C0
+  # To enable it, after deployment, run `tuned-adm profile cpu-partitioning-c0`
+  CustomTunedProfileName: cpu-partitioning-c0
+  CustomTunedProfileContent: |
+    [main]
+    summary=Custom cpu-partitioning profile configuring C-State C0
+    include=cpu-partitioning
+    [cpu]
+    force_latency=0
+
   ComputeOvsDpdkParameters:
     # GRUB Kernel CLI
     KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=58 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"

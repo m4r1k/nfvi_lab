@@ -2,12 +2,19 @@ resource_registry:
   # FirstBoot Script for initial configuration (i.e. Disk Wipe, Root Password, SSH Root Access)
   OS::TripleO::NodeUserData:                        ../firstboot/first-boot.yaml
 
-  # Real-Time specific tuning
-  OS::TripleO::ComputeOvsDpdkRTExtraConfigPre:      ../extraconfig/pre-config/compute_deterministic.yaml
-  OS::TripleO::ComputeDualOvsDpdkRTExtraConfigPre:  ../extraconfig/pre-config/compute_deterministic.yaml
-  OS::TripleO::ComputeSriovRTExtraConfigPre:        ../extraconfig/pre-config/compute_deterministic.yaml
-  OS::TripleO::ComputeDualSriovRTExtraConfigPre:    ../extraconfig/pre-config/compute_deterministic.yaml
-  OS::TripleO::ComputeOvsDpdkSriovRTExtraConfigPre: ../extraconfig/pre-config/compute_deterministic.yaml
+  # Compute Real-Time specific tuning
+  OS::TripleO::ComputeOvsDpdkRTExtraConfigPre:      ../extraconfig/pre-config/compute_realtime.yaml
+  OS::TripleO::ComputeDualOvsDpdkRTExtraConfigPre:  ../extraconfig/pre-config/compute_realtime.yaml
+  OS::TripleO::ComputeSriovRTExtraConfigPre:        ../extraconfig/pre-config/compute_realtime.yaml
+  OS::TripleO::ComputeDualSriovRTExtraConfigPre:    ../extraconfig/pre-config/compute_realtime.yaml
+  OS::TripleO::ComputeOvsDpdkSriovRTExtraConfigPre: ../extraconfig/pre-config/compute_realtime.yaml
+
+  # Compute Deterministic specific tuning
+  OS::TripleO::ComputeOvsDpdkExtraConfigPre:      ../extraconfig/pre-config/compute_deterministic.yaml
+  OS::TripleO::ComputeDualOvsDpdkExtraConfigPre:  ../extraconfig/pre-config/compute_deterministic.yaml
+  OS::TripleO::ComputeSriovExtraConfigPre:        ../extraconfig/pre-config/compute_deterministic.yaml
+  OS::TripleO::ComputeDualSriovExtraConfigPre:    ../extraconfig/pre-config/compute_deterministic.yaml
+  OS::TripleO::ComputeOvsDpdkSriovExtraConfigPre: ../extraconfig/pre-config/compute_deterministic.yaml
 
   # Ceph SSD Workaround
   OS::TripleO::CephStorageExtraConfigPre:           ../extraconfig/pre-config/ceph_ssd_workaround.yaml

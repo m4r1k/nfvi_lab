@@ -8,34 +8,26 @@ parameters:
     type: string
   DeployIdentifier:
     type: string
-  CustomTunedProfileName:
-    type: string
-  CustomTunedProfileContent:
-    type: string
 
 resources:
-  CustomTunedProfile:
+  ExtraKVMFlags:
     type: OS::Heat::SoftwareConfig
     properties:
       group: script
       inputs:
         - name: DeployIdentifier
-        - name: _CUSTOM_TUNED_PROFILE_NAME_
-        - name: _CUSTOM_TUNED_PROFILE_CONTENT_
-      config: {get_file: scripts/custom_tuned_profile.sh}
+      config: {get_file: scripts/nx_huge_pages_recovery_ratio.sh}
 
-  CustomTunedProfileDeployment:
+  ExtraKVMFlagsDeployment:
     type: OS::Heat::SoftwareDeployment
     properties:
       actions: ['CREATE', 'UPDATE'] # Do this on CREATE and UPDATE as well
       server: {get_param: server}
-      config: {get_resource: CustomTunedProfile}
+      config: {get_resource: ExtraKVMFlags}
       input_values:
         deploy_identifier: {get_param: DeployIdentifier}
-        _CUSTOM_TUNED_PROFILE_NAME_: {get_param: CustomTunedProfileName}
-        _CUSTOM_TUNED_PROFILE_CONTENT_: {get_param: CustomTunedProfileContent}
 
 outputs:
   deploy_stdout:
     description: Deployment reference, used to trigger puppet apply on changes
-    value: {get_attr: [CustomTunedProfileDeployment, deploy_stdout]}
+    value: {get_attr: [ExtraKVMFlagsDeployment, deploy_stdout]}
