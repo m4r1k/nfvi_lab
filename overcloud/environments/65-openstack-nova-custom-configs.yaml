@@ -23,12 +23,6 @@ parameter_defaults:
 
   # Friendly name in libvirt for VM using hostname instead of "instance-%08x"
   InstanceNameTemplate: '"%(hostname)s"'
-resource_registry:
-  # FirstBoot Script for initial configuration (i.e. Disk Wipe, Root Password, SSH Root Access)
-  OS::TripleO::NodeUserData:                     ../firstboot/first-boot.yaml
-
-  # Controller Role Post-Configuration hook for the Heat cache
-  OS::TripleO::Tasks::ControllerPostConfig: ../extraconfig/post-config/controller.yaml
 
   ComputeOvsDpdkExtraConfig:
     nova::config::nova_config:
