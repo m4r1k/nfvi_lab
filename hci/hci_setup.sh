@@ -79,6 +79,17 @@ podman run -d --name=netdata \
   --restart always \
   --cpuset-cpus 0,1,20,21,40,41,60,61 \
   netdata/netdata:v1.20.0
+cat > /etc/systemd/system/netdata-container.service << EOF
+[Unit]
+Description=Netdata Container
+[Service]
+Restart=always
+ExecStart=/usr/bin/podman start -a netdata
+ExecStop=/usr/bin/podman stop -t 2 netdata
+[Install]
+WantedBy=local.target
+EOF
+systemctl enable netdata-container.service
 firewall-cmd --zone=public --permanent --add-port=19999/tcp
 firewall-cmd --reload
 
