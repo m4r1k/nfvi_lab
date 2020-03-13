@@ -258,11 +258,6 @@ qemu-img create -f raw -o preallocation=full /var/lib/libvirt/optane/CEPH2.img 8
 
 wait
 
-curl -o /tmp/dell_ome.zip -L https://downloads.dell.com/FOLDER05774382M/1/openmanage_enterprise_kvm_format_3.2.1.zip
-unzip /tmp/dell_ome.zip -x openmanage_enterprise.qcow2 -d /tmp/
-mv /tmp/appliance/qemu-kvm/openmanage_enterprise.qcow2 /var/lib/libvirt/images/
-rm -rf /tmp/dell_ome.zip /tmp/appliance
-
 cat > /etc/sysctl.d/asynchronous_io_tuning.conf << EOF
 # http://kvmonz.blogspot.com/p/knowledge-choosing-right-configuration.html
 # http://kvmonz.blogspot.com/p/knowledge-disk-performance-hints-tips.html
@@ -278,6 +273,5 @@ virsh define --file ./CTRL2.xml --validate
 virsh define --file ./CEPH0.xml --validate
 virsh define --file ./CEPH1.xml --validate
 virsh define --file ./CEPH2.xml --validate
-virsh define --file ./OME.xml --validate
 
 echo "## REBOOT THE HCI NODE PLEASE ##"
