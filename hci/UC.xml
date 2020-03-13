@@ -38,6 +38,7 @@
   </features>
   <cpu mode='host-passthrough' check='partial'>
     <topology sockets='1' cores='4' threads='2'/>
+    <cache mode='passthrough'/>
   </cpu>
   <clock offset='utc'>
     <timer name='rtc' tickpolicy='catchup'/>
