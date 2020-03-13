@@ -52,7 +52,7 @@ vlan 140 name storagemgmt by port
  loop-detection
 !
 vlan 178 name external by port
- tagged ethe 1/1/6
+ tagged ethe 1/1/2 to 1/1/12
  untagged ethe 1/1/1
  router-interface ve 178
  loop-detection
@@ -296,7 +296,37 @@ ntp
 !
 !
 !
+interface ethernet 1/1/2
+ dual-mode  178
+!
+interface ethernet 1/1/3
+ dual-mode  178
+!
+interface ethernet 1/1/4
+ dual-mode  178
+!
+interface ethernet 1/1/5
+ dual-mode  178
+!
 interface ethernet 1/1/6
+ dual-mode  178
+!
+interface ethernet 1/1/7
+ dual-mode  178
+!
+interface ethernet 1/1/8
+ dual-mode  178
+!
+interface ethernet 1/1/9
+ dual-mode  178
+!
+interface ethernet 1/1/10
+ dual-mode  178
+!
+interface ethernet 1/1/11
+ dual-mode  178
+!
+interface ethernet 1/1/12
  dual-mode  178
 !
 interface ethernet 1/3/1
