@@ -60,7 +60,8 @@ systemctl enable --now rngd
 dnf install -y python3-virtualenv python3-libvirt libvirt-devel gcc make
 virtualenv /root/vBMC
 source /root/vBMC/bin/activate
-pip install virtualbmc
+pip install --upgrade pip
+pip install virtualbmc==1.6.0
 firewall-cmd --zone=public --permanent --add-port=623/udp
 firewall-cmd --reload
 
