@@ -1,3 +1,5 @@
+zaqar::max_messages_post_size: 1048576000
+mistral::engine::execution_field_size_limit_kb: 163840
 heat::keystone::authtoken::memcached_servers: 'localhost:11211'
 heat::keystone::authtoken::memcache_pool_conn_get_timeout: 1
 heat::keystone::authtoken::memcache_pool_dead_retry: 600
