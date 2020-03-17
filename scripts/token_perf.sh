@@ -4,7 +4,7 @@ source ~/overcloudrc
 
 while :;
 do
-time curl -s -o /dev/null -i -H "Content-Type: application/json" -d '
+time curl -s -o /dev/null -w "%{time_total}" -i -H "Content-Type: application/json" -d '
 { "auth": {
     "identity": {
       "methods": ["password"],
