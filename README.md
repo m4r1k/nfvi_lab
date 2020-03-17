@@ -52,7 +52,8 @@ Usually changes between clouds can be found in the following files
 │   │   ├── 40-fencing.yaml				=> Hash with server Ethernet MAC address, IPMI credential, and fencing mechanism
 │   │   ├── 50-keystone-admin-endpoint.yaml		=> Expose Keystone Admin API over external network
 │   │   ├── 60-openstack-neutron-custom-configs.yaml	=> Specific Neutron configuration such as MTU size, bridge mapping, security group firewall driver etc
-│   │   ├── 65-openstack-nova-custom-configs.yaml	=> Specific Nova configuration such as Multipathd, scheduler filters etc
+│   │   ├── 60-openstack-nova-custom-configs.yaml	=> Specific Nova configuration such as Multipathd, scheduler filters etc
+│   │   ├── 60-openstack-glance-custom-configs.yaml	=> Specific Glance configuration such as Image Auto Conversion
 │   │   ├── 70-ovs-dpdk-sriov.yaml			=> SR-IOV and OVS-DPDK Compute configuration such as Tuned profile, CPU Partitioning, Huge Pages, kernel args etc
 │   │   ├── 99-extraconfig.yaml				=> Puppet Extra configuration for Pre and Post deployment hooks, tuning (oslo, memcached, rabbit, haproxy, mysql) etc
 │   │   └── 99-server-blacklist.yaml			=> Blacklist nodes useful for upgrade purpose

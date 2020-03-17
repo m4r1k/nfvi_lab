@@ -48,7 +48,8 @@ sudo -E openstack overcloud container image prepare \
     -e ${_LTHT}/environments/40-fencing.yaml \
     -e ${_LTHT}/environments/50-keystone-admin-endpoint.yaml \
     -e ${_LTHT}/environments/60-openstack-neutron-custom-configs.yaml \
-    -e ${_LTHT}/environments/65-openstack-nova-custom-configs.yaml \
+    -e ${_LTHT}/environments/60-openstack-nova-custom-configs.yaml \
+    -e ${_LTHT}/environments/60-openstack-glance-custom-configs.yaml \
     -e ${_LTHT}/environments/70-ovs-dpdk-sriov.yaml \
     -e ${_LTHT}/environments/99-extraconfig.yaml \
     -e ${_LTHT}/environments/99-server-blacklist.yaml

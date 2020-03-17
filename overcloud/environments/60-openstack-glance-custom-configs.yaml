@@ -1,0 +1,7 @@
+parameter_defaults:
+  # Enable Glance image_conversion plugin to automatically convern QCOW2 images to RAW format
+  GlanceImageImportPlugins: ['image_conversion']
+
+  # Desired output format for image conversion plugin
+  GlanceImageConversionOutputFormat: 'raw'
+
