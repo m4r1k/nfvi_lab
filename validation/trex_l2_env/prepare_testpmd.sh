@@ -24,8 +24,15 @@ tuned-adm profile cpu-partitioning
 sed 's/^\(GRUB_CMDLINE_LINUX=".*\)"/\1 default_hugepagesz=1GB hugepagesz=1G hugepages=8 isolcpus=1-6"/g' -i /etc/default/grub
 grub2-mkconfig -o /etc/grub2.cfg
 
-driverctl set-override 0000:00:04.0 uio_pci_generic
-driverctl set-override 0000:00:05.0 uio_pci_generic
+# https://bugzilla.redhat.com/show_bug.cgi?id=1762087
+# vIOMMU not supported
+cat > /etc/modprobe.d/vfio.conf << EOF
+options vfio enable_unsafe_noiommu_mode=Y
+options vfio_iommu_type1 allow_unsafe_interrupts=Y
+EOF
+
+driverctl set-override 0000:00:04.0 vfio-pci
+driverctl set-override 0000:00:05.0 vfio-pci
 
 dracut -f
 
