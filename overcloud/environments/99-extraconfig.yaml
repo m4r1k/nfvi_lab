@@ -69,6 +69,12 @@ parameter_defaults:
 
     keystone::config::keystone_config:
         # memcached everywhere
+        application_credential/caching:
+            value: true
+        # memcached everywhere
+        assignment/caching:
+            value: true
+        # memcached everywhere
         catalog/caching:
             value: true
         # memcached everywhere
@@ -77,6 +83,12 @@ parameter_defaults:
         # memcached everywhere
         federation/caching:
             value: true
+        # memcached everywhere
+        identity/caching:
+            value: true
+        # memcached everywhere
+        identity/cache_time:
+            value: '600'
         # memcached everywhere
         revoke/caching:
             value: true
@@ -87,11 +99,8 @@ parameter_defaults:
         token/cache_on_issue:
             value: true
         # memcached everywhere
-        identity/caching:
+        unified_limit/caching:
             value: true
-        # memcached everywhere
-        identity/cache_time:
-            value: '600'
         # Keystone Password driver
         # https://access.redhat.com/solutions/3452481
         identity/password_hash_algorithm:
@@ -172,6 +181,7 @@ parameter_defaults:
     keystone::memcache_socket_timeout: 1
     keystone::memcache_pool_unused_timeout: 10
     keystone::memcache_pool_connection_get_timeout: 1
+    keystone::token_caching: true
     keystone::cache_enabled: true
     keystone::cache_backend: 'oslo_cache.memcache_pool'
     neutron::keystone::authtoken::memcached_servers: 'overcloud-controller-0.internalapi:11211,overcloud-controller-1.internalapi:11211,overcloud-controller-2.internalapi:11211'
