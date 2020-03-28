@@ -10,14 +10,14 @@ resource_registry:
   OS::TripleO::ComputeOvsDpdkSriovRTExtraConfigPre: ../extraconfig/pre-config/compute_realtime.yaml
 
   # Compute Deterministic specific tuning
-  OS::TripleO::ComputeOvsDpdkExtraConfigPre:      ../extraconfig/pre-config/compute_deterministic.yaml
-  OS::TripleO::ComputeDualOvsDpdkExtraConfigPre:  ../extraconfig/pre-config/compute_deterministic.yaml
-  OS::TripleO::ComputeSriovExtraConfigPre:        ../extraconfig/pre-config/compute_deterministic.yaml
-  OS::TripleO::ComputeDualSriovExtraConfigPre:    ../extraconfig/pre-config/compute_deterministic.yaml
-  OS::TripleO::ComputeOvsDpdkSriovExtraConfigPre: ../extraconfig/pre-config/compute_deterministic.yaml
+  OS::TripleO::ComputeOvsDpdkExtraConfigPre:        ../extraconfig/pre-config/compute_deterministic.yaml
+  OS::TripleO::ComputeDualOvsDpdkExtraConfigPre:    ../extraconfig/pre-config/compute_deterministic.yaml
+  OS::TripleO::ComputeSriovExtraConfigPre:          ../extraconfig/pre-config/compute_deterministic.yaml
+  OS::TripleO::ComputeDualSriovExtraConfigPre:      ../extraconfig/pre-config/compute_deterministic.yaml
+  OS::TripleO::ComputeOvsDpdkSriovExtraConfigPre:   ../extraconfig/pre-config/compute_deterministic.yaml
 
-  # Ceph SSD Workaround
-  OS::TripleO::CephStorageExtraConfigPre:           ../extraconfig/pre-config/ceph_ssd_workaround.yaml
+  # Ceph SSD Workaround only required under Linux HCI
+  # OS::TripleO::CephStorageExtraConfigPre:         ../extraconfig/pre-config/ceph_ssd_workaround.yaml
 
   # Controller Role Post-Configuration hook for the Heat cache and to Beast RadosGW frontend
   # Queens TripleO RGW template hardcodes civetweb effectively disabling Beast

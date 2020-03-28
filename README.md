@@ -24,6 +24,8 @@ Usually changes between clouds can be found in the following files
 ## Folder structure
 ```
 ├── deployment_wrappers	=> Wrapper directory including NFVi deployment and initialization scripts (e.g. Docker images, import baremetal environment, etc)
+├── hci             => Folder with script to run HCI node on RHEL
+├── hci-esxi        => Folder with Readme, VMX and script to run HCI node on VMware ESXi
 ├── overcloud		=> Overcloud main directory for custom templates and environment configuration
 │   ├── environments	=> Templates and configurations for the platform (network, SSL, storage, tuning, and extraconfig hooks mapping)
 │   ├── extraconfig	=> Pre and post-puppet customization hooks templates and scripts

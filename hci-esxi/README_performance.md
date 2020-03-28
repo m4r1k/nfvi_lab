@@ -1,0 +1,11 @@
+# Userful Knowledge Base
+- [Performance Best Practices for VMware vSphere 6.7](https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/techpaper/performance/vsphere-esxi-vcenter-server-67-performance-best-practices.pdf)
+- [Best Practices for Performance Tuning of Telco and NFV Workloads in vSphere](https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/techpaper/vmware-tuning-telco-nfv-workloads-vsphere-white-paper.pdf)
+- [VMware vCloud NFV 3.0](https://docs.vmware.com/en/VMware-vCloud-NFV/3.0/vmware-vcloud-nfv-30.pdf)
+- [Hyperthreading and ESXi Hosts](https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.resmgmt.doc/GUID-3362A2E9-AB03-4C10-B9A1-3E6CA78D399B.html)
+- [What is PreferHT and When To Use It](https://blogs.vmware.com/vsphere/2014/03/perferht-use-2.html)
+- [Assign a Virtual Machine to a Specific Processor](https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.resmgmt.doc/GUID-F40F901D-C1A7-43E2-90AF-E6F98C960E4B.html)
+- [Backing Guest vRAM with 1GB Pages](https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.resmgmt.doc/GUID-F0E284A5-A6DD-477E-B80B-8EFDF814EE01.html)
+- [Associate Virtual Machines with Specified NUMA Nodes](https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.resmgmt.doc/GUID-A80A6337-7B99-48C8-B024-EE47E2366C1B.html)
+- [Checking cpuinfo information on an ESXi host](https://kb.vmware.com/s/article/1031785)
+- [VMware vSphere - Why checking NUMA Configuration is so important!](https://itnext.io/vmware-vsphere-why-checking-numa-configuration-is-so-important-9764c16a7e73)

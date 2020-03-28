@@ -25,7 +25,7 @@ parameter_defaults:
   # Gnocchi backend can be either 'rbd' (Ceph), 'swift' or 'file'.
   GnocchiBackend: rbd
 
-  # Here the Ceph Storage node config
+  # Here the Ceph Storage node config under Linux HCI
   # NAME   MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
   # sda      8:0    0  50G  0 disk
   # ├─sda1   8:1    0   1M  0 part
@@ -33,11 +33,21 @@ parameter_defaults:
   # sdb      8:16   0   8G  0 disk <- Optane NVME
   # sdc      8:32   0  75G  0 disk <- SSD Data
   # sdd      8:48   0  75G  0 disk <- SSD Data
+
+  # Here the Ceph Storage node config under ESXi HCI
+  # NAME    MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+  # sda       8:0    0  50G  0 disk
+  # ├─sda1    8:1    0   1M  0 part
+  # └─sda2    8:2    0  50G  0 part /
+  # sdb       8:16   0  75G  0 disk <- SSD Data
+  # sdc       8:32   0  75G  0 disk <- SSD Data
+  # nvme0n1 259:0    0   8G  0 disk <- Optane NVME
+
   CephAnsibleDisksConfig:
     devices:
-      - /dev/sdc
-      - /dev/sdd
       - /dev/sdb
+      - /dev/sdc
+      - /dev/nvme0n1
     osd_scenario: lvm
     # It is recommended that the block.db size isn’t smaller than 4% of block.
     # For example, if the block size is 1TB, then block.db shouldn’t be less than 40GB.
