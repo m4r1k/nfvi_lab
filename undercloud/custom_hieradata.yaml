@@ -33,22 +33,28 @@ ironic::api::authtoken::memcache_pool_dead_retry: 600
 ironic::api::authtoken::memcache_pool_socket_timeout: 1
 ironic::api::authtoken::memcache_pool_unused_timeout: 10
 
+keystone::password_hash_algorithm: pbkdf2_sha512
+
 keystone::config::keystone_config:
+    application_credential/caching:
+        value: true
+    assignment/caching:
+        value: true
     catalog/caching:
         value: true
     domain_config/caching:
         value: true
     federation/caching:
         value: true
+    identity/caching:
+        value: true
+    identity/cache_time:
+        value: '600'
     revoke/caching:
         value: true
     role/caching:
         value: true
     token/cache_on_issue:
         value: true
-    identity/caching:
+    unified_limit/caching:
         value: true
-    identity/cache_time:
-        value: '600'
-    identity/password_hash_algorithm:
-        value: pbkdf2_sha512
