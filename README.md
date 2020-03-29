@@ -1,4 +1,4 @@
-# Red Hat OpenStack 13 for NFVi Lab
+# Red Hat OpenStack 16 for NFVi Lab
 ## Reasons and Design decisions
 [NFVi Lab](https://docs.google.com/document/d/1wRIaOTZs_lQYS7LjX6rsvTg9-o_3w8LKfUiF8ps9Lsw/edit?usp=sharing)
 ## Low-Level Design
