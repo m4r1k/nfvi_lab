@@ -20,7 +20,7 @@ parameter_defaults:
       name_prefix: openstack-
       name_suffix: ''
       namespace: registry.redhat.io/rhosp-rhel8
-      neutron_driver: neutron-server
+      neutron_driver: null
       rhel_containers: false
       tag: '16.0'
     tag_from_label: '{version}-{release}'
