@@ -9,3 +9,5 @@
 - [Associate Virtual Machines with Specified NUMA Nodes](https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.resmgmt.doc/GUID-A80A6337-7B99-48C8-B024-EE47E2366C1B.html)
 - [Checking cpuinfo information on an ESXi host](https://kb.vmware.com/s/article/1031785)
 - [VMware vSphere - Why checking NUMA Configuration is so important!](https://itnext.io/vmware-vsphere-why-checking-numa-configuration-is-so-important-9764c16a7e73)
+- [VMworld 2017 - SER2724BE - Extreme Performance Series: Performance Best Practices](https://www.youtube.com/watch?v=e9GWK8Pn8ec)
+- [Extreme Performance Series at VMworld 2019](https://blogs.vmware.com/performance/2019/07/extreme-performance-series-at-vmworld-2019.html)
