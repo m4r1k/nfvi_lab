@@ -1,7 +1,7 @@
 resource_registry:
-  OS::TripleO::Services::ComputeNeutronOvsDpdk: /usr/share/openstack-tripleo-heat-templates/docker/services/neutron-ovs-dpdk-agent.yaml
-  OS::TripleO::Services::NeutronSriovAgent:      /usr/share/openstack-tripleo-heat-templates/docker/services/neutron-sriov-agent.yaml
-  OS::TripleO::Services::NeutronSriovHostConfig: /usr/share/openstack-tripleo-heat-templates/puppet/services/neutron-sriov-host-config.yaml
+  OS::TripleO::Services::ComputeNeutronOvsDpdk:  /usr/share/openstack-tripleo-heat-templates/deployment/neutron/neutron-ovs-dpdk-agent-container-puppet.yaml
+  OS::TripleO::Services::NeutronSriovAgent:      /usr/share/openstack-tripleo-heat-templates/deployment/neutron/neutron-sriov-agent-container-puppet.yaml
+  OS::TripleO::Services::NeutronSriovHostConfig: /usr/share/openstack-tripleo-heat-templates/deployment/deprecated/neutron/neutron-sriov-host-config.yaml
 
 parameter_defaults:
   # Custom tuned profile to configure all cores in C-State C0
@@ -162,10 +162,6 @@ parameter_defaults:
     NovaVcpuPinSet: ['2-23,26-47']
     # Neutron Physical mapping between a custom name and physical devices
     NeutronPhysicalDevMappings: "niantic_pool:p3p1,niantic_pool:p3p2"
-    # Number of VFs that needs to be configured for a physical interface
-    NeutronSriovNumVFs:
-      - p3p1:16
-      - p3p2:16
     # Mapping of SR-IOV PF interface to neutron physical_network.
     NovaPCIPassthrough:
       - devname: "p3p1"
@@ -194,10 +190,6 @@ parameter_defaults:
     NovaVcpuPinSet: ['2-23']
     # Neutron Physical mapping between a custom name and physical devices
     NeutronPhysicalDevMappings: "niantic_pool:p3p1,niantic_pool:p3p2"
-    # Number of VFs that needs to be configured for a physical interface
-    NeutronSriovNumVFs:
-      - p3p1:16
-      - p3p2:16
     # Mapping of SR-IOV PF interface to neutron physical_network.
     NovaPCIPassthrough:
       - devname: "p3p1"
@@ -225,12 +217,6 @@ parameter_defaults:
     NovaVcpuPinSet: ['2-23,26-47']
     # Neutron Physical mapping between a custom name and physical devices
     NeutronPhysicalDevMappings: "niantic_pool:p4p1,niantic_pool:p4p2,niantic_pool:p6p1,niantic_pool:p6p2"
-    # Number of VFs that needs to be configured for a physical interface
-    NeutronSriovNumVFs:
-      - p4p1:16
-      - p4p2:16
-      - p6p1:16
-      - p6p2:16
     # Mapping of SR-IOV PF interface to neutron physical_network.
     NovaPCIPassthrough:
       - devname: "p4p1"
@@ -265,12 +251,6 @@ parameter_defaults:
     NovaVcpuPinSet: ['2-23']
     # Neutron Physical mapping between a custom name and physical devices
     NeutronPhysicalDevMappings: "niantic_pool:p4p1,niantic_pool:p4p2,niantic_pool:p6p1,niantic_pool:p6p2"
-    # Number of VFs that needs to be configured for a physical interface
-    NeutronSriovNumVFs:
-      - p4p1:16
-      - p4p2:16
-      - p6p1:16
-      - p6p2:16
     # Mapping of SR-IOV PF interface to neutron physical_network.
     NovaPCIPassthrough:
       - devname: "p4p1"
@@ -319,10 +299,6 @@ parameter_defaults:
     NeutronTunnelNUMANodes: 0,1
     # Neutron Physical mapping between a custom name and physical devices
     NeutronPhysicalDevMappings: "niantic_pool:p4p1,niantic_pool:p4p2"
-    # Number of VFs that needs to be configured for a physical interface
-    NeutronSriovNumVFs:
-      - p4p1:16
-      - p4p2:16
     # Mapping of SR-IOV PF interface to neutron physical_network.
     NovaPCIPassthrough:
       - devname: "p4p1"
@@ -366,10 +342,6 @@ parameter_defaults:
     NeutronTunnelNUMANodes: 0,1
     # Neutron Physical mapping between a custom name and physical devices
     NeutronPhysicalDevMappings: "niantic_pool:p4p1,niantic_pool:p4p2"
-    # Number of VFs that needs to be configured for a physical interface
-    NeutronSriovNumVFs:
-      - p4p1:16
-      - p4p2:16
     # Mapping of SR-IOV PF interface to neutron physical_network.
     NovaPCIPassthrough:
       - devname: "p4p1"
