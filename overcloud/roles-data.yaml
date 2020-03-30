@@ -10,10 +10,14 @@
     - primary
     - controller
   networks:
-    - External
-    - InternalApi
-    - Tenant
-    - Storage
+    External:
+      subnet: external_subnet
+    InternalApi:
+      subnet: internal_api_subnet
+    Storage:
+      subnet: storage_subnet
+    Tenant:
+      subnet: tenant_subnet
   # For systems with both IPv4 and IPv6, you may specify a gateway network for
   # each, such as ['ControlPlane', 'External']
   default_route_networks: ['External']
@@ -38,13 +42,12 @@
     - OS::TripleO::Services::BarbicanBackendDogtag
     - OS::TripleO::Services::BarbicanBackendKmip
     - OS::TripleO::Services::BarbicanBackendPkcs11Crypto
+    - OS::TripleO::Services::BootParams
     - OS::TripleO::Services::CACerts
-    - OS::TripleO::Services::CeilometerApi
-    - OS::TripleO::Services::CeilometerCollector
-    - OS::TripleO::Services::CeilometerExpirer
     - OS::TripleO::Services::CeilometerAgentCentral
     - OS::TripleO::Services::CeilometerAgentNotification
     - OS::TripleO::Services::CephExternal
+    - OS::TripleO::Services::CephGrafana
     - OS::TripleO::Services::CephMds
     - OS::TripleO::Services::CephMgr
     - OS::TripleO::Services::CephMon
@@ -62,20 +65,25 @@
     - OS::TripleO::Services::CinderBackendPure
     - OS::TripleO::Services::CinderBackendScaleIO
     - OS::TripleO::Services::CinderBackendVRTSHyperScale
+    - OS::TripleO::Services::CinderBackendNVMeOF
     - OS::TripleO::Services::CinderBackup
     - OS::TripleO::Services::CinderHPELeftHandISCSI
     - OS::TripleO::Services::CinderScheduler
     - OS::TripleO::Services::CinderVolume
     - OS::TripleO::Services::Clustercheck
     - OS::TripleO::Services::Collectd
-    - OS::TripleO::Services::Congress
+    - OS::TripleO::Services::ContainerImagePrepare
+    - OS::TripleO::Services::DesignateApi
+    - OS::TripleO::Services::DesignateCentral
+    - OS::TripleO::Services::DesignateProducer
+    - OS::TripleO::Services::DesignateWorker
+    - OS::TripleO::Services::DesignateMDNS
+    - OS::TripleO::Services::DesignateSink
     - OS::TripleO::Services::Docker
     - OS::TripleO::Services::Ec2Api
     - OS::TripleO::Services::Etcd
     - OS::TripleO::Services::ExternalSwiftProxy
-    - OS::TripleO::Services::Fluentd
     - OS::TripleO::Services::GlanceApi
-    - OS::TripleO::Services::GlanceRegistry
     - OS::TripleO::Services::GnocchiApi
     - OS::TripleO::Services::GnocchiMetricd
     - OS::TripleO::Services::GnocchiStatsd
@@ -89,7 +97,9 @@
     - OS::TripleO::Services::Ipsec
     - OS::TripleO::Services::IronicApi
     - OS::TripleO::Services::IronicConductor
+    - OS::TripleO::Services::IronicInspector
     - OS::TripleO::Services::IronicPxe
+    - OS::TripleO::Services::IronicNeutronAgent
     - OS::TripleO::Services::Iscsid
     - OS::TripleO::Services::Keepalived
     - OS::TripleO::Services::Kernel
@@ -110,7 +120,7 @@
     - OS::TripleO::Services::MistralEngine
     - OS::TripleO::Services::MistralExecutor
     - OS::TripleO::Services::MistralEventEngine
-    - OS::TripleO::Services::MongoDb
+    - OS::TripleO::Services::Multipathd
     - OS::TripleO::Services::MySQL
     - OS::TripleO::Services::MySQLClient
     - OS::TripleO::Services::NeutronApi
@@ -121,68 +131,67 @@
     - OS::TripleO::Services::NeutronL2gwAgent
     - OS::TripleO::Services::NeutronL2gwApi
     - OS::TripleO::Services::NeutronL3Agent
-    - OS::TripleO::Services::NeutronLbaasv2Agent
-    - OS::TripleO::Services::NeutronLbaasv2Api
     - OS::TripleO::Services::NeutronLinuxbridgeAgent
     - OS::TripleO::Services::NeutronMetadataAgent
     - OS::TripleO::Services::NeutronML2FujitsuCfab
     - OS::TripleO::Services::NeutronML2FujitsuFossw
     - OS::TripleO::Services::NeutronOvsAgent
     - OS::TripleO::Services::NeutronVppAgent
+    - OS::TripleO::Services::NeutronAgentsIBConfig
     - OS::TripleO::Services::NovaApi
     - OS::TripleO::Services::NovaConductor
-    - OS::TripleO::Services::NovaConsoleauth
     - OS::TripleO::Services::NovaIronic
     - OS::TripleO::Services::NovaMetadata
-    - OS::TripleO::Services::NovaPlacement
     - OS::TripleO::Services::NovaScheduler
     - OS::TripleO::Services::NovaVncProxy
-    - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
     - OS::TripleO::Services::OctaviaApi
     - OS::TripleO::Services::OctaviaDeploymentConfig
     - OS::TripleO::Services::OctaviaHealthManager
     - OS::TripleO::Services::OctaviaHousekeeping
     - OS::TripleO::Services::OctaviaWorker
-    - OS::TripleO::Services::OpenDaylightApi
-    - OS::TripleO::Services::OpenDaylightOvs
+    - OS::TripleO::Services::OpenStackClients
     - OS::TripleO::Services::OVNDBs
     - OS::TripleO::Services::OVNController
     - OS::TripleO::Services::Pacemaker
     - OS::TripleO::Services::PankoApi
-    - OS::TripleO::Services::RabbitMQ
+    - OS::TripleO::Services::PlacementApi
+    - OS::TripleO::Services::OsloMessagingRpc
+    - OS::TripleO::Services::OsloMessagingNotify
+    - OS::TripleO::Services::Podman
+    - OS::TripleO::Services::Rear
     - OS::TripleO::Services::Redis
     - OS::TripleO::Services::Rhsm
+    - OS::TripleO::Services::Rsyslog
     - OS::TripleO::Services::RsyslogSidecar
     - OS::TripleO::Services::SaharaApi
     - OS::TripleO::Services::SaharaEngine
     - OS::TripleO::Services::Securetty
-    - OS::TripleO::Services::SensuClient
-    - OS::TripleO::Services::SkydiveAgent
-    - OS::TripleO::Services::SkydiveAnalyzer
     - OS::TripleO::Services::Snmp
     - OS::TripleO::Services::Sshd
     - OS::TripleO::Services::SwiftProxy
     - OS::TripleO::Services::SwiftDispersion
     - OS::TripleO::Services::SwiftRingBuilder
     - OS::TripleO::Services::SwiftStorage
-    - OS::TripleO::Services::Tacker
+    - OS::TripleO::Services::Timesync
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
     - OS::TripleO::Services::Tuned
     - OS::TripleO::Services::Vpp
     - OS::TripleO::Services::Zaqar
-    - OS::TripleO::Services::Ptp
 ###############################################################################
 # Role: CephStorage                                                           #
 ###############################################################################
 - name: CephStorage
   description: |
     Ceph OSD Storage node role
+  CountDefault: 3
   networks:
-    - Storage
-    - StorageMgmt
+    Storage:
+      subnet: storage_subnet
+    StorageMgmt:
+      subnet: storage_mgmt_subnet
   uses_deprecated_params: False
   deprecated_nic_config_name: 'ceph-storage.yaml'
   # CephOSD present so serial has to be 1
@@ -190,48 +199,51 @@
   ServicesDefault:
     - OS::TripleO::Services::Aide
     - OS::TripleO::Services::AuditD
+    - OS::TripleO::Services::BootParams
     - OS::TripleO::Services::CACerts
     - OS::TripleO::Services::CephOSD
     - OS::TripleO::Services::CertmongerUser
     - OS::TripleO::Services::Collectd
     - OS::TripleO::Services::Docker
-    - OS::TripleO::Services::Fluentd
     - OS::TripleO::Services::IpaClient
     - OS::TripleO::Services::Ipsec
     - OS::TripleO::Services::Kernel
     - OS::TripleO::Services::LoginDefs
     - OS::TripleO::Services::MetricsQdr
     - OS::TripleO::Services::MySQLClient
-    - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
+    - OS::TripleO::Services::Podman
     - OS::TripleO::Services::Rhsm
+    - OS::TripleO::Services::Rsyslog
     - OS::TripleO::Services::RsyslogSidecar
     - OS::TripleO::Services::Securetty
-    - OS::TripleO::Services::SensuClient
     - OS::TripleO::Services::Snmp
     - OS::TripleO::Services::Sshd
+    - OS::TripleO::Services::Timesync
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
     - OS::TripleO::Services::Tuned
-    - OS::TripleO::Services::Ptp
 ###############################################################################
 # Role: ComputeOvsDpdk                                                        #
 ###############################################################################
 - name: ComputeOvsDpdk
   description: |
-    Compute role with OvS-DPDK
-  CountDefault: 0
+    Compute OvS DPDK Role
+  CountDefault: 1
   networks:
-    - InternalApi
-    - Tenant
-    - Storage
+    InternalApi:
+      subnet: internal_api_subnet
+    Tenant:
+      subnet: tenant_subnet
+    Storage:
+      subnet: storage_subnet
+  deprecated_nic_config_name: 'compute-dpdk.yaml'
   RoleParametersDefault:
     VhostuserSocketGroup: "hugetlbfs"
     TunedProfileName: "cpu-partitioning"
     NovaLibvirtRxQueueSize: 1024
     NovaLibvirtTxQueueSize: 1024
-  disable_upgrade_deployment: True
   update_serial: 25
   ServicesDefault:
     - OS::TripleO::Services::Aide
@@ -248,35 +260,37 @@
     - OS::TripleO::Services::ComputeNeutronMetadataAgent
     - OS::TripleO::Services::ComputeNeutronOvsDpdk
     - OS::TripleO::Services::Docker
-    - OS::TripleO::Services::Fluentd
     - OS::TripleO::Services::IpaClient
     - OS::TripleO::Services::Ipsec
     - OS::TripleO::Services::Iscsid
     - OS::TripleO::Services::Kernel
     - OS::TripleO::Services::LoginDefs
     - OS::TripleO::Services::MetricsQdr
+    - OS::TripleO::Services::Multipathd
     - OS::TripleO::Services::MySQLClient
     - OS::TripleO::Services::NeutronBgpVpnBagpipe
+    - OS::TripleO::Services::NovaAZConfig
     - OS::TripleO::Services::NovaCompute
     - OS::TripleO::Services::NovaLibvirt
     - OS::TripleO::Services::NovaLibvirtGuests
     - OS::TripleO::Services::NovaMigrationTarget
-    - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
-    - OS::TripleO::Services::OpenDaylightOvs
+    - OS::TripleO::Services::OVNController
     - OS::TripleO::Services::OVNMetadataAgent
+    - OS::TripleO::Services::OvsDpdkNetcontrold
+    - OS::TripleO::Services::Podman
+    - OS::TripleO::Services::Rear
     - OS::TripleO::Services::Rhsm
+    - OS::TripleO::Services::Rsyslog
     - OS::TripleO::Services::RsyslogSidecar
     - OS::TripleO::Services::Securetty
-    - OS::TripleO::Services::SensuClient
-    - OS::TripleO::Services::SkydiveAgent
     - OS::TripleO::Services::Snmp
     - OS::TripleO::Services::Sshd
+    - OS::TripleO::Services::Timesync
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
     - OS::TripleO::Services::Tuned
-    - OS::TripleO::Services::Ptp
 ###############################################################################
 # Role: ComputeOvsDpdkRT                                                      #
 ###############################################################################
@@ -285,9 +299,12 @@
     Compute OvS DPDK RealTime Role
   CountDefault: 0
   networks:
-    - InternalApi
-    - Tenant
-    - Storage
+    InternalApi:
+      subnet: internal_api_subnet
+    Tenant:
+      subnet: tenant_subnet
+    Storage:
+      subnet: storage_subnet
   ImageDefault: overcloud-realtime-compute
   RoleParametersDefault:
     VhostuserSocketGroup: "hugetlbfs"
@@ -295,7 +312,6 @@
     NovaLibvirtRxQueueSize: 1024
     NovaLibvirtTxQueueSize: 1024
     NovaLibvirtMemStatsPeriodSeconds: 0
-  disable_upgrade_deployment: True
   update_serial: 25
   ServicesDefault:
     - OS::TripleO::Services::Aide
@@ -312,35 +328,37 @@
     - OS::TripleO::Services::ComputeNeutronMetadataAgent
     - OS::TripleO::Services::ComputeNeutronOvsDpdk
     - OS::TripleO::Services::Docker
-    - OS::TripleO::Services::Fluentd
     - OS::TripleO::Services::IpaClient
     - OS::TripleO::Services::Ipsec
     - OS::TripleO::Services::Iscsid
     - OS::TripleO::Services::Kernel
     - OS::TripleO::Services::LoginDefs
     - OS::TripleO::Services::MetricsQdr
+    - OS::TripleO::Services::Multipathd
     - OS::TripleO::Services::MySQLClient
     - OS::TripleO::Services::NeutronBgpVpnBagpipe
+    - OS::TripleO::Services::NovaAZConfig
     - OS::TripleO::Services::NovaCompute
     - OS::TripleO::Services::NovaLibvirt
     - OS::TripleO::Services::NovaLibvirtGuests
     - OS::TripleO::Services::NovaMigrationTarget
-    - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
-    - OS::TripleO::Services::OpenDaylightOvs
+    - OS::TripleO::Services::OVNController
     - OS::TripleO::Services::OVNMetadataAgent
+    - OS::TripleO::Services::OvsDpdkNetcontrold
+    - OS::TripleO::Services::Podman
+    - OS::TripleO::Services::Rear
     - OS::TripleO::Services::Rhsm
+    - OS::TripleO::Services::Rsyslog
     - OS::TripleO::Services::RsyslogSidecar
     - OS::TripleO::Services::Securetty
-    - OS::TripleO::Services::SensuClient
-    - OS::TripleO::Services::SkydiveAgent
     - OS::TripleO::Services::Snmp
     - OS::TripleO::Services::Sshd
+    - OS::TripleO::Services::Timesync
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
     - OS::TripleO::Services::Tuned
-    - OS::TripleO::Services::Ptp
 ###############################################################################
 # Role: ComputeDualOvsDpdk                                                    #
 ###############################################################################
@@ -349,15 +367,18 @@
     Compute role with NUMA Aware OvS-DPDK
   CountDefault: 0
   networks:
-    - InternalApi
-    - Tenant
-    - Storage
+    InternalApi:
+      subnet: internal_api_subnet
+    Tenant:
+      subnet: tenant_subnet
+    Storage:
+      subnet: storage_subnet
+  deprecated_nic_config_name: 'compute-dpdk.yaml'
   RoleParametersDefault:
     VhostuserSocketGroup: "hugetlbfs"
     TunedProfileName: "cpu-partitioning"
     NovaLibvirtRxQueueSize: 1024
     NovaLibvirtTxQueueSize: 1024
-  disable_upgrade_deployment: True
   update_serial: 25
   ServicesDefault:
     - OS::TripleO::Services::Aide
@@ -374,35 +395,37 @@
     - OS::TripleO::Services::ComputeNeutronMetadataAgent
     - OS::TripleO::Services::ComputeNeutronOvsDpdk
     - OS::TripleO::Services::Docker
-    - OS::TripleO::Services::Fluentd
     - OS::TripleO::Services::IpaClient
     - OS::TripleO::Services::Ipsec
     - OS::TripleO::Services::Iscsid
     - OS::TripleO::Services::Kernel
     - OS::TripleO::Services::LoginDefs
     - OS::TripleO::Services::MetricsQdr
+    - OS::TripleO::Services::Multipathd
     - OS::TripleO::Services::MySQLClient
     - OS::TripleO::Services::NeutronBgpVpnBagpipe
+    - OS::TripleO::Services::NovaAZConfig
     - OS::TripleO::Services::NovaCompute
     - OS::TripleO::Services::NovaLibvirt
     - OS::TripleO::Services::NovaLibvirtGuests
     - OS::TripleO::Services::NovaMigrationTarget
-    - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
-    - OS::TripleO::Services::OpenDaylightOvs
+    - OS::TripleO::Services::OVNController
     - OS::TripleO::Services::OVNMetadataAgent
+    - OS::TripleO::Services::OvsDpdkNetcontrold
+    - OS::TripleO::Services::Podman
+    - OS::TripleO::Services::Rear
     - OS::TripleO::Services::Rhsm
+    - OS::TripleO::Services::Rsyslog
     - OS::TripleO::Services::RsyslogSidecar
     - OS::TripleO::Services::Securetty
-    - OS::TripleO::Services::SensuClient
-    - OS::TripleO::Services::SkydiveAgent
     - OS::TripleO::Services::Snmp
     - OS::TripleO::Services::Sshd
+    - OS::TripleO::Services::Timesync
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
     - OS::TripleO::Services::Tuned
-    - OS::TripleO::Services::Ptp
 ###############################################################################
 # Role: ComputeDualOvsDpdkRT                                                  #
 ###############################################################################
@@ -411,9 +434,12 @@
     Compute role with NUMA Aware OvS-DPDK RealTime
   CountDefault: 0
   networks:
-    - InternalApi
-    - Tenant
-    - Storage
+    InternalApi:
+      subnet: internal_api_subnet
+    Tenant:
+      subnet: tenant_subnet
+    Storage:
+      subnet: storage_subnet
   ImageDefault: overcloud-realtime-compute
   RoleParametersDefault:
     VhostuserSocketGroup: "hugetlbfs"
@@ -421,7 +447,6 @@
     NovaLibvirtRxQueueSize: 1024
     NovaLibvirtTxQueueSize: 1024
     NovaLibvirtMemStatsPeriodSeconds: 0
-  disable_upgrade_deployment: True
   update_serial: 25
   ServicesDefault:
     - OS::TripleO::Services::Aide
@@ -438,49 +463,53 @@
     - OS::TripleO::Services::ComputeNeutronMetadataAgent
     - OS::TripleO::Services::ComputeNeutronOvsDpdk
     - OS::TripleO::Services::Docker
-    - OS::TripleO::Services::Fluentd
     - OS::TripleO::Services::IpaClient
     - OS::TripleO::Services::Ipsec
     - OS::TripleO::Services::Iscsid
     - OS::TripleO::Services::Kernel
     - OS::TripleO::Services::LoginDefs
     - OS::TripleO::Services::MetricsQdr
+    - OS::TripleO::Services::Multipathd
     - OS::TripleO::Services::MySQLClient
     - OS::TripleO::Services::NeutronBgpVpnBagpipe
+    - OS::TripleO::Services::NovaAZConfig
     - OS::TripleO::Services::NovaCompute
     - OS::TripleO::Services::NovaLibvirt
     - OS::TripleO::Services::NovaLibvirtGuests
     - OS::TripleO::Services::NovaMigrationTarget
-    - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
-    - OS::TripleO::Services::OpenDaylightOvs
+    - OS::TripleO::Services::OVNController
     - OS::TripleO::Services::OVNMetadataAgent
+    - OS::TripleO::Services::OvsDpdkNetcontrold
+    - OS::TripleO::Services::Podman
+    - OS::TripleO::Services::Rear
     - OS::TripleO::Services::Rhsm
+    - OS::TripleO::Services::Rsyslog
     - OS::TripleO::Services::RsyslogSidecar
     - OS::TripleO::Services::Securetty
-    - OS::TripleO::Services::SensuClient
-    - OS::TripleO::Services::SkydiveAgent
     - OS::TripleO::Services::Snmp
     - OS::TripleO::Services::Sshd
+    - OS::TripleO::Services::Timesync
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
     - OS::TripleO::Services::Tuned
-    - OS::TripleO::Services::Ptp
 ###############################################################################
 # Role: ComputeSriov                                                          #
 ###############################################################################
 - name: ComputeSriov
   description: |
-    Compute role with SR-IOV
+    Compute SR-IOV Role
   CountDefault: 0
   networks:
-    - InternalApi
-    - Tenant
-    - Storage
+    InternalApi:
+      subnet: internal_api_subnet
+    Tenant:
+      subnet: tenant_subnet
+    Storage:
+      subnet: storage_subnet
   RoleParametersDefault:
     TunedProfileName: "cpu-partitioning"
-  disable_upgrade_deployment: True
   update_serial: 25
   ServicesDefault:
     - OS::TripleO::Services::Aide
@@ -497,32 +526,33 @@
     - OS::TripleO::Services::ComputeNeutronMetadataAgent
     - OS::TripleO::Services::ComputeNeutronOvsAgent
     - OS::TripleO::Services::Docker
-    - OS::TripleO::Services::Fluentd
     - OS::TripleO::Services::IpaClient
     - OS::TripleO::Services::Ipsec
     - OS::TripleO::Services::Iscsid
     - OS::TripleO::Services::Kernel
     - OS::TripleO::Services::LoginDefs
     - OS::TripleO::Services::MetricsQdr
+    - OS::TripleO::Services::Multipathd
     - OS::TripleO::Services::MySQLClient
     - OS::TripleO::Services::NeutronBgpVpnBagpipe
     - OS::TripleO::Services::NeutronSriovAgent
     - OS::TripleO::Services::NeutronSriovHostConfig
     - OS::TripleO::Services::NeutronVppAgent
+    - OS::TripleO::Services::NovaAZConfig
     - OS::TripleO::Services::NovaCompute
     - OS::TripleO::Services::NovaLibvirt
     - OS::TripleO::Services::NovaLibvirtGuests
     - OS::TripleO::Services::NovaMigrationTarget
-    - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
-    - OS::TripleO::Services::OpenDaylightOvs
+    - OS::TripleO::Services::Podman
+    - OS::TripleO::Services::Rear
     - OS::TripleO::Services::Rhsm
+    - OS::TripleO::Services::Rsyslog
     - OS::TripleO::Services::RsyslogSidecar
     - OS::TripleO::Services::Securetty
-    - OS::TripleO::Services::SensuClient
-    - OS::TripleO::Services::SkydiveAgent
     - OS::TripleO::Services::Snmp
     - OS::TripleO::Services::Sshd
+    - OS::TripleO::Services::Timesync
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
@@ -530,23 +560,24 @@
     - OS::TripleO::Services::Vpp
     - OS::TripleO::Services::OVNController
     - OS::TripleO::Services::OVNMetadataAgent
-    - OS::TripleO::Services::Ptp
 ###############################################################################
 # Role: ComputeSriovRT                                                        #
 ###############################################################################
 - name: ComputeSriovRT
   description: |
-    Compute role with SR-IOV RealTime
+    Compute SR-IOV RealTime Role
   CountDefault: 0
   networks:
-    - InternalApi
-    - Tenant
-    - Storage
+    InternalApi:
+      subnet: internal_api_subnet
+    Tenant:
+      subnet: tenant_subnet
+    Storage:
+      subnet: storage_subnet
   ImageDefault: overcloud-realtime-compute
   RoleParametersDefault:
     TunedProfileName: "realtime-virtual-host"
     NovaLibvirtMemStatsPeriodSeconds: 0
-  disable_upgrade_deployment: True
   update_serial: 25
   ServicesDefault:
     - OS::TripleO::Services::Aide
@@ -563,32 +594,33 @@
     - OS::TripleO::Services::ComputeNeutronMetadataAgent
     - OS::TripleO::Services::ComputeNeutronOvsAgent
     - OS::TripleO::Services::Docker
-    - OS::TripleO::Services::Fluentd
     - OS::TripleO::Services::IpaClient
     - OS::TripleO::Services::Ipsec
     - OS::TripleO::Services::Iscsid
     - OS::TripleO::Services::Kernel
     - OS::TripleO::Services::LoginDefs
     - OS::TripleO::Services::MetricsQdr
+    - OS::TripleO::Services::Multipathd
     - OS::TripleO::Services::MySQLClient
     - OS::TripleO::Services::NeutronBgpVpnBagpipe
     - OS::TripleO::Services::NeutronSriovAgent
     - OS::TripleO::Services::NeutronSriovHostConfig
     - OS::TripleO::Services::NeutronVppAgent
+    - OS::TripleO::Services::NovaAZConfig
     - OS::TripleO::Services::NovaCompute
     - OS::TripleO::Services::NovaLibvirt
     - OS::TripleO::Services::NovaLibvirtGuests
     - OS::TripleO::Services::NovaMigrationTarget
-    - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
-    - OS::TripleO::Services::OpenDaylightOvs
+    - OS::TripleO::Services::Podman
+    - OS::TripleO::Services::Rear
     - OS::TripleO::Services::Rhsm
+    - OS::TripleO::Services::Rsyslog
     - OS::TripleO::Services::RsyslogSidecar
     - OS::TripleO::Services::Securetty
-    - OS::TripleO::Services::SensuClient
-    - OS::TripleO::Services::SkydiveAgent
     - OS::TripleO::Services::Snmp
     - OS::TripleO::Services::Sshd
+    - OS::TripleO::Services::Timesync
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
@@ -596,7 +628,6 @@
     - OS::TripleO::Services::Vpp
     - OS::TripleO::Services::OVNController
     - OS::TripleO::Services::OVNMetadataAgent
-    - OS::TripleO::Services::Ptp
 ###############################################################################
 # Role: ComputeDualSriov                                                      #
 ###############################################################################
@@ -605,12 +636,14 @@
     Compute role with two SR-IOV device one per NUMA
   CountDefault: 0
   networks:
-    - InternalApi
-    - Tenant
-    - Storage
+    InternalApi:
+      subnet: internal_api_subnet
+    Tenant:
+      subnet: tenant_subnet
+    Storage:
+      subnet: storage_subnet
   RoleParametersDefault:
     TunedProfileName: "cpu-partitioning"
-  disable_upgrade_deployment: True
   update_serial: 25
   ServicesDefault:
     - OS::TripleO::Services::Aide
@@ -627,32 +660,33 @@
     - OS::TripleO::Services::ComputeNeutronMetadataAgent
     - OS::TripleO::Services::ComputeNeutronOvsAgent
     - OS::TripleO::Services::Docker
-    - OS::TripleO::Services::Fluentd
     - OS::TripleO::Services::IpaClient
     - OS::TripleO::Services::Ipsec
     - OS::TripleO::Services::Iscsid
     - OS::TripleO::Services::Kernel
     - OS::TripleO::Services::LoginDefs
     - OS::TripleO::Services::MetricsQdr
+    - OS::TripleO::Services::Multipathd
     - OS::TripleO::Services::MySQLClient
     - OS::TripleO::Services::NeutronBgpVpnBagpipe
     - OS::TripleO::Services::NeutronSriovAgent
     - OS::TripleO::Services::NeutronSriovHostConfig
     - OS::TripleO::Services::NeutronVppAgent
+    - OS::TripleO::Services::NovaAZConfig
     - OS::TripleO::Services::NovaCompute
     - OS::TripleO::Services::NovaLibvirt
     - OS::TripleO::Services::NovaLibvirtGuests
     - OS::TripleO::Services::NovaMigrationTarget
-    - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
-    - OS::TripleO::Services::OpenDaylightOvs
+    - OS::TripleO::Services::Podman
+    - OS::TripleO::Services::Rear
     - OS::TripleO::Services::Rhsm
+    - OS::TripleO::Services::Rsyslog
     - OS::TripleO::Services::RsyslogSidecar
     - OS::TripleO::Services::Securetty
-    - OS::TripleO::Services::SensuClient
-    - OS::TripleO::Services::SkydiveAgent
     - OS::TripleO::Services::Snmp
     - OS::TripleO::Services::Sshd
+    - OS::TripleO::Services::Timesync
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
@@ -660,7 +694,6 @@
     - OS::TripleO::Services::Vpp
     - OS::TripleO::Services::OVNController
     - OS::TripleO::Services::OVNMetadataAgent
-    - OS::TripleO::Services::Ptp
 ###############################################################################
 # Role: ComputeDualSriovRT                                                    #
 ###############################################################################
@@ -669,14 +702,16 @@
     Compute role with two SR-IOV device one per NUMA RealTime
   CountDefault: 0
   networks:
-    - InternalApi
-    - Tenant
-    - Storage
+    InternalApi:
+      subnet: internal_api_subnet
+    Tenant:
+      subnet: tenant_subnet
+    Storage:
+      subnet: storage_subnet
   ImageDefault: overcloud-realtime-compute
   RoleParametersDefault:
     TunedProfileName: "realtime-virtual-host"
     NovaLibvirtMemStatsPeriodSeconds: 0
-  disable_upgrade_deployment: True
   update_serial: 25
   ServicesDefault:
     - OS::TripleO::Services::Aide
@@ -693,32 +728,33 @@
     - OS::TripleO::Services::ComputeNeutronMetadataAgent
     - OS::TripleO::Services::ComputeNeutronOvsAgent
     - OS::TripleO::Services::Docker
-    - OS::TripleO::Services::Fluentd
     - OS::TripleO::Services::IpaClient
     - OS::TripleO::Services::Ipsec
     - OS::TripleO::Services::Iscsid
     - OS::TripleO::Services::Kernel
     - OS::TripleO::Services::LoginDefs
     - OS::TripleO::Services::MetricsQdr
+    - OS::TripleO::Services::Multipathd
     - OS::TripleO::Services::MySQLClient
     - OS::TripleO::Services::NeutronBgpVpnBagpipe
     - OS::TripleO::Services::NeutronSriovAgent
     - OS::TripleO::Services::NeutronSriovHostConfig
     - OS::TripleO::Services::NeutronVppAgent
+    - OS::TripleO::Services::NovaAZConfig
     - OS::TripleO::Services::NovaCompute
     - OS::TripleO::Services::NovaLibvirt
     - OS::TripleO::Services::NovaLibvirtGuests
     - OS::TripleO::Services::NovaMigrationTarget
-    - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
-    - OS::TripleO::Services::OpenDaylightOvs
+    - OS::TripleO::Services::Podman
+    - OS::TripleO::Services::Rear
     - OS::TripleO::Services::Rhsm
+    - OS::TripleO::Services::Rsyslog
     - OS::TripleO::Services::RsyslogSidecar
     - OS::TripleO::Services::Securetty
-    - OS::TripleO::Services::SensuClient
-    - OS::TripleO::Services::SkydiveAgent
     - OS::TripleO::Services::Snmp
     - OS::TripleO::Services::Sshd
+    - OS::TripleO::Services::Timesync
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
@@ -726,7 +762,6 @@
     - OS::TripleO::Services::Vpp
     - OS::TripleO::Services::OVNController
     - OS::TripleO::Services::OVNMetadataAgent
-    - OS::TripleO::Services::Ptp
 ###############################################################################
 # Role: ComputeOvsDpdkSriov                                                   #
 ###############################################################################
@@ -743,11 +778,11 @@
     TunedProfileName: "cpu-partitioning"
     NovaLibvirtRxQueueSize: 1024
     NovaLibvirtTxQueueSize: 1024
-  disable_upgrade_deployment: True
   update_serial: 25
   ServicesDefault:
     - OS::TripleO::Services::Aide
     - OS::TripleO::Services::AuditD
+    - OS::TripleO::Services::BootParams
     - OS::TripleO::Services::CACerts
     - OS::TripleO::Services::CephClient
     - OS::TripleO::Services::CephExternal
@@ -759,43 +794,46 @@
     - OS::TripleO::Services::ComputeNeutronMetadataAgent
     - OS::TripleO::Services::ComputeNeutronOvsDpdk
     - OS::TripleO::Services::Docker
-    - OS::TripleO::Services::Fluentd
     - OS::TripleO::Services::IpaClient
     - OS::TripleO::Services::Ipsec
     - OS::TripleO::Services::Iscsid
     - OS::TripleO::Services::Kernel
     - OS::TripleO::Services::LoginDefs
+    - OS::TripleO::Services::MetricsQdr
+    - OS::TripleO::Services::Multipathd
     - OS::TripleO::Services::MySQLClient
     - OS::TripleO::Services::NeutronBgpVpnBagpipe
     - OS::TripleO::Services::NeutronSriovAgent
     - OS::TripleO::Services::NeutronSriovHostConfig
+    - OS::TripleO::Services::NovaAZConfig
     - OS::TripleO::Services::NovaCompute
     - OS::TripleO::Services::NovaLibvirt
     - OS::TripleO::Services::NovaLibvirtGuests
     - OS::TripleO::Services::NovaMigrationTarget
-    - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
-    - OS::TripleO::Services::OpenDaylightOvs
+    - OS::TripleO::Services::OVNController
     - OS::TripleO::Services::OVNMetadataAgent
+    - OS::TripleO::Services::OvsDpdkNetcontrold
     - OS::TripleO::Services::Rhsm
+    - OS::TripleO::Services::Rsyslog
     - OS::TripleO::Services::RsyslogSidecar
     - OS::TripleO::Services::Securetty
-    - OS::TripleO::Services::SensuClient
-    - OS::TripleO::Services::SkydiveAgent
     - OS::TripleO::Services::Snmp
     - OS::TripleO::Services::Sshd
+    - OS::TripleO::Services::Timesync
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
     - OS::TripleO::Services::Tuned
+    - OS::TripleO::Services::Podman
     - OS::TripleO::Services::Ptp
 ###############################################################################
 # Role: ComputeOvsDpdkSriovRT                                                 #
 ###############################################################################
 - name: ComputeOvsDpdkSriovRT
   description: |
-    Compute role with OvS-DPDK and SR-IOV RealTime services
-  CountDefault: 0
+    Compute Realtime role with OvS-DPDK and SR-IOV services
+  CountDefault: 1
   networks:
     - InternalApi
     - Tenant
@@ -807,11 +845,11 @@
     NovaLibvirtRxQueueSize: 1024
     NovaLibvirtTxQueueSize: 1024
     NovaLibvirtMemStatsPeriodSeconds: 0
-  disable_upgrade_deployment: True
   update_serial: 25
   ServicesDefault:
     - OS::TripleO::Services::Aide
     - OS::TripleO::Services::AuditD
+    - OS::TripleO::Services::BootParams
     - OS::TripleO::Services::CACerts
     - OS::TripleO::Services::CephClient
     - OS::TripleO::Services::CephExternal
@@ -823,33 +861,36 @@
     - OS::TripleO::Services::ComputeNeutronMetadataAgent
     - OS::TripleO::Services::ComputeNeutronOvsDpdk
     - OS::TripleO::Services::Docker
-    - OS::TripleO::Services::Fluentd
     - OS::TripleO::Services::IpaClient
     - OS::TripleO::Services::Ipsec
     - OS::TripleO::Services::Iscsid
     - OS::TripleO::Services::Kernel
     - OS::TripleO::Services::LoginDefs
+    - OS::TripleO::Services::MetricsQdr
+    - OS::TripleO::Services::Multipathd
     - OS::TripleO::Services::MySQLClient
     - OS::TripleO::Services::NeutronBgpVpnBagpipe
     - OS::TripleO::Services::NeutronSriovAgent
     - OS::TripleO::Services::NeutronSriovHostConfig
+    - OS::TripleO::Services::NovaAZConfig
     - OS::TripleO::Services::NovaCompute
     - OS::TripleO::Services::NovaLibvirt
     - OS::TripleO::Services::NovaLibvirtGuests
     - OS::TripleO::Services::NovaMigrationTarget
-    - OS::TripleO::Services::Ntp
     - OS::TripleO::Services::ContainersLogrotateCrond
-    - OS::TripleO::Services::OpenDaylightOvs
+    - OS::TripleO::Services::OVNController
     - OS::TripleO::Services::OVNMetadataAgent
+    - OS::TripleO::Services::OvsDpdkNetcontrold
     - OS::TripleO::Services::Rhsm
+    - OS::TripleO::Services::Rsyslog
     - OS::TripleO::Services::RsyslogSidecar
     - OS::TripleO::Services::Securetty
-    - OS::TripleO::Services::SensuClient
-    - OS::TripleO::Services::SkydiveAgent
     - OS::TripleO::Services::Snmp
     - OS::TripleO::Services::Sshd
+    - OS::TripleO::Services::Timesync
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
     - OS::TripleO::Services::Tuned
+    - OS::TripleO::Services::Podman
     - OS::TripleO::Services::Ptp
