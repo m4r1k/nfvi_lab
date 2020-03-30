@@ -118,11 +118,6 @@ resource_registry:
 
 
 parameter_defaults:
-  # This sets 'external_network_bridge' in l3_agent.ini to an empty string
-  # so that external networks act like provider bridge networks (they
-  # will plug into br-int instead of br-ex)
-  NeutronExternalNetworkBridge: "''"
-
   # Internal API used for private OpenStack Traffic
   InternalApiNetCidr: 10.0.11.0/27
   InternalApiAllocationPools: [{'start': '10.0.11.10', 'end': '10.0.11.30'}]
