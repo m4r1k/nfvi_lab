@@ -1,6 +1,6 @@
 parameter_defaults:
   # List of plugins enabled in Neutron
-  NeutronServicePlugins: "router,qos,segments,trunk"
+  NeutronServicePlugins: "router,qos,segments,trunk,port_forwarding"
   NeutronPluginExtensions: "qos,port_security"
   NeutronSriovAgentExtensions: "qos"
 
