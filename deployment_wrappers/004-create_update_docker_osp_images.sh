@@ -4,8 +4,6 @@
 # Given the above assumption, all path are local ones
 cd $(dirname $(readlink -f $0))
 
-echo "This script is meant to pull the Container images from the Red Hat CDN, hence a valid subscription must be enrolled to the system."
-
 sudo subscription-manager status >/dev/null 2>&1
 if [[ "$?" != "0" ]]; then
   echo "subscription-manager returned an error"
@@ -26,21 +24,17 @@ source ~/stackrc
 
 rm -f ${_LTHT}/overcloud_images.yaml
 
-sudo -E openstack overcloud container image prepare \
-    --namespace=registry.access.redhat.com/rhosp13 \
-    --push-destination=$(ip -4 -o address show br-ctlplane|awk '{print $4}'|sed "s/\/.*$//g"):8787 \
-    --prefix=openstack- \
-    --tag-from-label {version}-{release} \
-    --set ceph_namespace=registry.access.redhat.com/rhceph \
-    --set ceph_image=rhceph-3-rhel7 \
+sudo -E openstack tripleo container image prepare \
+    -e ~/containers-prepare-parameter.yaml \
     --output-env-file=${_LTHT}/overcloud_images.yaml \
-    --output-images-file /home/stack/local_registry_images.yaml \
     -r ~/roles-data.yaml \
     -e ${_THT}/environments/sshd-banner.yaml \
     -e ${_THT}/environments/network-isolation.yaml \
+    -e ${_THT}/environments/services/neutron-ovs.yaml \
     -e ${_THT}/environments/ceph-ansible/ceph-ansible.yaml \
     -e ${_THT}/environments/ceph-ansible/ceph-rgw.yaml \
-    -e ${_THT}/environments/services-docker/cinder-backup.yaml \
+    -e ${_THT}/environments/ceph-ansible/ceph-dashboard.yaml \
+    -e ${_THT}/environments/services/cinder-backup.yaml \
     -e ${_THT}/environments/host-config-and-reboot.yaml \
     -e ${_LTHT}/environments/10-commons-parameters.yaml \
     -e ${_LTHT}/environments/20-network-environment.yaml \
@@ -54,12 +48,7 @@ sudo -E openstack overcloud container image prepare \
     -e ${_LTHT}/environments/99-extraconfig.yaml \
     -e ${_LTHT}/environments/99-server-blacklist.yaml
 
-sudo -E openstack overcloud container image upload \
-  --config-file /home/stack/local_registry_images.yaml \
-  --verbose
-
 curl -s $(ip -4 -o address show br-ctlplane|awk '{print $4}'|sed "s/\/.*$//g"):8787/v2/_catalog|jq .
-sudo rm -f ~/local_registry_images.yaml
 rm -f ~/roles-data.yaml
 
 exit 0
