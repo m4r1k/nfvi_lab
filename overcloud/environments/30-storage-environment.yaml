@@ -1,11 +1,3 @@
-resource_registry:
-  # Custom endpoint_map.yaml to expose PublicURL in RadosGW
-  #  - https://github.com/openstack/tripleo-heat-templates/commit/7c379543cc
-  #  - https://bugzilla.redhat.com/show_bug.cgi?id=1699206
-  #  - https://access.redhat.com/solutions/3228661
-  #  - https://access.redhat.com/solutions/4010951
-  OS::TripleO::EndpointMap: endpoints/endpoint_map.yaml
-
 parameter_defaults:
   # Whether to enable iscsi backend for Cinder.
   CinderEnableIscsiBackend: false
@@ -21,9 +13,6 @@ parameter_defaults:
 
   # Glance backend can be either 'rbd' (Ceph), 'swift' or 'file'.
   GlanceBackend: rbd
-
-  # Gnocchi backend can be either 'rbd' (Ceph), 'swift' or 'file'.
-  GnocchiBackend: rbd
 
   # Here the Ceph Storage node config under Linux HCI
   # NAME   MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
@@ -65,11 +54,17 @@ parameter_defaults:
     max_open_files: 131072
     # Support all the base OpenStack roles
     rgw_keystone_accepted_roles: 'Member, _member_, admin, swiftoperator'
-    # Allow RadosGW to expose PublicURL
-    rgw_swift_account_in_url: true
 
-  # Reduce Ceph-Ansible verbosity - https://bugzilla.redhat.com/show_bug.cgi?id=1624254
-  CephAnsiblePlaybookVerbosity: 0
+  CephAnsiblePlaybookVerbosity: 1
+
+  # Required variables to run config-download manually
+  CephAnsibleEnvironmentVariables:
+    ANSIBLE_CONFIG: /usr/share/ceph-ansible/ansible.cfg
+    ANSIBLE_HOST_KEY_CHECKING: 'False'
+    ANSIBLE_PRIVATE_KEY_FILE: '/home/stack/.ssh/id_rsa'
+    ANSIBLE_RETRY_FILES_ENABLED: 'False'
+    ANSIBLE_SSH_RETRIES: '3'
+    DEFAULT_FORKS: '25'
 
   # Default Replica Count
   # HDD CephPoolDefaultSize: 3 (and higher)
@@ -88,14 +83,11 @@ parameter_defaults:
       pg_num: 128 # assuming 30% of the datas
       application: rbd
     - name: backups
-      pg_num: 32 # assuming 10% of the datas
+      pg_num: 64 # assuming 15% of the datas
       application: rbd
     - name: images
-      pg_num: 32 # assuming 10% of the datas
+      pg_num: 64 # assuming 20% of the datas
       application: rbd
-    - name: metrics
-      pg_num: 32 # assuming 7.8% of the datas
-      application: openstack_gnocchi
 
   # Whether to enable rbd (Ceph) backend for Nova ephemeral storage.
   NovaEnableRbdBackend: false
