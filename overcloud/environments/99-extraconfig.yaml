@@ -101,8 +101,16 @@ parameter_defaults:
     # Memcached everywhere (to enable Heat caching)
     # https://review.opendev.org/#/c/636746/
     # Following config not working so replaced by a post-deployment
-    Controller_classes:
-    - '::heat::cache'
+    # Controller_classes:
+    # - '::heat::cache'
+    # ExtraConfig:
+    #   heat::cache::enabled: true
+    #   heat::cache::backend: 'oslo_cache.memcache_pool'
+    #   heat::cache::memcache_servers: 'overcloud-controller-0.internalapi:11211,overcloud-controller-1.internalapi:11211,overcloud-controller-2.internalapi:11211'
+    #   heat::cache::memcache_dead_retry: 600
+    #   heat::cache::memcache_socket_timeout: 1
+    #   heat::cache::memcache_pool_unused_timeout: 10
+    #   heat::cache::memcache_pool_connection_get_timeout: 1
 
   # Maximum resources allowed per top-level stack.
   HeatMaxResourcesPerStack: -1
@@ -141,13 +149,6 @@ parameter_defaults:
     heat::keystone::authtoken::memcache_pool_dead_retry: 600
     heat::keystone::authtoken::memcache_pool_socket_timeout: 1
     heat::keystone::authtoken::memcache_pool_unused_timeout: 10
-    heat::cache::enabled: true
-    heat::cache::backend: 'oslo_cache.memcache_pool'
-    heat::cache::memcache_servers: 'overcloud-controller-0.internalapi:11211,overcloud-controller-1.internalapi:11211,overcloud-controller-2.internalapi:11211'
-    heat::cache::memcache_dead_retry: 600
-    heat::cache::memcache_socket_timeout: 1
-    heat::cache::memcache_pool_unused_timeout: 10
-    heat::cache::memcache_pool_connection_get_timeout: 1
     keystone::cache_memcache_servers: 'overcloud-controller-0.internalapi:11211,overcloud-controller-1.internalapi:11211,overcloud-controller-2.internalapi:11211'
     keystone::memcache_dead_retry: 600
     keystone::memcache_socket_timeout: 1
