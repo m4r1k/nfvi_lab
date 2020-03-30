@@ -19,13 +19,7 @@ resource_registry:
   # Ceph SSD Workaround only required under Linux HCI
   # OS::TripleO::CephStorageExtraConfigPre:         ../extraconfig/pre-config/ceph_ssd_workaround.yaml
 
-  # Controller Role Post-Configuration hook for the Heat cache and to Beast RadosGW frontend
-  # Queens TripleO RGW template hardcodes civetweb effectively disabling Beast
-  # https://github.com/openstack/tripleo-heat-templates/blob/stable/queens/docker/services/ceph-ansible/ceph-rgw.yaml#L80
-  # It's NOT possible to enable Beast by CephConfigOverrides
-  # CephConfigOverrides:
-  #   radosgw_frontend_type: beast
-  #   radosgw_frontend_port: 8080
+  # Enable Heat cache
   OS::TripleO::Tasks::ControllerPostConfig:         ../extraconfig/post-config/controller.yaml
 
 parameter_defaults:
@@ -38,13 +32,6 @@ parameter_defaults:
     # https://www.haproxy.com/blog/play_with_maxconn_avoid_server_slowness_or_crash/
     tripleo::haproxy::haproxy_global_maxconn: 5120001
     tripleo::haproxy::haproxy_default_maxconn: 20480
-
-    # Keystone token expiration set at 4 hours
-    keystone::token_expiration: 14440
-
-    # Heat re-auth model using trust tokens
-    # https://github.com/openstack/heat/blob/stable/queens/doc/source/admin/auth-model.rst#authorization-model-configuration
-    heat::engine::reauthentication_auth_method: trusts
 
     # The size in bytes of the buffer pool, the memory area where InnoDB caches table and index data.
     # Tuned at 10GB in order to store in-memory the entire DB dataset
@@ -101,10 +88,10 @@ parameter_defaults:
         # memcached everywhere
         unified_limit/caching:
             value: true
-        # Keystone Password driver
-        # https://access.redhat.com/solutions/3452481
-        identity/password_hash_algorithm:
-            value: pbkdf2_sha512
+
+    # Keystone Password driver
+    # https://access.redhat.com/solutions/3452481
+    keystone::password_hash_algorithm: pbkdf2_sha512
 
     heat::config::heat_config:
         # Heat Max stacks per tenant
@@ -117,31 +104,16 @@ parameter_defaults:
     Controller_classes:
     - '::heat::cache'
 
-  # Required config in order to have a custom Ceilometer polling
-  ManagePolling: true
-
-  # Required config in order to have a custom Ceilometer pipeline
-  ManagePipeline: true
-
   # Maximum resources allowed per top-level stack.
   HeatMaxResourcesPerStack: -1
+  # Heat re-auth model using trust tokens
+  # https://github.com/openstack/heat/blob/stable/rocky/doc/source/admin/auth-model.rst#authorization-model-configuration
+  HeatReauthenticationAuthMethod: 'trusts'
+
+  # Keystone token expiration set at 4 hours
+  TokenExpiration: 14400
 
   ExtraConfig:
-    # Ceilometer custom Polling frequency
-    ceilometer::agent::polling::polling_interval: 600
-
-    ceilometer::agent::polling::polling_meters:
-      - cpu
-      - memory.usage
-      - network.outgoing.packets.drop
-      - network.incoming.packets.drop
-      - network.outgoing.packets.rate
-      - network.incoming.packets.rate
-      - disk.read.requests.rate
-      - disk.write.requests.rate
-      - disk.read.bytes.rate
-      - disk.write.bytes.rate
-
     # Expose real hypervisor CPU
     nova::compute::libvirt::libvirt_cpu_mode: 'host-passthrough'
     # Ensure extra CPU flags are exposed
