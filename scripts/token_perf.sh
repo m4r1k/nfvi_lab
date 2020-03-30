@@ -18,5 +18,5 @@ curl -s -o /dev/null -w "%{time_total}" -i -H "Content-Type: application/json" -
     }
   }
 }' \
-  "${OS_AUTH_URL}/auth/tokens" ; echo
+  "${OS_AUTH_URL}/v3/auth/tokens" ; echo
 done
