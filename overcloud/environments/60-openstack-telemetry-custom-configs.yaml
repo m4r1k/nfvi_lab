@@ -1,0 +1,29 @@
+# To enable the legacy OpenStack Telemetry stack include the following environment file
+# /usr/share/openstack-tripleo-heat-templates/environments/enable-legacy-telemetry.yaml
+
+parameter_defaults:
+  # Gnocchi backend can be either 'rbd' (Ceph), 'swift' or 'file'.
+  GnocchiBackend: rbd
+
+  # Required config in order to have a custom Ceilometer polling
+  ManagePolling: true
+
+  # Required config in order to have a custom Ceilometer pipeline
+  ManagePipeline: true
+
+  ExtraConfig:
+    # Ceilometer custom Polling frequency
+    ceilometer::agent::polling::polling_interval: 600
+
+    # Ceilometer Custom metrics
+    ceilometer::agent::polling::polling_meters:
+      - cpu
+      - memory.usage
+      - network.outgoing.packets.drop
+      - network.incoming.packets.drop
+      - network.outgoing.packets.rate
+      - network.incoming.packets.rate
+      - disk.read.requests.rate
+      - disk.write.requests.rate
+      - disk.read.bytes.rate
+      - disk.write.bytes.rate
