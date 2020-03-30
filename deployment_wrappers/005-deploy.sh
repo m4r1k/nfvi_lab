@@ -14,20 +14,24 @@ _LTHT="$(readlink -f ../overcloud)"
 # Move to home folder to output the generared files during the deployment there
 cd ~/
 
-# Not possile to use "--environment-directory" due to https://bugzilla.redhat.com/show_bug.cgi?id=1593077
-
+#    --stack-only \
 openstack overcloud deploy \
     --force-postconfig \
+    --verbose \
+    --stack overcloud \
     --templates ${_THT} \
     --timeout 180 \
     -r ${_LTHT}/roles-data.yaml \
     -e ${_LTHT}/nodes-info.yaml \
     -e ${_THT}/environments/sshd-banner.yaml \
     -e ${_THT}/environments/network-isolation.yaml \
+    -e ${_THT}/environments/services/neutron-ovs.yaml \
     -e ${_THT}/environments/ceph-ansible/ceph-ansible.yaml \
     -e ${_THT}/environments/ceph-ansible/ceph-rgw.yaml \
-    -e ${_THT}/environments/services-docker/cinder-backup.yaml \
+    -e ${_THT}/environments/ceph-ansible/ceph-dashboard.yaml \
+    -e ${_THT}/environments/services/cinder-backup.yaml \
     -e ${_THT}/environments/host-config-and-reboot.yaml \
+    -e ~/containers-prepare-parameter.yaml \
     -e ${_LTHT}/overcloud_images.yaml \
     -e ${_LTHT}/environments/10-commons-parameters.yaml \
     -e ${_LTHT}/environments/20-network-environment.yaml \
@@ -40,6 +44,26 @@ openstack overcloud deploy \
     -e ${_LTHT}/environments/70-ovs-dpdk-sriov.yaml \
     -e ${_LTHT}/environments/99-extraconfig.yaml \
     -e ${_LTHT}/environments/99-server-blacklist.yaml
+
+#openstack overcloud config download \
+#  --name overcloud \
+#  --no-preserve-config \
+#  --config-dir ~/config-download
+#
+#cd ~/config-download
+#
+#tripleo-ansible-inventory \
+#  --ansible_ssh_user heat-admin \
+#  --plan overcloud \
+#  --static-yaml-inventory inventory.yaml
+#
+#export ANSIBLE_HOST_KEY_CHECKING=false
+#
+#ansible-playbook \
+#  -i inventory.yaml \
+#  --private-key ~/.ssh/id_rsa \
+#  --become \
+#  deploy_steps_playbook.yaml
 
 _END=$(date +%s)
 _TOTALTIME=$((${_END}-${_START}))
