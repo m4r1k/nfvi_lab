@@ -10,6 +10,6 @@ crudini --set /var/lib/config-data/puppet-generated/heat/etc/heat/heat.conf cons
 crudini --set /var/lib/config-data/puppet-generated/heat/etc/heat/heat.conf service_extension_cache caching true
 crudini --set /var/lib/config-data/puppet-generated/heat/etc/heat/heat.conf resource_finder_cache caching true
 
-docker ps --filter name=heat --quiet|xargs -n1 docker restart
+podman ps --filter name=heat --quiet|xargs -n1 podman restart
 
 exit 0

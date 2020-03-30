@@ -1,4 +1,4 @@
-heat_template_version: queens
+heat_template_version: rocky
 
 description: >
   Controller post-configuration hook
@@ -26,23 +26,6 @@ resources:
       actions: ['CREATE', 'UPDATE'] # Do this on CREATE and UPDATE as well
       servers: {get_param: [servers, 'Controller']}
       config: {get_resource: HeatCache}
-      input_values:
-        get_param: input_values
-        deploy_identifier: {get_param: DeployIdentifier}
-
-  BeastRgw:
-    type: OS::Heat::SoftwareConfig
-    properties:
-      group: script
-      inputs:
-        - name: DeployIdentifier
-      config: {get_file: scripts/beastrgw.sh}
-  BeastRgwDeployment:
-    type: OS::Heat::SoftwareDeploymentGroup
-    properties:
-      actions: ['CREATE', 'UPDATE'] # Do this on CREATE and UPDATE as well
-      servers: {get_param: [servers, 'Controller']}
-      config: {get_resource: BeastRgw}
       input_values:
         get_param: input_values
         deploy_identifier: {get_param: DeployIdentifier}
