@@ -11,11 +11,11 @@ sudo yum update -y rhosp-director-images rhosp-director-images-ipa
 echo "#### Extract new overcloud images"
 mkdir ~/images
 cd ~/images
-for i in /usr/share/rhosp-director-images/overcloud-full-latest-13.0.tar /usr/share/rhosp-director-images/ironic-python-agent-latest-13.0.tar; do tar -xvf $i; done
+for i in /usr/share/rhosp-director-images/overcloud-full-latest-16.0.tar /usr/share/rhosp-director-images/ironic-python-agent-latest-16.0.tar; do tar -xvf $i; done
 
 echo "#### Uploading updated overcloud image to the Undercloud's Glance Registry"
 source ~/stackrc
 openstack overcloud image upload --image-path ~/images/ --update-existing
-openstack baremetal node list -c UUID -f value|xargs -n 1 -P 1 -r openstack overcloud node configure
+openstack baremetal node list -c UUID -f value|xargs -n 10 -P 1 -r openstack overcloud node configure
 
 exit 0
