@@ -60,6 +60,7 @@ tripleo-ansible-inventory \
 
 cd ~/config-download
 ansible -i ~/config-download/inventory.yaml -m ping all
+# https://docs.openstack.org/project-deploy-guide/tripleo-docs/latest/deployment/ansible_config_download.html#manual-config-download
 ansible-playbook \
   -i ~/config-download/inventory.yaml \
   --private-key ~/.ssh/id_rsa \
