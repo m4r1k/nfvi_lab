@@ -54,6 +54,10 @@ sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noa
 sudo dnf config-manager --set-disabled epel
 sudo dnf --enablerepo=epel install screen -y
 
+# https://github.com/amix/vimrc
+git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+sh ~/.vim_runtime/install_basic_vimrc.sh
+
 openstack complete > ~/openstack
 sudo mv ~/openstack /etc/bash_completion.d/openstack
 sudo sed -e '/^.*INFO.*$/d' -e '/^.*DEBUG.*$/d' -i /etc/bash_completion.d/openstack
