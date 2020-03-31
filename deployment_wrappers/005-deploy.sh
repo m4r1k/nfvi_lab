@@ -10,13 +10,14 @@ source ~/stackrc
 
 _THT="/usr/share/openstack-tripleo-heat-templates"
 _LTHT="$(readlink -f ../overcloud)"
+_LDIR="$(readlink -f .)"
 
 # Move to home folder to output the generared files during the deployment there
 cd ~/
 
-#    --stack-only \
 openstack overcloud deploy \
     --force-postconfig \
+    --stack-only \
     --verbose \
     --stack overcloud \
     --templates ${_THT} \
@@ -45,25 +46,25 @@ openstack overcloud deploy \
     -e ${_LTHT}/environments/99-extraconfig.yaml \
     -e ${_LTHT}/environments/99-server-blacklist.yaml
 
-#openstack overcloud config download \
-#  --name overcloud \
-#  --no-preserve-config \
-#  --config-dir ~/config-download
-#
-#cd ~/config-download
-#
-#tripleo-ansible-inventory \
-#  --ansible_ssh_user heat-admin \
-#  --plan overcloud \
-#  --static-yaml-inventory inventory.yaml
-#
-#export ANSIBLE_HOST_KEY_CHECKING=false
-#
-#ansible-playbook \
-#  -i inventory.yaml \
-#  --private-key ~/.ssh/id_rsa \
-#  --become \
-#  deploy_steps_playbook.yaml
+openstack overcloud config download \
+  --name overcloud \
+  --no-preserve-config \
+  --config-dir ~/config-download
+
+python3 ${_LDIR}/write_default_ansible_cfg.py
+
+tripleo-ansible-inventory \
+  --ansible_ssh_user heat-admin \
+  --plan overcloud \
+  --static-yaml-inventory ~/config-download/inventory.yaml
+
+cd ~/config-download
+ansible -i ~/config-download/inventory.yaml -m ping all
+ansible-playbook \
+  -i ~/config-download/inventory.yaml \
+  --private-key ~/.ssh/id_rsa \
+  --become \
+  ~/config-download/deploy_steps_playbook.yaml
 
 _END=$(date +%s)
 _TOTALTIME=$((${_END}-${_START}))
