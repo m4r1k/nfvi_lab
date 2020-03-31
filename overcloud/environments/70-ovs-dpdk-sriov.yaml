@@ -161,13 +161,13 @@ parameter_defaults:
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['2-23,26-47']
     # Neutron Physical mapping between a custom name and physical devices
-    NeutronPhysicalDevMappings: "niantic_pool:p3p1,niantic_pool:p3p2"
+    NeutronPhysicalDevMappings: "niantic_pool:enp4s0f0,niantic_pool:enp4s0f1"
     # Mapping of SR-IOV PF interface to neutron physical_network.
     NovaPCIPassthrough:
-      - devname: "p3p1"
+      - devname: "enp4s0f0"
         trusted: "true"
         physical_network: "niantic_pool"
-      - devname: "p3p2"
+      - devname: "enp4s0f1"
         trusted: "true"
         physical_network: "niantic_pool"
 
@@ -189,13 +189,13 @@ parameter_defaults:
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['2-23']
     # Neutron Physical mapping between a custom name and physical devices
-    NeutronPhysicalDevMappings: "niantic_pool:p3p1,niantic_pool:p3p2"
+    NeutronPhysicalDevMappings: "niantic_pool:enp4s0f0,niantic_pool:enp4s0f1"
     # Mapping of SR-IOV PF interface to neutron physical_network.
     NovaPCIPassthrough:
-      - devname: "p3p1"
+      - devname: "enp4s0f0"
         trusted: "true"
         physical_network: "niantic_pool"
-      - devname: "p3p2"
+      - devname: "enp4s0f1"
         trusted: "true"
         physical_network: "niantic_pool"
 
@@ -216,19 +216,19 @@ parameter_defaults:
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['2-23,26-47']
     # Neutron Physical mapping between a custom name and physical devices
-    NeutronPhysicalDevMappings: "niantic_pool:p4p1,niantic_pool:p4p2,niantic_pool:p6p1,niantic_pool:p6p2"
+    NeutronPhysicalDevMappings: "niantic_pool:enp4s0f0,niantic_pool:enp4s0f1,niantic_pool:enp130s0f0,niantic_pool:enp130s0f1"
     # Mapping of SR-IOV PF interface to neutron physical_network.
     NovaPCIPassthrough:
-      - devname: "p4p1"
+      - devname: "enp4s0f0"
         trusted: "true"
         physical_network: "niantic_pool"
-      - devname: "p4p2"
+      - devname: "enp4s0f1"
         trusted: "true"
         physical_network: "niantic_pool"
-      - devname: "p6p1"
+      - devname: "enp130s0f0"
         trusted: "true"
         physical_network: "niantic_pool"
-      - devname: "p6p2"
+      - devname: "enp130s0f1"
         trusted: "true"
         physical_network: "niantic_pool"
 
@@ -250,19 +250,19 @@ parameter_defaults:
     # Nova pCPU to be used by the vCPU
     NovaVcpuPinSet: ['2-23']
     # Neutron Physical mapping between a custom name and physical devices
-    NeutronPhysicalDevMappings: "niantic_pool:p4p1,niantic_pool:p4p2,niantic_pool:p6p1,niantic_pool:p6p2"
+    NeutronPhysicalDevMappings: "niantic_pool:enp4s0f0,niantic_pool:enp4s0f1,niantic_pool:enp130s0f0,niantic_pool:enp130s0f1"
     # Mapping of SR-IOV PF interface to neutron physical_network.
     NovaPCIPassthrough:
-      - devname: "p4p1"
+      - devname: "enp4s0f0"
         trusted: "true"
         physical_network: "niantic_pool"
-      - devname: "p4p2"
+      - devname: "enp4s0f1"
         trusted: "true"
         physical_network: "niantic_pool"
-      - devname: "p6p1"
+      - devname: "enp130s0f0"
         trusted: "true"
         physical_network: "niantic_pool"
-      - devname: "p6p2"
+      - devname: "enp130s0f1"
         trusted: "true"
         physical_network: "niantic_pool"
 
@@ -298,13 +298,13 @@ parameter_defaults:
     # NUMA-aware vSwitch for the VXLAN overlay
     NeutronTunnelNUMANodes: 0,1
     # Neutron Physical mapping between a custom name and physical devices
-    NeutronPhysicalDevMappings: "niantic_pool:p4p1,niantic_pool:p4p2"
+    NeutronPhysicalDevMappings: "niantic_pool:enp4s0f0,niantic_pool:enp4s0f1"
     # Mapping of SR-IOV PF interface to neutron physical_network.
     NovaPCIPassthrough:
-      - devname: "p4p1"
+      - devname: "enp4s0f0"
         trusted: "true"
         physical_network: "niantic_pool"
-      - devname: "p4p2"
+      - devname: "enp4s0f1"
         trusted: "true"
         physical_network: "niantic_pool"
 
@@ -341,12 +341,12 @@ parameter_defaults:
     # NUMA-aware vSwitch for the VXLAN overlay
     NeutronTunnelNUMANodes: 0,1
     # Neutron Physical mapping between a custom name and physical devices
-    NeutronPhysicalDevMappings: "niantic_pool:p4p1,niantic_pool:p4p2"
+    NeutronPhysicalDevMappings: "niantic_pool:enp4s0f0,niantic_pool:enp4s0f1"
     # Mapping of SR-IOV PF interface to neutron physical_network.
     NovaPCIPassthrough:
-      - devname: "p4p1"
+      - devname: "enp4s0f0"
         trusted: "true"
         physical_network: "niantic_pool"
-      - devname: "p4p2"
+      - devname: "enp4s0f1"
         trusted: "true"
         physical_network: "niantic_pool"
