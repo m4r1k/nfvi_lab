@@ -58,13 +58,10 @@ parameter_defaults:
   CephAnsiblePlaybookVerbosity: 1
 
   # Required variables to run config-download manually
+  # https://docs.openstack.org/project-deploy-guide/tripleo-docs/latest/deployment/ansible_config_download.html#run-ansible-playbook
   CephAnsibleEnvironmentVariables:
-    ANSIBLE_CONFIG: /usr/share/ceph-ansible/ansible.cfg
     ANSIBLE_HOST_KEY_CHECKING: 'False'
     ANSIBLE_PRIVATE_KEY_FILE: '/home/stack/.ssh/id_rsa'
-    ANSIBLE_RETRY_FILES_ENABLED: 'False'
-    ANSIBLE_SSH_RETRIES: '3'
-    DEFAULT_FORKS: '25'
 
   # Default Replica Count
   # HDD CephPoolDefaultSize: 3 (and higher)
