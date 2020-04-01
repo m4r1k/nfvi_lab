@@ -18,6 +18,7 @@ _PID=$(docker ps --filter "name=nfvbench" --quiet --all)
 if [[ "${_PID}" == "" ]]; then
 	docker run --name nfvbench --detach \
 		--privileged \
+		--net=host \
 		-v /lib/modules/$(uname -r):/lib/modules/$(uname -r) \
 		-v /usr/src/kernels:/usr/src/kernels \
 		-v /dev:/dev \
