@@ -31,8 +31,8 @@ openstack flavor show nfv >/dev/null 2>&1 || openstack flavor create \
 	--disk 10 \
 	--vcpus 7 \
 	--public \
-	--property hw:cpu_policy=dedicated \
-	--property hw:cpu_thread_policy=isolate \
+	--property resources:PCPU=7 \
+	--property trait:HW_CPU_HYPERTHREADING=required \
 	--property hw:mem_page_size=large \
 	--property hw:numa_mempolicy=strict \
 	--property hw:emulator_threads_policy=share \
