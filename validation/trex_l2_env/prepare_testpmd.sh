@@ -14,7 +14,7 @@ subscription-manager repos \
 yum makecache fast
 
 yum update -y
-yum install -y tuned-profiles-cpu-partitioning tuned dpdk dpdk-devel dpdk-tools driverctl screen
+yum install -y tuned-profiles-cpu-partitioning tuned dpdk dpdk-devel dpdk-tools driverctl screen sysstat
 
 echo "isolated_cores=1-6" | tee -a /etc/tuned/cpu-partitioning-variables.conf
 systemctl enable --now tuned

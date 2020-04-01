@@ -18,7 +18,7 @@ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 yum makecache fast
 
 yum update -y
-yum install -y tuned-profiles-cpu-partitioning tuned dpdk dpdk-devel dpdk-tools driverctl screen
+yum install -y tuned-profiles-cpu-partitioning tuned dpdk dpdk-devel dpdk-tools driverctl screen sysstat
 yum install -y docker-ce docker-ce-cli containerd.io docker-ce-selinux docker-rhel-push-plugin
 
 systemctl disable --now NetworkManager
