@@ -44,6 +44,6 @@ driverctl set-override 0000:00:07.0 vfio-pci
 
 dracut -f
 
-docker pull opnfv/nfvbench:latest
+docker pull opnfv/nfvbench:4.2.2
 
 reboot
