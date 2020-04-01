@@ -11,7 +11,7 @@ fi
 _RATE=${1:-10kpps}
 
 # Check if NFVBench image has been defined
-docker image ls | grep -q nfvbench >/dev/null 2>&1 || docker pull opnfv/nfvbench:latest
+docker image ls | grep -q nfvbench >/dev/null 2>&1 || docker pull opnfv/nfvbench:4.2.2
 
 # Check if NFVBench container has been defined
 _PID=$(docker ps --filter "name=nfvbench" --quiet --all)
@@ -23,7 +23,7 @@ if [[ "${_PID}" == "" ]]; then
 		-v /usr/src/kernels:/usr/src/kernels \
 		-v /dev:/dev \
 		-v $HOME:/tmp/nfvbench \
-		opnfv/nfvbench:latest
+		opnfv/nfvbench:4.2.2
 fi
 
 # Check if NFVBench container is running
