@@ -18,7 +18,7 @@ curl \
       }
     }
   }' \
-  "${OS_AUTH_URL}/v3/auth/tokens"
+  "${OS_AUTH_URL}v3/auth/tokens"
 }
 
 function scoped_token_issue {
@@ -44,7 +44,7 @@ curl \
       }
     }
   }' \
-  "${OS_AUTH_URL}/v3/auth/tokens"
+  "${OS_AUTH_URL}v3/auth/tokens"
 }
 
 function token_validation {
@@ -55,7 +55,7 @@ curl \
   -H "Content-Type: application/json" \
   -H "X-Auth-Token: ${_TOKEN}" \
   -H "X-Subject-Token: ${_TOKEN}" \
-  "${OS_AUTH_URL}/v3/auth/tokens"
+  "${OS_AUTH_URL}v3/auth/tokens"
 }
 function token_validation_header {
 _TOKEN=$(scoped_token_issue|awk -v RS='\r' '/X-Subject-Token/ {print $2}')
@@ -65,7 +65,7 @@ curl \
   -H "Content-Type: application/json" \
   -H "X-Auth-Token: ${_TOKEN}" \
   -H "X-Subject-Token: ${_TOKEN}" \
-  "${OS_AUTH_URL}/v3/auth/tokens"
+  "${OS_AUTH_URL}v3/auth/tokens"
 }
 
 _TMP=$(mktemp --dry-run)
