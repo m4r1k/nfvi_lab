@@ -30,7 +30,7 @@ parameter_defaults:
     # Also added 16GB (8 per NUMA) for OVS-DPDK
     NovaReservedHostMemory: 20480
     # Nova pCPU to be used by the vCPU
-    NovaComputeCpuDedicatedSet: ['10-23,34-47']
+    NovaVcpuPinSet: ['10-23,34-47']
     # OVS-DPDK Memory size for NUMA node
     OvsDpdkSocketMemory: "8192,8192"
     # OVS-DPDK DPC config (DPC1 here)
@@ -63,7 +63,7 @@ parameter_defaults:
     # Also added 16GB (8 per NUMA) for OVS-DPDK
     NovaReservedHostMemory: 20480
     # Nova pCPU to be used by the vCPU
-    NovaComputeCpuDedicatedSet: ['10-23']
+    NovaVcpuPinSet: ['10-23']
     # OVS-DPDK Memory size for NUMA node
     OvsDpdkSocketMemory: "8192,8192"
     # OVS-DPDK DPC config (DPC1 here)
@@ -95,7 +95,7 @@ parameter_defaults:
     # Also added 16GB (8 per NUMA) for OVS-DPDK
     NovaReservedHostMemory: 20480
     # Nova pCPU to be used by the vCPU
-    NovaComputeCpuDedicatedSet: ['10-23,34-47']
+    NovaVcpuPinSet: ['10-23,34-47']
     # OVS-DPDK Memory size for NUMA node
     OvsDpdkSocketMemory: "8192,8192"
     # OVS-DPDK DPC config (DPC1 here)
@@ -128,7 +128,7 @@ parameter_defaults:
     # Also added 16GB (8 per NUMA) for OVS-DPDK
     NovaReservedHostMemory: 20480
     # Nova pCPU to be used by the vCPU
-    NovaComputeCpuDedicatedSet: ['10-23']
+    NovaVcpuPinSet: ['10-23']
     # OVS-DPDK Memory size for NUMA node
     OvsDpdkSocketMemory: "8192,8192"
     # OVS-DPDK DPC config (DPC1 here)
@@ -159,7 +159,7 @@ parameter_defaults:
     # 4GB left for the Kernel + Userland
     NovaReservedHostMemory: 4096
     # Nova pCPU to be used by the vCPU
-    NovaComputeCpuDedicatedSet: ['2-23,26-47']
+    NovaVcpuPinSet: ['2-23,26-47']
     # Neutron Physical mapping between a custom name and physical devices
     NeutronPhysicalDevMappings: "niantic_pool:enp4s0f0,niantic_pool:enp4s0f1"
     # Mapping of SR-IOV PF interface to neutron physical_network.
@@ -187,7 +187,7 @@ parameter_defaults:
     # 4GB left for the Kernel + Userland
     NovaReservedHostMemory: 4096
     # Nova pCPU to be used by the vCPU
-    NovaComputeCpuDedicatedSet: ['2-23']
+    NovaVcpuPinSet: ['2-23']
     # Neutron Physical mapping between a custom name and physical devices
     NeutronPhysicalDevMappings: "niantic_pool:enp4s0f0,niantic_pool:enp4s0f1"
     # Mapping of SR-IOV PF interface to neutron physical_network.
@@ -214,7 +214,7 @@ parameter_defaults:
     # 5GB left for the Kernel + Userland
     NovaReservedHostMemory: 5120
     # Nova pCPU to be used by the vCPU
-    NovaComputeCpuDedicatedSet: ['2-23,26-47']
+    NovaVcpuPinSet: ['2-23,26-47']
     # Neutron Physical mapping between a custom name and physical devices
     NeutronPhysicalDevMappings: "niantic_pool:enp4s0f0,niantic_pool:enp4s0f1,niantic_pool:enp130s0f0,niantic_pool:enp130s0f1"
     # Mapping of SR-IOV PF interface to neutron physical_network.
@@ -248,7 +248,7 @@ parameter_defaults:
     # 5GB left for the Kernel + Userland
     NovaReservedHostMemory: 5120
     # Nova pCPU to be used by the vCPU
-    NovaComputeCpuDedicatedSet: ['2-23']
+    NovaVcpuPinSet: ['2-23']
     # Neutron Physical mapping between a custom name and physical devices
     NeutronPhysicalDevMappings: "niantic_pool:enp4s0f0,niantic_pool:enp4s0f1,niantic_pool:enp130s0f0,niantic_pool:enp130s0f1"
     # Mapping of SR-IOV PF interface to neutron physical_network.
@@ -282,7 +282,7 @@ parameter_defaults:
     # Also added 16GB (8 per NUMA) for OVS-DPDK
     NovaReservedHostMemory: 21504
     # Nova pCPU to be used by the vCPU
-    NovaComputeCpuDedicatedSet: ['5,7,9-23,29,31,33-47']
+    NovaVcpuPinSet: ['5,7,9-23,29,31,33-47']
     # OVS-DPDK Memory size for NUMA node
     OvsDpdkSocketMemory: "8192,8192"
     # OVS-DPDK DPC config (DPC1 here)
@@ -325,7 +325,7 @@ parameter_defaults:
     # Also added 16GB (8 per NUMA) for OVS-DPDK
     NovaReservedHostMemory: 21504
     # Nova pCPU to be used by the vCPU
-    NovaComputeCpuDedicatedSet: ['5,7,9-23']
+    NovaVcpuPinSet: ['5,7,9-23']
     # OVS-DPDK Memory size for NUMA node
     OvsDpdkSocketMemory: "8192,8192"
     # OVS-DPDK DPC config (DPC1 here)
