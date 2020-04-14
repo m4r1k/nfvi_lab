@@ -95,7 +95,7 @@ cat ${_TMP}|awk '{print $3}'|sort -n|awk '
       median = ( a[c/2] + a[c/2-1] ) / 2;
     }
     format = "%-15s %-15s %-15s %-15s %-15s %s\n"
-    printf format, "Summury", "Data count", "Mean datum", "Median datum", "Minimum datum", "Maximum datum";
+    printf format, "Summary", "Data count", "Mean datum", "Median datum", "Minimum datum", "Maximum datum";
     printf format, sum, c, ave, median, a[0], a[c-1];
   }
 '
