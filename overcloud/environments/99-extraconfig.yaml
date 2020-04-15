@@ -91,7 +91,10 @@ parameter_defaults:
 
     # Keystone Password driver
     # https://access.redhat.com/solutions/3452481
-    keystone::password_hash_algorithm: pbkdf2_sha512
+    # https://review.opendev.org/#/c/438701/ (see the review comments)
+    # https://review.opendev.org/#/c/473104/ (see the review comments)
+    keystone::password_hash_algorithm: bcrypt
+    keystone::password_hash_rounds: 4
 
     heat::config::heat_config:
         # Heat Max stacks per tenant
