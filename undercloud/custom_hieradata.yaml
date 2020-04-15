@@ -33,7 +33,8 @@ ironic::api::authtoken::memcache_pool_dead_retry: 600
 ironic::api::authtoken::memcache_pool_socket_timeout: 1
 ironic::api::authtoken::memcache_pool_unused_timeout: 10
 
-keystone::password_hash_algorithm: pbkdf2_sha512
+keystone::password_hash_algorithm: bcrypt
+keystone::password_hash_rounds: 4
 
 keystone::config::keystone_config:
     application_credential/caching:
