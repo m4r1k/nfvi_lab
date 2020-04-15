@@ -51,4 +51,6 @@ keystone::config::keystone_config:
     identity/cache_time:
         value: '600'
     identity/password_hash_algorithm:
-        value: pbkdf2_sha512
+        value: bcrypt
+    identity/password_hash_rounds:
+        value: 4
