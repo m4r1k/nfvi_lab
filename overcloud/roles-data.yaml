@@ -290,7 +290,6 @@
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
-    - OS::TripleO::Services::Tuned
 ###############################################################################
 # Role: ComputeOvsDpdkRT                                                      #
 ###############################################################################
@@ -358,7 +357,6 @@
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
-    - OS::TripleO::Services::Tuned
 ###############################################################################
 # Role: ComputeDualOvsDpdk                                                    #
 ###############################################################################
@@ -425,7 +423,6 @@
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
-    - OS::TripleO::Services::Tuned
 ###############################################################################
 # Role: ComputeDualOvsDpdkRT                                                  #
 ###############################################################################
@@ -493,7 +490,6 @@
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
-    - OS::TripleO::Services::Tuned
 ###############################################################################
 # Role: ComputeSriov                                                          #
 ###############################################################################
@@ -556,7 +552,6 @@
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
-    - OS::TripleO::Services::Tuned
     - OS::TripleO::Services::Vpp
     - OS::TripleO::Services::OVNController
     - OS::TripleO::Services::OVNMetadataAgent
@@ -624,7 +619,6 @@
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
-    - OS::TripleO::Services::Tuned
     - OS::TripleO::Services::Vpp
     - OS::TripleO::Services::OVNController
     - OS::TripleO::Services::OVNMetadataAgent
@@ -690,7 +684,6 @@
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
-    - OS::TripleO::Services::Tuned
     - OS::TripleO::Services::Vpp
     - OS::TripleO::Services::OVNController
     - OS::TripleO::Services::OVNMetadataAgent
@@ -758,7 +751,6 @@
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
-    - OS::TripleO::Services::Tuned
     - OS::TripleO::Services::Vpp
     - OS::TripleO::Services::OVNController
     - OS::TripleO::Services::OVNMetadataAgent
@@ -824,7 +816,6 @@
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
-    - OS::TripleO::Services::Tuned
     - OS::TripleO::Services::Podman
     - OS::TripleO::Services::Ptp
 ###############################################################################
@@ -891,6 +882,5 @@
     - OS::TripleO::Services::Timezone
     - OS::TripleO::Services::TripleoFirewall
     - OS::TripleO::Services::TripleoPackages
-    - OS::TripleO::Services::Tuned
     - OS::TripleO::Services::Podman
     - OS::TripleO::Services::Ptp
