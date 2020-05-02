@@ -33,6 +33,8 @@ openstack flavor show nfv >/dev/null 2>&1 || openstack flavor create \
 	--property hw:emulator_threads_policy=share \
 	--property hw:cpu_sockets=1 \
 	--property hw:numa_nodes=1 \
+	--property hw:cpu_cores=7 \
+	--property hw:cpu_threads=1 \
 	nfv
 
 openstack keypair show undercloud >/dev/null 2>&1 || openstack keypair create --public-key ~/.ssh/id_rsa.pub undercloud
