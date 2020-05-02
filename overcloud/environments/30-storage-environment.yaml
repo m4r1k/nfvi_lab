@@ -98,11 +98,11 @@ parameter_defaults:
       application: openstack_gnocchi
 
   # Whether to enable rbd (Ceph) backend for Nova ephemeral storage.
-  NovaEnableRbdBackend: false
+  NovaEnableRbdBackend: true
 
   ExtraConfig:
     # Disable force RAW images
     # If NovaEnableRbdBackend is set to true this flag MUST be set to true (default option)
-    nova::compute::force_raw_images: false
+    nova::compute::force_raw_images: true
     # Enable the Cinder Backup dashboard in Horizon
     horizon::cinder_options: { enable_backup: true }
