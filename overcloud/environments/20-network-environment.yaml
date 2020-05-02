@@ -165,7 +165,7 @@ parameter_defaults:
   BondInterfaceOvsOptions: 'bond_mode=balance-slb'
 
   # Bonding options for Linux (only active/backup works in a virtual environment)
-  BondInterfaceLinuxOptions: 'mode=balance-xor xmit_hash_policy=layer3+4 miimon=100'
+  BondInterfaceLinuxOptions: 'mode=802.3ad xmit_hash_policy=layer2+3 ad_select=bandwidth lacp_rate=fast miimon=100'
 
   # To refresh the overcloud nodes network configuration at every Overcloud Update
   NetworkDeploymentActions: ['CREATE','UPDATE']

@@ -92,9 +92,10 @@ resources:
           params:
             $network_config:
               network_config:
-              - type: interface
-                name: nic1
+              - type: linux_bond
+                name: bond0
                 mtu: 1500
+                bonding_options: {get_param: BondInterfaceLinuxOptions}
                 use_dhcp: false
                 dns_servers: {get_param: DnsServers}
                 addresses:
@@ -108,15 +109,23 @@ resources:
                   next_hop: {get_param: EC2MetadataIp}
                 - default: true
                   next_hop: {get_param: ControlPlaneDefaultRoute}
-
-              - type: interface
-                name: nic2
-                mtu: 9000
-                use_dhcp: false
-                onboot: true
+                members:
+                - type: interface
+                  name: nic1
+                  mtu: 9000
+                  primary: true
+                - type: interface
+                  name: nic2
+                  mtu: 9000
+                - type: interface
+                  name: nic3
+                  mtu: 9000
+                - type: interface
+                  name: nic4
+                  mtu: 9000
 
               - type: vlan
-                device: nic2
+                device: bond0
                 mtu: 1500
                 vlan_id: {get_param: InternalApiNetworkVlanID}
                 addresses:
@@ -124,33 +133,17 @@ resources:
 
               - type: vlan
                 vlan_id: {get_param: StorageNetworkVlanID}
-                device: nic2
+                device: bond0
                 mtu: 9000
                 addresses:
                 - ip_netmask: {get_param: StorageIpSubnet}
 
               - type: vlan
-                device: nic2
+                device: bond0
                 mtu: 9000
                 vlan_id: {get_param: TenantNetworkVlanID}
                 addresses:
                 - ip_netmask: {get_param: TenantIpSubnet}
-
-              - type: interface
-                name: nic3
-                mtu: 9216
-                use_dhcp: false
-                defroute: false
-                nm_controlled: true
-                hotplug: true
-
-              - type: interface
-                name: nic4
-                mtu: 9216
-                use_dhcp: false
-                defroute: false
-                nm_controlled: true
-                hotplug: true
 
               - type: interface
                 name: nic5
@@ -162,6 +155,22 @@ resources:
 
               - type: interface
                 name: nic6
+                mtu: 9216
+                use_dhcp: false
+                defroute: false
+                nm_controlled: true
+                hotplug: true
+
+              - type: interface
+                name: nic7
+                mtu: 9216
+                use_dhcp: false
+                defroute: false
+                nm_controlled: true
+                hotplug: true
+
+              - type: interface
+                name: nic8
                 mtu: 9216
                 use_dhcp: false
                 defroute: false
