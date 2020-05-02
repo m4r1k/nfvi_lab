@@ -5,3 +5,5 @@ parameter_defaults:
   # Desired output format for image conversion plugin
   GlanceImageConversionOutputFormat: 'raw'
 
+  # List of enabled Image Import Methods
+  GlanceEnabledImportMethods: 'glance-direct,web-download'
