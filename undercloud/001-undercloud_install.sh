@@ -29,6 +29,7 @@ sudo subscription-manager clean >/dev/null 2>&1
 
 sudo subscription-manager register --username=${_USERNAME} --password=${_PASSWORD} || exit 1
 sudo subscription-manager attach --pool=${_POOL} || exit 1
+sudo subscription-manager release --set=8.1
 sudo subscription-manager repos \
 --disable "*" \
 --enable rhel-8-for-x86_64-baseos-rpms \
