@@ -46,6 +46,8 @@ openstack overcloud deploy \
     -e ${_LTHT}/environments/99-extraconfig.yaml \
     -e ${_LTHT}/environments/99-server-blacklist.yaml
 
+_END1=$(date +%s)
+
 openstack overcloud config download \
   --name overcloud \
   --no-preserve-config \
@@ -67,13 +69,19 @@ ansible-playbook \
   --become \
   ~/config-download/deploy_steps_playbook.yaml
 
-_END=$(date +%s)
-_TOTALTIME=$((${_END}-${_START}))
+_END2=$(date +%s)
+_TOTALTIME=$((${_END2}-${_START}))
+_PROVISIONING=$((${_END1}-${_START}))
+_CONFIG=$((${_END2}-${_END1}))
 echo "DEPLOYMENT STARTED: $(date --date="@${_START}" --utc)"
 if ((${_TOTALTIME} < 3600)); then
-	echo "DEPLOYMENT TIME: $(date -d@${_TOTALTIME} -u +%M'm'%S's')"
+	echo "PROVISIONING PHASE: $(date -d@${_PROVISIONING} -u +%M'm'%S's')"
+	echo "CONFIG PHASE: $(date -d@${_CONFIG} -u +%M'm'%S's')"
+	echo "TOTAL DEPLOYMENT TIME: $(date -d@${_TOTALTIME} -u +%M'm'%S's')"
 else
-	echo "DEPLOYMENT TIME: $(date -d@${_TOTALTIME} -u +%H'h'%M'm'%S's')"
+	echo "PROVISIONING PHASE: $(date -d@${_PROVISIONING} -u +%H'h'%M'm'%S's')"
+	echo "CONFIG PHASE: $(date -d@${_CONFIG} -u +%H'h'%M'm'%S's')"
+	echo "TOTAL DEPLOYMENT TIME: $(date -d@${_TOTALTIME} -u +%H'h'%M'm'%S's')"
 fi
 
 exit 0
