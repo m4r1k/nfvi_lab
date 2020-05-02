@@ -143,3 +143,4 @@ Usually changes between clouds can be found in the following files
 - [do not raise timer softirq unconditionally](https://bugzilla.redhat.com/show_bug.cgi?id=1730016)
 - [8 vCPU guest need max latency < 20 us with stress](https://bugzilla.redhat.com/show_bug.cgi?id=1757165)
 - [kvm nx_huge_pages_recovery_ratio=0 is needed to meet KVM-RT low](https://bugzilla.redhat.com/show_bug.cgi?id=1772738)
+- [[RFE] KVM-RT guest with 10 vCPUs hangs on reboot](https://bugzilla.redhat.com/show_bug.cgi?id=1700390)
