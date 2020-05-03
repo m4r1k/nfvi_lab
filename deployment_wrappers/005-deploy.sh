@@ -48,6 +48,13 @@ openstack overcloud deploy \
 
 _END1=$(date +%s)
 
+echo "Update ~/.ssh/known_hosts"
+for _IP in $(openstack server list --format value --column Networks|grep -E -o "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}")
+do
+    ssh-keygen -R ${_IP}
+    ssh-keyscan -H ${_IP} >> ~/.ssh/known_hosts
+done
+
 openstack overcloud config download \
   --name overcloud \
   --no-preserve-config \
