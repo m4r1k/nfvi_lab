@@ -12,9 +12,6 @@ parameter_defaults:
   NeutronNetworkType: 'vxlan,vlan,flat'
   NeutronTunnelTypes: 'vxlan,gre'
 
-  # Neutron Logical bridge mapping between a custom name and OVS bridge
-  NeutronBridgeMappings: 'external:br-ex,datacentre0:br-link0,datacentre1:br-link1'
-
   # Neutron VLAN range per bridge
   NeutronNetworkVLANRanges: 'datacentre0,datacentre1,niantic_pool'
 
@@ -58,6 +55,10 @@ parameter_defaults:
   # lots of traffic as it's relegated to signaling only traffic
   OvsDisableEMC: false
 
+  ControllerParameters:
+    # Neutron Logical bridge mapping between a custom name and OVS bridge
+    # See https://bugzilla.redhat.com/show_bug.cgi?id=1807602 for the array definition
+    NeutronBridgeMappings: ['external:br-ex']
   ControllerExtraConfig:
     # Array of Physical network and custom MTU size
     # Ensure MTU is 1500 Bytes for external floating IP network
@@ -67,6 +68,10 @@ parameter_defaults:
     # Ensure Overlay VXLAN has 1500 Byte
     neutron::plugins::ml2::path_mtu: 1550
 
+  ComputeOvsDpdkParameters:
+    # Neutron Logical bridge mapping between a custom name and OVS bridge
+    # See https://bugzilla.redhat.com/show_bug.cgi?id=1807602 for the array definition
+    NeutronBridgeMappings: ['datacentre0:br-link0']
   ComputeOvsDpdkExtraConfig:
     # Array of Physical network and custom MTU size
     # Datacentre at 9000Byte
@@ -75,6 +80,10 @@ parameter_defaults:
     # Ensure Overlay VXLAN has 1500 Byte
     neutron::plugins::ml2::path_mtu: 1550
 
+  ComputeOvsDpdkRTParameters:
+    # Neutron Logical bridge mapping between a custom name and OVS bridge
+    # See https://bugzilla.redhat.com/show_bug.cgi?id=1807602 for the array definition
+    NeutronBridgeMappings: ['datacentre0:br-link0']
   ComputeOvsDpdkRTExtraConfig:
     # Array of Physical network and custom MTU size
     # Datacentre at 9000Byte
@@ -83,6 +92,10 @@ parameter_defaults:
     # Ensure Overlay VXLAN has 1500 Byte
     neutron::plugins::ml2::path_mtu: 1550
 
+  ComputeDualOvsDpdkParameters:
+    # Neutron Logical bridge mapping between a custom name and OVS bridge
+    # See https://bugzilla.redhat.com/show_bug.cgi?id=1807602 for the array definition
+    NeutronBridgeMappings: ['datacentre0:br-link0,datacentre1:br-link1']
   ComputeDualOvsDpdkExtraConfig:
     # Array of Physical network and custom MTU size
     # Both Datacentre at 9000Byte
@@ -91,6 +104,10 @@ parameter_defaults:
     # Ensure Overlay VXLAN has 1500 Byte
     neutron::plugins::ml2::path_mtu: 1550
 
+  ComputeDualOvsDpdkRTParameters:
+    # Neutron Logical bridge mapping between a custom name and OVS bridge
+    # See https://bugzilla.redhat.com/show_bug.cgi?id=1807602 for the array definition
+    NeutronBridgeMappings: ['datacentre0:br-link0,datacentre1:br-link1']
   ComputeDualOvsDpdkRTExtraConfig:
     # Array of Physical network and custom MTU size
     # Both Datacentre at 9000Byte
@@ -131,6 +148,10 @@ parameter_defaults:
     # Ensure Overlay VXLAN has 1500 Byte
     neutron::plugins::ml2::path_mtu: 1550
 
+  ComputeOvsDpdkSriovParameters:
+    # Neutron Logical bridge mapping between a custom name and OVS bridge
+    # See https://bugzilla.redhat.com/show_bug.cgi?id=1807602 for the array definition
+    NeutronBridgeMappings: ['datacentre0:br-link0']
   ComputeOvsDpdkSriovExtraConfig:
     # Array of Physical network and custom MTU size
     # Datacentre and Niantic_pool both at 9000Byte
@@ -139,6 +160,10 @@ parameter_defaults:
     # Ensure Overlay VXLAN has 1500 Byte
     neutron::plugins::ml2::path_mtu: 1550
 
+  ComputeOvsDpdkSriovRTParameters:
+    # Neutron Logical bridge mapping between a custom name and OVS bridge
+    # See https://bugzilla.redhat.com/show_bug.cgi?id=1807602 for the array definition
+    NeutronBridgeMappings: ['datacentre0:br-link0']
   ComputeOvsDpdkSriovRTExtraConfig:
     # Array of Physical network and custom MTU size
     # Datacentre and Niantic_pool both at 9000Byte
