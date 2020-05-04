@@ -226,7 +226,7 @@ resources:
 
               - type: vlan
                 device: bond0
-                mtu: 1500
+                mtu: 9000
                 vlan_id: {get_param: InternalApiNetworkVlanID}
                 addresses:
                 - ip_netmask: {get_param: InternalApiIpSubnet}
