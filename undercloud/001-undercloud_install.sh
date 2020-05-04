@@ -39,7 +39,6 @@ sudo subscription-manager repos \
 --enable rhel-8-for-x86_64-rt-rpms \
 --enable rhel-8-for-x86_64-supplementary-rpms \
 --enable ansible-2.8-for-rhel-8-x86_64-rpms \
---enable ansible-2.9-for-rhel-8-x86_64-rpms \
 --enable advanced-virt-for-rhel-8-x86_64-rpms \
 --enable satellite-tools-6.5-for-rhel-8-x86_64-rpms \
 --enable openstack-16-for-rhel-8-x86_64-rpms \
@@ -79,3 +78,5 @@ EOF
 mkdir /home/stack/builddir/
 
 openstack undercloud install
+
+ln -s ~/builddir/undercloud-passwords.conf ~/
