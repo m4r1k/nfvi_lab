@@ -94,7 +94,7 @@ resources:
               network_config:
               - type: interface
                 name: nic1
-                mtu: 1500
+                mtu: 9000
                 use_dhcp: false
                 dns_servers: {get_param: DnsServers}
                 addresses:
