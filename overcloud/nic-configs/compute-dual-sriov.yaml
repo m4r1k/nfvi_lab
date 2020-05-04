@@ -194,7 +194,7 @@ resources:
               network_config:
               - type: linux_bond
                 name: bond0
-                mtu: 1500
+                mtu: 9000
                 bonding_options: {get_param: BondInterfaceLinuxOptions}
                 use_dhcp: false
                 dns_servers: {get_param: DnsServers}
