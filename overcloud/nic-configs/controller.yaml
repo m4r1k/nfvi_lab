@@ -123,12 +123,6 @@ resources:
                   mtu: 1500
                   use_dhcp: false
                   onboot: true
-                - type: vlan
-                  vlan_id: {get_param: InternalApiNetworkVlanID}
-                  device: br-ex
-                  mtu: 1500
-                  addresses:
-                  - ip_netmask: {get_param: InternalApiIpSubnet}
 
               - type: ovs_bridge
                 name: br-overlay
@@ -152,6 +146,12 @@ resources:
                   mtu: 9000
                   addresses:
                   - ip_netmask: {get_param: StorageIpSubnet}
+                - type: vlan
+                  vlan_id: {get_param: InternalApiNetworkVlanID}
+                  device: br-ex
+                  mtu: 9000
+                  addresses:
+                  - ip_netmask: {get_param: InternalApiIpSubnet}
 
 outputs:
   OS::stack_id:
