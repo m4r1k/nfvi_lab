@@ -20,7 +20,8 @@
       subnet: tenant_subnet
   # For systems with both IPv4 and IPv6, you may specify a gateway network for
   # each, such as ['ControlPlane', 'External']
-  default_route_networks: ['External']
+  # Commenting out default_route_networks otherwise default route somehow becomes 10.0.0.1
+  # default_route_networks: ['External']
   HostnameFormatDefault: '%stackname%-controller-%index%'
   # Deprecated & backward-compatible values (FIXME: Make parameters consistent)
   # Set uses_deprecated_params to True if any deprecated params are used.
