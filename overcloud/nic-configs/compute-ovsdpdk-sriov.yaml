@@ -194,6 +194,13 @@ parameters:
     constraints:
       - allowed_values: ['true', 'True', 'TRUE', 'false', 'False', 'FALSE']
     type: string
+  EnableLLDP:
+    default: 'false'
+    description: >
+      Whether enabling Link Layer Discovery Protocol (LLDP)
+    constraints:
+      - allowed_values: ['true', 'True', 'TRUE', 'false', 'False', 'FALSE']
+    type: string
 resources:
   OsNetConfigImpl:
     type: OS::Heat::SoftwareConfig
@@ -271,6 +278,7 @@ resources:
                   mtu: 9216
                   # For Signature Match Cache (SMC) see -> https://github.com/openvswitch/ovs/commit/60d8cca
                   # For Link Stage Change (LSC) see -> https://github.com/openvswitch/ovs/commit/f8b64a6
+                  # For Link Layer Discovery Protocol (LLDP) see -> https://access.redhat.com/solutions/4460231
                   ovs_extra:
                     str_replace:
                       template: |
@@ -281,9 +289,14 @@ resources:
                         -- set Open_vSwitch . other_config:smc-enable=_SMC_
                         -- set interface dpdk0 options:dpdk-lsc-interrupt=_LSC_
                         -- set interface dpdk1 options:dpdk-lsc-interrupt=_LSC_
+                        add-aa-mapping br-link0 30 0
+                        -- set AutoAttach . system_name=$(hostname -f)
+                        -- set interface dpdk0 lldp:enable=_LLDP_
+                        -- set interface dpdk1 lldp:enable=_LLDP_
                       params:
                         _SMC_: {get_param: OvsEnableSMC}
                         _LSC_: {get_param: EnableLSC}
+                        _LLDP_: {get_param: EnableLLDP}
                   # DPDK DRIVERS
                   # https://access.redhat.com/articles/3538141
                   # Driver "vfio-pci" for the following NIC Families:
