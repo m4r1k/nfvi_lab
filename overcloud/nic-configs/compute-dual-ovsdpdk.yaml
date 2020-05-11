@@ -180,6 +180,13 @@ parameters:
       Unless the default is changed, the parameter is automatically resolved
       from the subnet host_routes attribute.
     type: json
+  OvsEnableSMC:
+    default: 'false'
+    description: >
+      Whether enabling the Signature Match Cache (SMC)
+    constraints:
+      - allowed_values: ['true', 'True', 'TRUE', 'false', 'False', 'FALSE']
+    type: string
 resources:
   OsNetConfigImpl:
     type: OS::Heat::SoftwareConfig
@@ -255,11 +262,17 @@ resources:
                   name: ovsbond0
                   ovs_options: {get_param: BondInterfaceOvsOptions}
                   mtu: 9216
+                  # For Signature Match Cache (SMC) see -> https://github.com/openvswitch/ovs/commit/60d8cca
                   ovs_extra:
-                  - set interface dpdk0 options:n_rxq=2
-                  - set interface dpdk0 other_config:pmd-rxq-affinity="0:2,1:4"
-                  - set interface dpdk1 options:n_rxq=2
-                  - set interface dpdk1 other_config:pmd-rxq-affinity="0:4,1:2"
+                    str_replace:
+                      template: |
+                        -- set interface dpdk0 options:n_rxq=2
+                        -- set interface dpdk0 other_config:pmd-rxq-affinity="0:2,1:4"
+                        -- set interface dpdk1 options:n_rxq=2
+                        -- set interface dpdk1 other_config:pmd-rxq-affinity="0:4,1:2"
+                        -- set Open_vSwitch . other_config:smc-enable=_SMC_
+                      params:
+                        _SMC_: {get_param: OvsEnableSMC}
                   # DPDK DRIVERS
                   # https://access.redhat.com/articles/3538141
                   # Driver "vfio-pci" for the following NIC Families:
@@ -299,11 +312,17 @@ resources:
                   name: ovsbond1
                   ovs_options: {get_param: BondInterfaceOvsOptions}
                   mtu: 9216
+                  # For Signature Match Cache (SMC) see -> https://github.com/openvswitch/ovs/commit/60d8cca
                   ovs_extra:
-                  - set interface dpdk2 options:n_rxq=2
-                  - set interface dpdk2 other_config:pmd-rxq-affinity="0:3,1:5"
-                  - set interface dpdk3 options:n_rxq=2
-                  - set interface dpdk3 other_config:pmd-rxq-affinity="0:5,1:3"
+                    str_replace:
+                      template: |
+                        -- set interface dpdk0 options:n_rxq=2
+                        -- set interface dpdk0 other_config:pmd-rxq-affinity="0:2,1:4"
+                        -- set interface dpdk1 options:n_rxq=2
+                        -- set interface dpdk1 other_config:pmd-rxq-affinity="0:4,1:2"
+                        -- set Open_vSwitch . other_config:smc-enable=_SMC_
+                      params:
+                        _SMC_: {get_param: OvsEnableSMC}
                   members:
                   - type: ovs_dpdk_port
                     name: dpdk2

@@ -55,6 +55,15 @@ parameter_defaults:
   # lots of traffic as it's relegated to signaling only traffic
   OvsDisableEMC: false
 
+  # The signature match cache (SMC) is after exact match
+  # cache (EMC). The difference between SMC and EMC is SMC only stores
+  # a signature of a flow thus it is much more memory efficient. With
+  # same memory space, EMC can store 8k flows while SMC can store 1M
+  # flows. It is generally beneficial to turn on SMC and turn off EMC
+  # when traffic flow count is much larger than EMC size.
+  # SMC cache will map a signature to an dp_netdev_flow index in
+  OvsEnableSMC: true
+
   ControllerParameters:
     # Neutron Logical bridge mapping between a custom name and OVS bridge
     # See https://bugzilla.redhat.com/show_bug.cgi?id=1807602 for the array definition
