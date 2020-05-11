@@ -95,7 +95,7 @@ parameter_defaults:
   ComputeDualOvsDpdkParameters:
     # Neutron Logical bridge mapping between a custom name and OVS bridge
     # See https://bugzilla.redhat.com/show_bug.cgi?id=1807602 for the array definition
-    NeutronBridgeMappings: ['datacentre0:br-link0,datacentre1:br-link1']
+    NeutronBridgeMappings: ['datacentre0:br-link0','datacentre1:br-link1']
   ComputeDualOvsDpdkExtraConfig:
     # Array of Physical network and custom MTU size
     # Both Datacentre at 9000Byte
@@ -107,7 +107,7 @@ parameter_defaults:
   ComputeDualOvsDpdkRTParameters:
     # Neutron Logical bridge mapping between a custom name and OVS bridge
     # See https://bugzilla.redhat.com/show_bug.cgi?id=1807602 for the array definition
-    NeutronBridgeMappings: ['datacentre0:br-link0,datacentre1:br-link1']
+    NeutronBridgeMappings: ['datacentre0:br-link0','datacentre1:br-link1']
   ComputeDualOvsDpdkRTExtraConfig:
     # Array of Physical network and custom MTU size
     # Both Datacentre at 9000Byte
