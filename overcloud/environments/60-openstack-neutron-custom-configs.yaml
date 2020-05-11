@@ -64,6 +64,17 @@ parameter_defaults:
   # SMC cache will map a signature to an dp_netdev_flow index in
   OvsEnableSMC: true
 
+  # There are two methods to get the information when Link State
+  # Change (LSC) happens on a network interface:
+  # by polling (default) or interrupt.
+  # Configuring the lsc detection mode has no direct effect on OVS
+  # itself, instead it configures the NIC how it should handle link
+  # state changes. Processing the link state update request triggered
+  # by OVS takes less time using interrupt mode, since the NIC
+  # updates its link state in the background, while in polling mode
+  # the link state has to be fetched from the firmware every time to
+  # fulfil this request.
+  EnableLSC: true
   ControllerParameters:
     # Neutron Logical bridge mapping between a custom name and OVS bridge
     # See https://bugzilla.redhat.com/show_bug.cgi?id=1807602 for the array definition

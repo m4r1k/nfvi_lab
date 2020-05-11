@@ -87,6 +87,13 @@ parameters:
     constraints:
       - allowed_values: ['true', 'True', 'TRUE', 'false', 'False', 'FALSE']
     type: string
+  EnableLSC:
+    default: 'false'
+    description: >
+      Whether enabling Link State Change (LSC) detection mode
+    constraints:
+      - allowed_values: ['true', 'True', 'TRUE', 'false', 'False', 'FALSE']
+    type: string
 resources:
   OsNetConfigImpl:
     type: OS::Heat::SoftwareConfig
@@ -163,6 +170,7 @@ resources:
                   ovs_options: {get_param: BondInterfaceOvsOptions}
                   mtu: 9216
                   # For Signature Match Cache (SMC) see -> https://github.com/openvswitch/ovs/commit/60d8cca
+                  # For Link Stage Change (LSC) see -> https://github.com/openvswitch/ovs/commit/f8b64a6
                   ovs_extra:
                     str_replace:
                       template: |
@@ -171,8 +179,11 @@ resources:
                         -- set interface dpdk1 options:n_rxq=2
                         -- set interface dpdk1 other_config:pmd-rxq-affinity="0:4,1:2"
                         -- set Open_vSwitch . other_config:smc-enable=_SMC_
+                        -- set interface dpdk0 options:dpdk-lsc-interrupt=_LSC_
+                        -- set interface dpdk1 options:dpdk-lsc-interrupt=_LSC_
                       params:
                         _SMC_: {get_param: OvsEnableSMC}
+                        _LSC_: {get_param: EnableLSC}
                   # DPDK DRIVERS
                   # https://access.redhat.com/articles/3538141
                   # Driver "vfio-pci" for the following NIC Families:
