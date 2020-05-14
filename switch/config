@@ -24,14 +24,12 @@ lag R630 dynamic id 10
  ports ethernet 1/1/13 to 1/1/16
  primary-port 1/1/13
  force-up ethernet 1/1/13
- lacp-timeout long
  deploy
 !
 lag R730 dynamic id 20
  ports ethernet 1/1/17 to 1/1/20
  primary-port 1/1/17
  force-up ethernet 1/1/17
- lacp-timeout long
  deploy
 !
 !
