@@ -289,7 +289,7 @@ resources:
                         -- set Open_vSwitch . other_config:smc-enable=_SMC_
                         -- set interface dpdk0 options:dpdk-lsc-interrupt=_LSC_
                         -- set interface dpdk1 options:dpdk-lsc-interrupt=_LSC_
-                        add-aa-mapping br-link0 30 0
+                        -- add-aa-mapping br-link0 30 0
                         -- set AutoAttach . system_name=$(hostname -f)
                         -- set interface dpdk0 lldp:enable=_LLDP_
                         -- set interface dpdk1 lldp:enable=_LLDP_
