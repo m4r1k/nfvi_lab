@@ -218,14 +218,14 @@ resources:
                     mtu: 9216
                     members:
                     - type: interface
-                      name: nic5
+                      name: p3p1
                   - type: ovs_dpdk_port
                     name: dpdk1
                     driver: vfio-pci
                     mtu: 9216
                     members:
                     - type: interface
-                      name: nic6
+                      name: p3p2
 
 outputs:
   OS::stack_id:

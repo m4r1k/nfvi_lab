@@ -146,7 +146,7 @@ resources:
                 - ip_netmask: {get_param: TenantIpSubnet}
 
               - type: interface
-                name: nic5
+                name: p3p1
                 mtu: 9216
                 use_dhcp: false
                 defroute: false
@@ -154,7 +154,7 @@ resources:
                 hotplug: true
 
               - type: interface
-                name: nic6
+                name: p3p2
                 mtu: 9216
                 use_dhcp: false
                 defroute: false
