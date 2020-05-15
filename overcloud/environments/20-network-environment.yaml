@@ -165,7 +165,11 @@ parameter_defaults:
   BondInterfaceOvsOptions: 'bond_mode=balance-slb'
 
   # Bonding options for Linux (only active/backup works in a virtual environment)
-  BondInterfaceLinuxOptions: 'mode=802.3ad xmit_hash_policy=layer2+3 ad_select=bandwidth lacp_rate=fast miimon=100'
+  # OSP13 won't play nicely with LACP during the PXE phase
+  # Follows the LACP error triggered dynamic lag 10 peer info (priority=65535,id=ecf4.bbdd.9628,key=1) remove (LagExpiry)
+  # LACP on provisioning works correctly on OSP16
+  # BondInterfaceLinuxOptions: 'mode=802.3ad xmit_hash_policy=layer2+3 ad_select=bandwidth lacp_rate=fast miimon=100'
+  BondInterfaceLinuxOptions: 'mode=balance-xor xmit_hash_policy=layer2+3 miimon=100'
 
   # To refresh the overcloud nodes network configuration at every Overcloud Update
   NetworkDeploymentActions: ['CREATE','UPDATE']
