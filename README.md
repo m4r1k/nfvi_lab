@@ -129,6 +129,7 @@ Usually changes between clouds can be found in the following files
 - [Ironic node using dracclient goes to clean failed with "Unfinished config jobs found"](https://bugzilla.redhat.com/show_bug.cgi?id=1534551)
 - [Nova instance provision fails with host is not mapped to any cell in Red Hat OpenStack Platform](https://access.redhat.com/solutions/3268111)
 - [Starting 2nd VM on same NUMA socket is causing huge latency during startup of second VM](https://bugzilla.redhat.com/show_bug.cgi?id=1678810#c39)
+- [Provisioning with LACP configuration is incomplete](https://bugzilla.redhat.com/show_bug.cgi?id=1801790)
 ## Outstanding Deterministic Performance and Real-Time Issues
 - [OVS-DPDK bridges should be DOWN](https://bugzilla.redhat.com/show_bug.cgi?id=1628227)
 - [[RHOSP13.0.6][OVS-DPDK] CPU steal in PMD thread imapcting physical Rxq performance](https://bugzilla.redhat.com/show_bug.cgi?id=1734368)
