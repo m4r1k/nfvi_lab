@@ -13,23 +13,27 @@ stack unit 1
 lag HCI-10G dynamic id 30
  ports ethernet 1/3/7 to 1/3/8
  primary-port 1/3/7
+ lacp-timeout short
  deploy
 !
 lag HCI-1G dynamic id 31
  ports ethernet 1/1/11 to 1/1/12
  primary-port 1/1/11
+ lacp-timeout short
  deploy
 !
 lag R630 dynamic id 10
  ports ethernet 1/1/13 to 1/1/16
  primary-port 1/1/13
  force-up ethernet 1/1/13
+ lacp-timeout short
  deploy
 !
 lag R730 dynamic id 20
  ports ethernet 1/1/17 to 1/1/20
  primary-port 1/1/17
  force-up ethernet 1/1/17
+ lacp-timeout short
  deploy
 !
 !
