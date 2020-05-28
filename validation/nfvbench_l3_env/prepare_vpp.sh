@@ -64,7 +64,6 @@ socksvr {
 cpu {
         main-core 1
         corelist-workers 2-5
-        workers 4
         scheduler-policy fifo
         scheduler-priority 50
 }
