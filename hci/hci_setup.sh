@@ -17,17 +17,14 @@ subscription-manager repos \
 --enable ansible-2.9-for-rhel-8-x86_64-rpms \
 --enable advanced-virt-for-rhel-8-x86_64-rpms \
 --enable satellite-tools-6.6-for-rhel-8-x86_64-rpms \
---enable openstack-16-for-rhel-8-x86_64-rpms \
---enable openstack-16-tools-for-rhel-8-x86_64-rpms \
---enable openstack-16-devtools-for-rhel-8-x86_64-rpms \
 --enable fast-datapath-for-rhel-8-x86_64-rpms
 
 dnf makecache
 
 dnf module -y reset virt
-dnf module -y enable virt:8.1
+dnf module -y enable virt:8.2
 
-dnf module -y enable container-tools
+dnf module -y enable container-tools:8.2
 dnf module -y install container-tools
 
 dnf upgrade -y
@@ -39,7 +36,7 @@ systemctl enable --now libvirtd.service
 firewall-cmd --add-service=cockpit --permanent
 firewall-cmd --reload
 
-dnf install -y rhosp-openvswitch
+dnf install -y openvswitch2.13
 systemctl enable --now openvswitch.service
 systemctl enable --now network
 
@@ -54,6 +51,10 @@ systemctl enable --now lm_sensors.service
 
 dnf install -y ipmitool lsof tcpdump vim git
 
+# https://github.com/amix/vimrc
+git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+sh ~/.vim_runtime/install_basic_vimrc.sh
+
 dnf install -y rng-tools
 systemctl enable --now rngd
 
@@ -66,9 +67,10 @@ firewall-cmd --zone=public --permanent --add-port=623/udp
 firewall-cmd --reload
 
 dnf install -y nvme-cli
-
 dnf install -y perf
-podman run -d --name=netdata \
+
+setsebool -P container_manage_cgroup 1
+podman create -d --name=netdata \
   -p 19999:19999 \
   -v /etc/passwd:/host/etc/passwd:ro \
   -v /etc/group:/host/etc/group:ro \
@@ -79,17 +81,10 @@ podman run -d --name=netdata \
   --security-opt label=disable \
   --restart always \
   --cpuset-cpus 0,1,20,21,40,41,60,61 \
-  netdata/netdata:v1.20.0
-cat > /etc/systemd/system/netdata-container.service << EOF
-[Unit]
-Description=Netdata Container
-[Service]
-Restart=always
-ExecStart=/usr/bin/podman start -a netdata
-ExecStop=/usr/bin/podman stop -t 2 netdata
-[Install]
-WantedBy=local.target
-EOF
+  netdata/netdata:v1.22.1
+
+podman generate systemd netdata > /etc/systemd/system/netdata-container.service
+systemctl daemon-reload
 systemctl enable netdata-container.service
 firewall-cmd --zone=public --permanent --add-port=19999/tcp
 firewall-cmd --reload
