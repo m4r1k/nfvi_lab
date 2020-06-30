@@ -1,7 +1,11 @@
 #!/bin/bash
 
-_ESXiCONNECTION="--libvirt-uri esx://192.168.178.13/?no_verify=1 --libvirt-sasl-username root --libvirt-sasl-password Diablo1108!"
-_vCSACONNECTION="--libvirt-uri vpx://192.168.178.11/NFVi/192.168.178.13?no_verify=1 --libvirt-sasl-username administrator@vpshere.local --libvirt-sasl-password Diablo1108!"
+echo -n "vCenter Administrator Password: "
+read -s _PASSWORD
+echo
+
+_ESXiCONNECTION="--libvirt-uri esx://192.168.178.13/?no_verify=1 --libvirt-sasl-username root --libvirt-sasl-password ${_PASSWORD}"
+_vCSACONNECTION="--libvirt-uri vpx://192.168.178.11/NFVi/192.168.178.13?no_verify=1 --libvirt-sasl-username administrator@vpshere.local --libvirt-sasl-password ${_PASSWORD}"
 
 source /root/vBMC/bin/activate
 
