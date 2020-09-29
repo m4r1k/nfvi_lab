@@ -30,7 +30,7 @@ parameter_defaults:
     # HAProxy - Ensure to not drop any incoming request in the events the backend are busy
     # https://stackoverflow.com/questions/8750518/difference-between-global-maxconn-and-server-maxconn-haproxy
     # https://www.haproxy.com/blog/play_with_maxconn_avoid_server_slowness_or_crash/
-    tripleo::haproxy::haproxy_global_maxconn: 5120001
+    tripleo::haproxy::haproxy_global_maxconn: 512000
     tripleo::haproxy::haproxy_default_maxconn: 20480
 
     # The size in bytes of the buffer pool, the memory area where InnoDB caches table and index data.
