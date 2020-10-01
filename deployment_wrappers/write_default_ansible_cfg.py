@@ -10,8 +10,9 @@ from tripleo_common.actions import ansible
 
 output_dir = '/home/stack/config-download'
 ansible_cfg = 'ansible.cfg'
-deployment_user = 'heat-admin'
-ssh_private_key = '/home/stack/.ssh/id_rsa'
+deployment_user = 'tripleo-admin'
+ssh_private_key = '/var/lib/mistral/overcloud/ssh_private_key'
+
 fact_caching_connection = '/tmp/ansible_fact_cache'
 
 print ("Starting {} export...".format(ansible_cfg))
