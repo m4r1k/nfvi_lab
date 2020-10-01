@@ -36,8 +36,9 @@ parameter_defaults:
     devices:
       - /dev/sdb
       - /dev/sdc
+    dedicated_devices:
       - /dev/nvme0n1
-    osd_scenario: lvm
+    osd_scenario: non-collocated
     # It is recommended that the block.db size isn’t smaller than 4% of block.
     # For example, if the block size is 1TB, then block.db shouldn’t be less than 40GB.
     # In our environment we have 2x 75GB per Ceph Storage Node so we configure a 3GiB block.db
