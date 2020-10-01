@@ -48,22 +48,25 @@ openstack overcloud deploy \
 
 _END1=$(date +%s)
 
-echo "Update ~/.ssh/known_hosts"
-for _IP in $(openstack server list --format value --column Networks|grep -E -o "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}")
-do
-    ssh-keygen -R ${_IP}
-    ssh-keyscan -H ${_IP} >> ~/.ssh/known_hosts
-done
+# Creates tripleo-admin user in the overcloud and exchange SSH Key
+openstack overcloud admin authorize
 
+# Ensure the Mistral SSH Key is usable by Stack  user
+sudo chown 42430:$(id --group) /var/lib/mistral/overcloud/ssh_private_key
+sudo chmod 0660 /var/lib/mistral/overcloud/ssh_private_key
+
+# Generate all Ansible's playbooks
 openstack overcloud config download \
   --name overcloud \
   --no-preserve-config \
   --config-dir ~/config-download
 
+# To directly use Ansible, is not possible to re-use Mistral's ansible.cfg, so creates a new one
 python3 ${_LDIR}/write_default_ansible_cfg.py
 
+# Generates Ansible's inventory
 tripleo-ansible-inventory \
-  --ansible_ssh_user heat-admin \
+  --ansible_ssh_user tripleo-admin \
   --plan overcloud \
   --static-yaml-inventory ~/config-download/inventory.yaml
 
@@ -72,8 +75,8 @@ ansible -i ~/config-download/inventory.yaml -m ping all
 # https://docs.openstack.org/project-deploy-guide/tripleo-docs/latest/deployment/ansible_config_download.html#manual-config-download
 ansible-playbook \
   -i ~/config-download/inventory.yaml \
-  --private-key ~/.ssh/id_rsa \
   --become \
+  --skip-tags opendev-validation \
   ~/config-download/deploy_steps_playbook.yaml
 
 _END2=$(date +%s)
