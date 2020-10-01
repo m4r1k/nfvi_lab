@@ -3,8 +3,8 @@
 mkdir -p ~/tmp_rt/{rpm,image}
 cd ~/tmp_rt/
 
-tar -xf /usr/share/rhosp-director-images/overcloud-full-latest-13.0.tar
-tar -xf /usr/share/rhosp-director-images/ironic-python-agent-latest-13.0.tar
+tar -xf /usr/share/rhosp-director-images/overcloud-full-latest-16.1.tar
+tar -xf /usr/share/rhosp-director-images/ironic-python-agent-latest-16.1.tar
 mv overcloud-full.qcow2 overcloud-realtime-compute.qcow2
 rm -f overcloud-full.initrd overcloud-full-rpm.manifest overcloud-full-signature.manifest overcloud-full.vmlinuz
 
