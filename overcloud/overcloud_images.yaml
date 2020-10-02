@@ -1,4 +1,4 @@
-# Generated with the following on 2020-09-30T12:22:14.702059
+# Generated with the following on 2020-10-02T09:02:37.481833
 #
 #   openstack tripleo container image prepare -e /home/stack/containers-prepare-parameter.yaml --output-env-file=../overcloud/overcloud_images.yaml -r /home/stack/roles-data.yaml -e /usr/share/openstack-tripleo-heat-templates/environments/sshd-banner.yaml -e /usr/share/openstack-tripleo-heat-templates/environments/network-isolation.yaml -e /usr/share/openstack-tripleo-heat-templates/environments/services/neutron-ovs.yaml -e /usr/share/openstack-tripleo-heat-templates/environments/ceph-ansible/ceph-ansible.yaml -e /usr/share/openstack-tripleo-heat-templates/environments/ceph-ansible/ceph-rgw.yaml -e /usr/share/openstack-tripleo-heat-templates/environments/ceph-ansible/ceph-dashboard.yaml -e /usr/share/openstack-tripleo-heat-templates/environments/services/cinder-backup.yaml -e /usr/share/openstack-tripleo-heat-templates/environments/host-config-and-reboot.yaml -e ../overcloud/environments/10-commons-parameters.yaml -e ../overcloud/environments/20-network-environment.yaml -e ../overcloud/environments/30-storage-environment.yaml -e ../overcloud/environments/40-fencing.yaml -e ../overcloud/environments/50-keystone-admin-endpoint.yaml -e ../overcloud/environments/60-openstack-neutron-custom-configs.yaml -e ../overcloud/environments/60-openstack-nova-custom-configs.yaml -e ../overcloud/environments/60-openstack-glance-custom-configs.yaml -e ../overcloud/environments/70-ovs-dpdk-sriov.yaml -e ../overcloud/environments/99-extraconfig.yaml -e ../overcloud/environments/99-server-blacklist.yaml
 #
@@ -20,7 +20,7 @@ parameter_defaults:
   ContainerCeilometerComputeImage: undercloud.ctlplane.local:8787/rhosp-rhel8/openstack-ceilometer-compute:16.1-50
   ContainerCeilometerConfigImage: undercloud.ctlplane.local:8787/rhosp-rhel8/openstack-ceilometer-central:16.1-51
   ContainerCeilometerNotificationImage: undercloud.ctlplane.local:8787/rhosp-rhel8/openstack-ceilometer-notification:16.1-51
-  ContainerCephDaemonImage: undercloud.ctlplane.local:8787/rhceph/rhceph-4-rhel8:4-32
+  ContainerCephDaemonImage: undercloud.ctlplane.local:8787/rhceph/rhceph-4-rhel8:4-33
   ContainerCinderApiImage: undercloud.ctlplane.local:8787/rhosp-rhel8/openstack-cinder-api:16.1-49
   ContainerCinderBackupImage: undercloud.ctlplane.local:8787/rhosp-rhel8/openstack-cinder-backup:16.1-49
   ContainerCinderConfigImage: undercloud.ctlplane.local:8787/rhosp-rhel8/openstack-cinder-api:16.1-49
@@ -136,6 +136,6 @@ parameter_defaults:
   ContainerZaqarImage: undercloud.ctlplane.local:8787/rhosp-rhel8/openstack-zaqar-wsgi:16.1-51
   DockerInsecureRegistryAddress:
   - undercloud.ctlplane.local:8787
-  GrafanaContainerImage: undercloud.ctlplane.local:8787/rhceph/rhceph-4-dashboard-rhel8:4-12
+  GrafanaContainerImage: undercloud.ctlplane.local:8787/rhceph/rhceph-4-dashboard-rhel8:4-13
   NodeExporterContainerImage: undercloud.ctlplane.local:8787/openshift4/ose-prometheus-node-exporter:v4.1.41-202004130646
   PrometheusContainerImage: undercloud.ctlplane.local:8787/openshift4/ose-prometheus:v4.1.37-202003021622
