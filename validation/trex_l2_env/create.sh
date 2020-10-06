@@ -1,6 +1,6 @@
 #!/bin/bash
 
-_IMAGE=rhel-7.8-x86_64-kvm.qcow2
+_IMAGE=rhel-7.9-x86_64-kvm.qcow2
 
 source ~/overcloudrc
 
