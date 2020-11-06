@@ -148,3 +148,4 @@ Usually changes between clouds can be found in the following files
 - [Nova: Disable USB/graphics/tablet via image props/extra specs](https://bugzilla.redhat.com/show_bug.cgi?id=1812652)
 - [Disable timer_migration on cpu-partitioning profile](https://bugzilla.redhat.com/show_bug.cgi?id=1797629)
 - [OVS causing high pings and latency inside guest VM when an active DPDK port fails](https://bugzilla.redhat.com/show_bug.cgi?id=1809363)
+- [OVS packet re-ordering due to upcalls](https://bugzilla.redhat.com/show_bug.cgi?id=1844576)
