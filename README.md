@@ -149,3 +149,4 @@ Usually changes between clouds can be found in the following files
 - [Disable timer_migration on cpu-partitioning profile](https://bugzilla.redhat.com/show_bug.cgi?id=1797629)
 - [OVS causing high pings and latency inside guest VM when an active DPDK port fails](https://bugzilla.redhat.com/show_bug.cgi?id=1809363)
 - [Test KVM-RT scaling](https://bugzilla.redhat.com/show_bug.cgi?id=1693665)
+- [OVS packet re-ordering due to upcalls](https://bugzilla.redhat.com/show_bug.cgi?id=1844576)
