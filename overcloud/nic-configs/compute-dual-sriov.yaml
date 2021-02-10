@@ -92,10 +92,8 @@ resources:
           params:
             $network_config:
               network_config:
-              - type: linux_bond
-                name: bond0
-                mtu: 9000
-                bonding_options: {get_param: BondInterfaceLinuxOptions}
+              - type: interface
+                name: nic1
                 use_dhcp: false
                 dns_servers: {get_param: DnsServers}
                 addresses:
@@ -109,14 +107,16 @@ resources:
                   next_hop: {get_param: EC2MetadataIp}
                 - default: true
                   next_hop: {get_param: ControlPlaneDefaultRoute}
+
+              - type: linux_bond
+                name: bond0
+                mtu: 9000
+                bonding_options: {get_param: BondInterfaceLinuxOptions}
                 members:
-                - type: interface
-                  name: nic1
-                  mtu: 9000
-                  primary: true
                 - type: interface
                   name: nic2
                   mtu: 9000
+                  primary: true
                 - type: interface
                   name: nic3
                   mtu: 9000

@@ -23,16 +23,16 @@ lag HCI-1G dynamic id 31
  deploy
 !
 lag R630 dynamic id 10
- ports ethernet 1/1/13 to 1/1/16
- primary-port 1/1/13
- force-up ethernet 1/1/13
+ ports ethernet 1/1/16 ethernet 1/1/18 ethernet 1/1/20
+ primary-port 1/1/16
+ force-up ethernet 1/1/16
  lacp-timeout short
  deploy
 !
 lag R730 dynamic id 20
- ports ethernet 1/1/17 to 1/1/20
- primary-port 1/1/17
- force-up ethernet 1/1/17
+ ports ethernet 1/1/15 ethernet 1/1/17 ethernet 1/1/19
+ primary-port 1/1/15
+ force-up ethernet 1/1/15
  lacp-timeout short
  deploy
 !
@@ -307,20 +307,14 @@ interface ethernet 1/1/11
 interface ethernet 1/1/13
  dual-mode  100
 !
-interface ethernet 1/1/17
+interface ethernet 1/1/14
  dual-mode  100
 !
-interface ethernet 1/1/21
- dual-mode  100
+interface ethernet 1/1/15
+ dual-mode  110
 !
-interface ethernet 1/1/22
- dual-mode  100
-!
-interface ethernet 1/1/23
- dual-mode  100
-!
-interface ethernet 1/1/24
- dual-mode  100
+interface ethernet 1/1/16
+ dual-mode  110
 !
 interface ethernet 1/3/1
  speed-duplex 10G-full
