@@ -77,7 +77,7 @@ ansible-playbook \
   -i ~/config-download/inventory.yaml \
   --become \
   --skip-tags opendev-validation \
-  ~/config-download/deploy_steps_playbook.yaml
+  ~/config-download/overcloud/deploy_steps_playbook.yaml
 
 _END2=$(date +%s)
 _TOTALTIME=$((${_END2}-${_START}))
