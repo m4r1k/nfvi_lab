@@ -62,7 +62,8 @@ parameter_defaults:
   # https://docs.openstack.org/project-deploy-guide/tripleo-docs/latest/deployment/ansible_config_download.html#run-ansible-playbook
   CephAnsibleEnvironmentVariables:
     ANSIBLE_HOST_KEY_CHECKING: 'False'
-    ANSIBLE_PRIVATE_KEY_FILE: '/var/lib/mistral/overcloud/ssh_private_key'
+    ANSIBLE_PRIVATE_KEY_FILE: '/home/stack/.ssh/id_rsa'
+    ANSIBLE_REMOTE_USER: 'heat-admin'
 
   # Default Replica Count
   # HDD CephPoolDefaultSize: 3 (and higher)

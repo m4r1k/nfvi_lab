@@ -48,14 +48,17 @@ openstack overcloud deploy \
 
 _END1=$(date +%s)
 
-# Creates tripleo-admin user in the overcloud and exchange SSH Key
-openstack overcloud admin authorize
+# This is a Config-Download Standalone execution where Ansible is not managed by Mistral
+# https://docs.openstack.org/project-deploy-guide/tripleo-docs/latest/deployment/ansible_config_download.html#manual-config-download
 
-# Ensure the Mistral SSH Key is usable by Stack  user
-sudo chown 42430:$(id --group) /var/lib/mistral/overcloud/ssh_private_key
-sudo chmod 0660 /var/lib/mistral/overcloud/ssh_private_key
+# Create a local user to ensure Ceph Ansible to work
+id heat-admin >/dev/null 2>&1 || (\
+    sudo adduser heat-admin ;\
+    echo "heat-admin ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/heat-admin ;\
+    sudo mkdir -p /home/heat-admin/.ssh ;\
+    cat ~/.ssh/id_rsa.pub | sudo tee /home/heat-admin/.ssh/authorized_keys)
 
-# Generate all Ansible's playbooks
+# Export the Ansible Playbooks of Config Download
 openstack overcloud config download \
   --name overcloud \
   --no-preserve-config \
@@ -64,20 +67,26 @@ openstack overcloud config download \
 # To directly use Ansible, is not possible to re-use Mistral's ansible.cfg, so creates a new one
 python3 ${_LDIR}/write_default_ansible_cfg.py
 
+# Export Ansible Config path
+export ANSIBLE_CONFIG=~/config-download/ansible.cfg
+
+# Export the Ansible remote user required by Ceph-Ansible
+# https://bugs.launchpad.net/tripleo/+bug/1887708
+export ANSIBLE_REMOTE_USER=heat-admin
+
 # Generates Ansible's inventory
 tripleo-ansible-inventory \
-  --ansible_ssh_user tripleo-admin \
+  --ansible_ssh_user heat-admin \
   --plan overcloud \
   --static-yaml-inventory ~/config-download/inventory.yaml
 
-cd ~/config-download
+cd ~/config-download/overcloud
 ansible -i ~/config-download/inventory.yaml -m ping all
-# https://docs.openstack.org/project-deploy-guide/tripleo-docs/latest/deployment/ansible_config_download.html#manual-config-download
 ansible-playbook \
   -i ~/config-download/inventory.yaml \
   --become \
   --skip-tags opendev-validation \
-  ~/config-download/overcloud/deploy_steps_playbook.yaml
+  deploy_steps_playbook.yaml
 
 _END2=$(date +%s)
 _TOTALTIME=$((${_END2}-${_START}))
