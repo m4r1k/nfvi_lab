@@ -133,6 +133,8 @@ resources:
                 name: bond0
                 mtu: 9000
                 bonding_options: {get_param: BondInterfaceLinuxOptions}
+                addresses:
+                - ip_netmask: {get_param: InternalApiIpSubnet}
                 members:
                 - type: interface
                   name: nic2
@@ -144,13 +146,6 @@ resources:
                 - type: interface
                   name: nic4
                   mtu: 9000
-
-              - type: vlan
-                device: bond0
-                mtu: 9000
-                vlan_id: {get_param: InternalApiNetworkVlanID}
-                addresses:
-                - ip_netmask: {get_param: InternalApiIpSubnet}
 
               - type: vlan
                 vlan_id: {get_param: StorageNetworkVlanID}
