@@ -352,7 +352,7 @@ interface ve 140
  ip address 10.0.14.1 255.255.255.224
 !
 interface ve 178
- ip address 192.168.178.12 255.255.255.0
+ ip address 192.168.178.10 255.255.255.0
 !
 !
 !
