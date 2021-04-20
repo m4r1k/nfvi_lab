@@ -17,7 +17,6 @@ cd ~/
 
 openstack overcloud deploy \
     --force-postconfig \
-    --stack-only \
     --verbose \
     --stack overcloud \
     --templates ${_THT} \
@@ -46,61 +45,14 @@ openstack overcloud deploy \
     -e ${_LTHT}/environments/99-extraconfig.yaml \
     -e ${_LTHT}/environments/99-server-blacklist.yaml
 
-_END1=$(date +%s)
+_END=$(date +%s)
 
-# This is a Config-Download Standalone execution where Ansible is not managed by Mistral
-# https://docs.openstack.org/project-deploy-guide/tripleo-docs/latest/deployment/ansible_config_download.html#manual-config-download
-
-# Create a local user to ensure Ceph Ansible to work
-id heat-admin >/dev/null 2>&1 || (\
-    sudo adduser heat-admin ;\
-    echo "heat-admin ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/heat-admin ;\
-    sudo mkdir -p /home/heat-admin/.ssh ;\
-    cat ~/.ssh/id_rsa.pub | sudo tee /home/heat-admin/.ssh/authorized_keys)
-
-# Export the Ansible Playbooks of Config Download
-openstack overcloud config download \
-  --name overcloud \
-  --no-preserve-config \
-  --config-dir ~/config-download
-
-# To directly use Ansible, is not possible to re-use Mistral's ansible.cfg, so creates a new one
-python3 ${_LDIR}/write_default_ansible_cfg.py
-
-# Export Ansible Config path
-export ANSIBLE_CONFIG=~/config-download/ansible.cfg
-
-# Export the Ansible remote user required by Ceph-Ansible
-# https://bugs.launchpad.net/tripleo/+bug/1887708
-export ANSIBLE_REMOTE_USER=heat-admin
-
-# Generates Ansible's inventory
-tripleo-ansible-inventory \
-  --ansible_ssh_user heat-admin \
-  --plan overcloud \
-  --static-yaml-inventory ~/config-download/inventory.yaml
-
-cd ~/config-download/overcloud
-ansible -i ~/config-download/inventory.yaml -m ping all
-ansible-playbook \
-  -i ~/config-download/inventory.yaml \
-  --become \
-  --skip-tags opendev-validation \
-  deploy_steps_playbook.yaml
-
-_END2=$(date +%s)
-_TOTALTIME=$((${_END2}-${_START}))
-_PROVISIONING=$((${_END1}-${_START}))
-_CONFIG=$((${_END2}-${_END1}))
+_TOTALTIME=$((${_END}-${_START}))
 echo "DEPLOYMENT STARTED: $(date --date="@${_START}" --utc)"
 if ((${_TOTALTIME} < 3600)); then
-	echo "PROVISIONING PHASE: $(date -d@${_PROVISIONING} -u +%M'm'%S's')"
-	echo "CONFIG PHASE: $(date -d@${_CONFIG} -u +%M'm'%S's')"
-	echo "TOTAL DEPLOYMENT TIME: $(date -d@${_TOTALTIME} -u +%M'm'%S's')"
+	echo "DEPLOYMENT TIME: $(date -d@${_TOTALTIME} -u +%M'm'%S's')"
 else
-	echo "PROVISIONING PHASE: $(date -d@${_PROVISIONING} -u +%H'h'%M'm'%S's')"
-	echo "CONFIG PHASE: $(date -d@${_CONFIG} -u +%H'h'%M'm'%S's')"
-	echo "TOTAL DEPLOYMENT TIME: $(date -d@${_TOTALTIME} -u +%H'h'%M'm'%S's')"
+	echo "DEPLOYMENT TIME: $(date -d@${_TOTALTIME} -u +%H'h'%M'm'%S's')"
 fi
 
 exit 0
