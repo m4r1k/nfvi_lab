@@ -23,5 +23,4 @@ parameter_defaults:
       namespace: registry.redhat.io/rhosp-rhel8
       neutron_driver: null
       rhel_containers: false
-      tag: '16.1'
     tag_from_label: '{version}-{release}'
