@@ -154,9 +154,7 @@ fi
 
 openstack router show router >/dev/null 2>&1
 if [[ "$?" != "0" ]]; then
-    # Disable L3 Router HA due to rhbz#1824397
-	# openstack router create --ha router
-	openstack router create --no-ha router
+	openstack router create --ha router
 	openstack router set router --external-gateway ext --fixed-ip ip-address=192.168.178.20
 	openstack router add subnet router mgmt
 	openstack floating ip create --floating-ip-address 192.168.178.21 ext
