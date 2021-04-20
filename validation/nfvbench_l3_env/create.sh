@@ -1,13 +1,13 @@
 #!/bin/bash
 
-_IMAGE=rhel-7.8-x86_64-kvm.qcow2
+_IMAGE=CentOS-Stream-GenericCloud-8-20210210.0.x86_64.qcow2
 
 source ~/overcloudrc
 
 openstack quota set --ram -1 admin
 openstack quota set --cores -1 admin
 
-openstack image show rhel >/dev/null 2>&1 || openstack image create \
+openstack image show centos >/dev/null 2>&1 || openstack image create \
 	--container-format bare \
 	--disk-format qcow2 \
 	--min-disk 4 \
@@ -18,7 +18,7 @@ openstack image show rhel >/dev/null 2>&1 || openstack image create \
 	--property hw_watchdog_action=reset \
 	--property os_require_quiesce=yes \
 	--property hw_qemu_guest_agent=yes \
-	rhel
+	centos
 
 openstack flavor show nfv >/dev/null 2>&1 || openstack flavor create \
 	--id 10 \
@@ -166,7 +166,7 @@ fi
 openstack server show nfvbench >/dev/null 2>&1
 if [[ "$?" != "0" ]]; then
 	openstack server create \
-	--image rhel \
+	--image centos \
 	--flavor nfv \
 	--nic net-id=$(openstack network show mgmt --format value --column id) \
 	--nic port-id=$(openstack port show trafficgen_a --format value --column id) \
@@ -180,7 +180,7 @@ fi
 openstack server show vpp >/dev/null 2>&1
 if [[ "$?" != "0" ]]; then
 	openstack server create \
-	--image rhel \
+	--image centos \
 	--flavor nfv \
 	--nic net-id=$(openstack network show mgmt --format value --column id) \
 	--nic port-id=$(openstack port show reflector_a --format value --column id) \

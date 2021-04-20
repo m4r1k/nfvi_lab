@@ -1,25 +1,14 @@
 #!/bin/bash
 
-subscription-manager register
-
-subscription-manager attach --pool 8a85f98260c27fc50160c323263339ff
-
-subscription-manager repos \
---disable "*" \
---enable rhel-7-server-rpms \
---enable rhel-7-server-extras-rpms \
---enable rhel-7-server-optional-rpms \
---enable rhel-7-server-rh-common-rpms
-
-yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+dnf install -y epel-release
 
 # https://packagecloud.io/fdio/release
 curl -s https://packagecloud.io/install/repositories/fdio/release/script.rpm.sh | bash
 
-yum makecache fast
+dnf makecache
 
-yum update -y
-yum install -y tuned-profiles-cpu-partitioning tuned dpdk dpdk-devel dpdk-tools driverctl screen sysstat
+dnf update -y
+dnf install -y tuned-profiles-cpu-partitioning tuned dpdk dpdk-devel dpdk-tools driverctl screen sysstat
 
 echo "isolated_cores=1-6" | tee -a /etc/tuned/cpu-partitioning-variables.conf
 systemctl enable --now tuned
@@ -41,7 +30,9 @@ driverctl set-override 0000:00:05.0 vfio-pci
 
 dracut -f
 
-yum install -y vpp vpp-plugins vpp-selinux-policy
+dnf install -y vpp vpp-plugins vpp-selinux-policy
+
+semanage boolean --modify --on domain_can_mmap_files
 
 cat > /etc/vpp/startup.conf << EOF
 unix {
