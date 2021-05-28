@@ -89,7 +89,6 @@ clock timezone gmt GMT+01
 !
 !
 ntp
- disable serve
  server 95.211.160.148
  server 213.109.127.82
  server 82.161.139.11
