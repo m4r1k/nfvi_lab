@@ -16,7 +16,7 @@ parameter_defaults:
 
   ComputeOvsDpdkParameters:
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=58 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=56 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
     # Tuned profile
     TunedProfileName: "cpu-partitioning"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
@@ -49,7 +49,7 @@ parameter_defaults:
   ComputeOvsDpdkRTParameters:
     # RealTime requires to disable Intel HTT (SMT)
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=58 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf mitigations=off"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=56 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf mitigations=off"
     # Tuned profile
     TunedProfileName: "realtime-virtual-host"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
@@ -81,7 +81,7 @@ parameter_defaults:
 
   ComputeDualOvsDpdkParameters:
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=118 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
     # Tuned profile
     TunedProfileName: "cpu-partitioning"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
@@ -114,7 +114,7 @@ parameter_defaults:
   ComputeDualOvsDpdkRTParameters:
     # RealTime requires to disable Intel HTT (SMT)
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=118 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf mitigations=off"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf mitigations=off"
     # Tuned profile
     TunedProfileName: "realtime-virtual-host"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
@@ -146,7 +146,7 @@ parameter_defaults:
 
   ComputeSriovParameters:
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=58 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=56 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
     # Tuned profile
     TunedProfileName: "cpu-partitioning"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
@@ -190,7 +190,7 @@ parameter_defaults:
   ComputeSriovRTParameters:
     # RealTime requires to disable Intel HTT (SMT)
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=58 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf mitigations=off"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=56 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf mitigations=off"
     # Tuned profile
     TunedProfileName: "realtime-virtual-host"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
@@ -223,7 +223,7 @@ parameter_defaults:
 
   ComputeDualSriovParameters:
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=118 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
     # Tuned profile
     TunedProfileName: "cpu-partitioning"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
@@ -267,7 +267,7 @@ parameter_defaults:
   ComputeDualSriovRTParameters:
     # RealTime requires to disable Intel HTT (SMT)
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=118 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf mitigations=off"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf mitigations=off"
     # Tuned profile
     TunedProfileName: "realtime-virtual-host"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
@@ -310,7 +310,7 @@ parameter_defaults:
 
   ComputeOvsDpdkSriovParameters:
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=118 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23,26-47 module_blacklist=ixgbevf,iavf"
     # Tuned profile
     TunedProfileName: "cpu-partitioning"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
@@ -359,7 +359,7 @@ parameter_defaults:
   ComputeOvsDpdkSriovRTParameters:
     # RealTime requires to disable Intel HTT (SMT)
     # GRUB Kernel CLI
-    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=118 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf mitigations=off"
+    KernelArgs: "default_hugepagesz=1GB hugepagesz=1G hugepages=116 iommu=pt intel_iommu=on isolcpus=2-23 nosmt module_blacklist=ixgbevf,iavf mitigations=off"
     # Tuned profile
     TunedProfileName: "realtime-virtual-host"
     # Isolated pCPU from Kernel, NMI, IRQ, and userland
