@@ -156,6 +156,22 @@ resources:
                 nm_controlled: true
                 hotplug: true
 
+              - type: interface
+                name: p1p1
+                mtu: 9216
+                use_dhcp: false
+                defroute: false
+                nm_controlled: true
+                hotplug: true
+
+              - type: interface
+                name: p1p2
+                mtu: 9216
+                use_dhcp: false
+                defroute: false
+                nm_controlled: true
+                hotplug: true
+
 outputs:
   OS::stack_id:
     description: The OsNetConfigImpl resource.
