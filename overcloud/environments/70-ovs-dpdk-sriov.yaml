@@ -164,10 +164,14 @@ parameter_defaults:
     NeutronPhysicalDevMappings:
       - niantic_pool:p3p1
       - niantic_pool:p3p2
+      - fortville_pool:p1p1
+      - fortville_pool:p1p2
     # Number of VFs that needs to be configured for a physical interface
     NeutronSriovNumVFs:
       - p3p1:16
       - p3p2:16
+      - p1p1:16
+      - p1p2:16
     # Mapping of SR-IOV PF interface to neutron physical_network.
     NovaPCIPassthrough:
       - devname: "p3p1"
@@ -176,6 +180,12 @@ parameter_defaults:
       - devname: "p3p2"
         trusted: "true"
         physical_network: "niantic_pool"
+      - devname: "p1p1"
+        trusted: "true"
+        physical_network: "fortville_pool"
+      - devname: "p1p2"
+        trusted: "true"
+        physical_network: "fortville_pool"
 
   ComputeSriovRTParameters:
     # RealTime requires to disable Intel HTT (SMT)

@@ -13,7 +13,7 @@ parameter_defaults:
   NeutronTunnelTypes: 'vxlan,gre'
 
   # Neutron VLAN range per bridge
-  NeutronNetworkVLANRanges: 'datacentre0,datacentre1,niantic_pool'
+  NeutronNetworkVLANRanges: 'datacentre0,datacentre1,niantic_pool,fortville_pool'
 
   # Neutron Flat Network
   NeutronFlatNetworks: 'external'
@@ -91,7 +91,7 @@ parameter_defaults:
     # Array of Physical network and custom MTU size
     # Ensure MTU is 1500 Bytes for external floating IP network
     # Datacentre and Niantic_pool both at 9000Byte
-    neutron::plugins::ml2::physical_network_mtus: ['external:1500','datacentre0:9000','datacentre1:9000','niantic_pool:9000']
+    neutron::plugins::ml2::physical_network_mtus: ['external:1500','datacentre0:9000','datacentre1:9000','niantic_pool:9000','fortville_pool:9000']
 
     # Ensure Overlay VXLAN has 1500 Byte
     neutron::plugins::ml2::path_mtu: 1550
@@ -147,7 +147,7 @@ parameter_defaults:
   ComputeSriovExtraConfig:
     # Array of Physical network and custom MTU size
     # Niantic_pool at 9000Byte
-    neutron::plugins::ml2::physical_network_mtus: ['niantic_pool:9000']
+    neutron::plugins::ml2::physical_network_mtus: ['niantic_pool:9000','fortville_pool:9000']
 
     # Ensure Overlay VXLAN has 1500 Byte
     neutron::plugins::ml2::path_mtu: 1550
